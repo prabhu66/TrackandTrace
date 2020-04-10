@@ -1,6 +1,6 @@
 applications :
 - name: "TrackandTrace"
-  path : "dist/angular-cloud-deployment"
+  path : "dist/TrackandTrace"
   memory : 256M
   buildpack :
   - "https://github.com/cloudfoundry/staticfile-buildpack.git"
