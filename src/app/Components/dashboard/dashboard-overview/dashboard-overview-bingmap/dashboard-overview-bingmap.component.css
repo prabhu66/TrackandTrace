@@ -1,0 +1,139 @@
+.map1{
+  margin-top: -14px;
+   margin-left: -15px;
+
+}
+#mapContainer{
+  text-align:center;
+  height: 500px;
+}
+.map-heading{
+  font-size: 1.2em;
+  padding: 1em;
+}
+.heading-set{
+  background-color:#3385ff;
+  color: #fff;
+}
+caption{
+  background-color: #3385ff;
+  color: #fff;
+  font-size: 1.3em;
+  text-align: center;
+  padding: 10px;
+}
+.table1{
+  border-radius: 12px;
+  padding: 2px 2px;
+}
+.header{
+    padding:20px;
+}
+li>p{
+  font-size: 0.6em;
+  color: #00CED1;
+}
+li>div>p{
+  font-size: 0.5em;
+  margin-left:9em;
+  padding:2px;
+}
+.links { display: flex; flex-direction: row }
+.icon{ 
+  background-color: transparent;
+  padding:2px;
+  margin:2px;
+}
+.canvas{
+  max-width: none !important;
+}
+.zoom-in {
+    font-size: 18px;
+    padding: 4px;
+    /* padding-left: 40em; */
+     margin-left: 814px;
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    z-index: 77;
+    background-color: white;
+    width: x;
+    border: 1px solid #e0d5d5;
+    color: grey;
+}
+.zoom-in1 {
+    font-size: 18px;
+    padding: 4px;
+    /* padding-left: 40em; */
+    margin-left: 90%;
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    z-index: 77;
+    background-color: white;
+    width: x;
+    border: 1px solid #e0d5d5;
+    color: grey;
+}
+.text_box{
+     z-index: 60;
+    background-color: white;
+    border: 2px dashed #cc0000;
+    position: absolute;
+    display: inline-block;
+    color: black;
+    margin-left: -9%;
+    margin-top: 15%;
+    padding: 1%;
+}
+.zoom-out {
+    font-size: 18px;
+    padding: 4px;
+    /* padding-left: 40em; */
+    margin-left: 1245px;
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    z-index: 77;
+    background-color: white;
+    width: x;
+    border: 1px solid #e0d5d5;
+    color: grey;
+}
+.zoom-out1 {
+    font-size: 18px;
+    padding: 4px;
+    /* padding-left: 40em; */
+     margin-left: 93%;
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    z-index: 77;
+    background-color: white;
+    width: x;
+    border: 1px solid #e0d5d5;
+    color: grey;
+}
+.zoom-map{
+      position:relative;
+      height: 100vh;
+      width: 100vw;
+      z-index:2;
+}
+.map-zoom-container{
+    position: absolute;
+    top: -156px;
+    bottom: 0;
+    right: 0;
+    left: -40px;
+}
+
+#mapContainer{
+  height: 67vh;
+}
+@media screen and (min-width:1440px){
+
+  #mapContainer{
+    height: 67vh;
+  }
+}

@@ -1,0 +1,128 @@
+<div class="main-container">
+  <div class="mr-auto p-2 main-link">Administration <img src="../../../assets/icon/fast-forward-double-right-arrows.svg"
+      id="breadcrumbIcon"> Manage Geofence</div> <span id='searchBoxContainer' class="search-map">
+    <input *ngIf="!busy" type="text" [(ngModel)]="searchText" id='searchBox' placeholder="  Search location.." class="text-search"
+      autocomplete="off">
+  </span><i *ngIf="!busy" class="material-icons refresh" (click)="RefreshPlan()">refresh</i>
+  <div *ngIf="loader" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  <div  class="container" *ngIf="!busy">
+    <div class="row ">
+      <div class="col-lg-3 header">
+        <span>Geofences</span>
+        <span class="header-tab ">
+          <!--<span><i class="material-icons filter">filter_list</i></span>-->
+          <!--<span><i (click)="click=!click" id="searchbutton" data-toggle="search" aria-haspopup="true" aria-expanded="false"class="material-icons search">search</i></span>
+      <span class="search-button" *ngIf="click" aria-labelledby="searchbutton">
+        <input type="text"  [(ngModel)]="search" (keyup.enter)="click=!click"placeholder="Search"/></span>-->
+          <div class="header-circle" (click)="onCreate()">+</div>
+        </span>
+      </div>
+    </div>
+    <div class="row panel">
+      <div class="col-md-3 geofenceList">
+        <div *ngFor="let geofence of _dataService.geofence; let i=index">
+          <!--  | searchGeofence : search-->
+          <div class="items" [class.highlight]="highlight[i]" (click)="showGeofence(i,geofence)">{{geofence.name}}
+            <!-- <div  data-toggle="tooltip" data-placement="bottom" [title]="geofence.geofenceInfo.address" *ngIf="!geofence.geofenceInfo.searchResult" class="subscript">{{geofence.geofenceInfo.address | truncate:[40, '...']}}
+              <span class="tooltiptext">{{geofence.address}}</span>
+            </div>
+            <div data-toggle="tooltip" data-placement="bottom" [title]="geofence.geofenceInfo.searchResult.formattedSuggestion" *ngIf="geofence.geofenceInfo.searchResult" class="subscript">
+              {{geofence.geofenceInfo.searchResult.formattedSuggestion | truncate:[40, '...']}}
+              <span class="tooltiptext">{{geofence.searchResult.formattedSuggestion}}</span>
+            </div> -->
+            <div  data-toggle="tooltip" data-placement="bottom" [title]="geofence.searchResult.formattedSuggestion" *ngIf="geofence.searchResult" class="subscript">{{geofence.address | truncate:[40, '...']}}
+              <span class="tooltiptext">{{geofence.address}}</span>
+            </div>
+            <div data-toggle="tooltip" data-placement="bottom" [title]="geofence.searchResult.formattedSuggestion" *ngIf="geofence.searchResult" class="subscript">
+              {{geofence.searchResult.formattedSuggestion | truncate:[40, '...']}}
+              <span class="tooltiptext">{{geofence.searchResult.formattedSuggestion}}</span>
+            </div>
+            <div>
+
+            </div>
+            <span>
+              <i class="material-icons delete" data-toggle="modal" data-target="#deleteModal" (click)="setGeofence(geofence,i)">delete</i>
+              <!-- commented -->
+              <!-- <i (click)="editGeofence(geofence.geofenceInfo,i)" class="material-icons edit">edit</i> -->
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- delete modal by akshay -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Do You Really Want To Delete?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" #closedelModal>No</button>
+              <button type="button" class="btn btn-primary" (click)="deleteGeofence()" >Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Ends here -->
+      <div class='col-md-9 map '>
+        <div *ngIf="edit || create">
+          <form #formRef="ngForm" (ngSubmit)="onSave()">
+            <div class="links">
+              <span class="row form-group">
+
+                <div *ngIf="edit==true"> <input type="text" id="input-small" [(ngModel)]="tempGeofence.name" name="name"
+                    placeholder="Geofence Name" readonly autocomplete="off"
+                    class="input-sm form-control-sm form-control"></div>
+                <div *ngIf="create==true"> <input type="text" id="input-small" [(ngModel)]="tempGeofence.name"
+                    name="name" required placeholder="Geofence Name" autocomplete="off"
+                    class="input-sm form-control-sm form-control"></div>
+                <span>
+                  <i class="material-icons tab1 " (click)="onSave()">done</i>
+                  <i *ngIf='draw' id="geofence" (click)="drawPolygonGeofence()" class="material-icons update">edit</i>
+                  <i *ngIf='!draw' (click)="endCurrentDraw()" class="material-icons update blue">edit</i>
+                </span>
+                <button type="button" class="close pull-right" (click)="onClose()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+              </span>
+            </div>
+          </form>
+        </div>
+        <div #myMap style='width: 100%; height: 600px;'>
+          <!--<i (click)="showMap()" class="material-icons zoom-in">zoom_in</i>-->
+        </div>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="!show" class="map-container">
+
+      <div #myMap style='width: 100%; height: 600px;' class="zoom-map">
+        <i (click)="showMap()" class="material-icons zoom-out">zoom_out</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Geofence-edit  -->
+  <div class="modal fade" id="geofenceEdit" tabindex="-1" role="dialog" aria-labelledby="geofenceEditTitle"
+    aria-hidden="true">
+    <div class="modal-dialog mw-100 modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <app-asset-geofence-edit></app-asset-geofence-edit>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="busy" class="spinnerDiv">
+    <p-progressSpinner></p-progressSpinner>
+  </div>

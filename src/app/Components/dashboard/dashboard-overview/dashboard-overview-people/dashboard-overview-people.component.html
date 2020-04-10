@@ -1,0 +1,23 @@
+<div class="utilization-content">
+    <div class="card-content row" *ngFor="let people of peopleData; let i = index">
+        <div class="title">{{people.AssetType}}</div>
+      <div  class="row">
+      <div class="colm col-4">
+        <!-- <canvas>{{content.chart}}</canvas> -->
+      <!-- <canvas id="assetChart{{i}}" width="38" height="38" style="display:block"></canvas>  ABHISHEK COMMENTED THIS SECTION BEFORE ADDING TYPE IMAGE -->
+      <div class="TypeIconSection">
+        <img id="typeIcon" [src]="people.AssetTypeImage">
+      </div>
+      </div>
+      <div class="colm col-5">
+        <label class="green"><span class="white">Total</span> <span>&nbsp; &nbsp; &nbsp; {{people.TotalAssetCount}}</span></label>
+        <label class="green"><span class="white">Online</span> <span>&nbsp;&nbsp; {{people.InUseAssetCount}}</span> </label>
+        <label class="subscript"><span class="white">Offline</span><span>&nbsp;&nbsp; {{people.IdleAssetCount}}</span></label>
+      </div>
+      <div class="colm col-3">
+        <img src="../../../../assets/image/warning_new.svg">
+        <div class="count">{{people.AlertAssetCount}}</div>
+      </div>
+    </div>
+    </div>
+  </div>

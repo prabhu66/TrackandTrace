@@ -1,0 +1,772 @@
+
+*{
+    font-family:Roboto
+}
+
+#labelIcon{
+    height:20px
+}
+.in-ref{
+    margin-left: 36%;
+    color: white;
+    font-size: 10px;
+}
+.out-ref{
+    margin-left: 59%;
+    color: #4d0015;
+    font-size: 10px;
+}
+.SensorDataSection{
+    margin-left: -6%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 5px
+}
+.dataSection{
+    color:white;
+    font-size:12px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.mainContent{
+    /* height:90vh; */
+    /* width:100vw; */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0px;
+    margin-right:-25px;
+    overflow-x: hidden;
+}
+
+.dashboardContent{
+    height:87vh;
+    width:90vw;
+     margin-top:3vw;
+     margin-left:5px
+}
+
+.dashboardContent{
+    display:grid;
+    /* grid-template-rows: 15% 45% 40%; */
+    grid-template-rows: 15% 82%;
+    grid-row-gap: 7px;
+    margin-top:5px
+}
+.summaryTabSection{
+    position:relative;
+    display: grid;
+    grid-template-columns: 17% 20% 20% 20% 23%;
+    grid-column-gap: 5px
+}
+
+.assetSummaryTab{
+    /* background:#330033; */
+    background-color: #000;
+    height: 82px;
+}
+
+.LocationSummaryTab{
+    /* background: #f2c810;
+    display: grid;
+    grid-template-rows: 60% 30%;
+    height: 82px; */
+    background: #eeb541;
+    display: grid;
+    grid-template-rows: 60% 30%;
+    height: 82px;
+    border: 1px solid black;
+}
+.online,.offline, .grey{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    margin-top: 15px;
+ }
+ .online{
+     background:#33cc00;
+    }
+
+    .grey{
+        background: grey
+    }
+ .offline{
+     background:#e62e00;
+ }
+ /* .nav-link.active{
+    color: #f8f9fa !important;
+    background-color: #666 !important
+ } */
+
+.locationTopSection{
+ display:grid;
+ grid-template-columns: 70% 5% 20%  
+}
+
+#sensorIcon{
+    height: 65px;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+.sensorIDSection{
+    margin-top: 5px;
+    font-weight: bolder;
+    padding: 5px;
+    text-align:center;
+}
+.custodianSummaryTab{
+    /* background: #e2e0d5 */
+    background: #cf455c;
+    border: 1px solid black;
+}
+.eventUtilizationTab{
+    /* border: 2px solid whitesmoke; */
+    /* background: whitesmoke; */
+    background: #444444;
+    height: 82px;
+    /* margin: 2px; */
+}
+
+#mixedchart{
+    margin-left:10%
+}
+.chartSection,.TabSection{
+    /* border: 2px solid whitesmoke; */
+    width:90vw
+}
+
+.chartSection{
+    display:grid;
+    grid-template-columns:40% 62%;
+    /* grid-template-columns:100% */
+    /* background:whitesmoke */
+}
+
+.assetSummaryTab{
+    display: grid;
+    grid-template-columns: 67% 33%;
+}
+
+.assetSummaryLeftSection{
+    display:grid;
+    grid-template-rows: 63% 25%;
+    padding:5px;
+    margin-left:5px
+}
+/* rightside nav tabs  */
+.nav-tabs {
+    /* border-bottom: none !important; */
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-top: 6px;
+    border-bottom: 1px solid #101010
+}
+a{
+    color: white !important;
+    font-size: 14px;
+    text-decoration: none;
+    background-color: #101010 !important;
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    padding: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: -5px;
+}
+ .nav-link.active {
+    color: #101010 !important;
+    background-color: #eeb53f !important;
+    padding: 3px 10px;
+    font-weight: bolder;
+    font-size: 14px;
+}
+.nav-link {
+    padding: 0px 5px !important;
+}
+.assetCreationTimeSection{
+    font-size:12px;
+    /* font-weight:bold; */
+    color:white;
+    margin-top: 8px;
+}
+#assetIcon{
+    height: 65px;
+    /* margin-top: 5px; */
+    margin-bottom: -10px;
+    padding: 0px;
+    margin-left: -10px;
+}
+
+.assetNameSection{
+    font-weight:bolder;
+    color:white;
+    margin-top:5px
+}
+#storeIcon{
+    margin-top: 0px;
+    height: 28px;
+    margin-left: 18%;
+    height: 38px;
+    width: 38px;
+    border: 1px solid;
+    border-radius: 22px;
+    background: white;
+    padding: 8px;
+}
+.circleIcon{
+    height: 38px;
+    width: 38px;
+    border: 1px solid;
+    border-radius: 22px;
+    background: white;
+    padding: 8px;
+}
+
+.assetTypeSection{
+    font-weight: 300;
+    font-size:12px;
+    color:white;
+    margin-top: -3px;
+}
+
+.infoSection{
+    margin-left:5px
+}
+.inUse, .idle, .disabled{
+    padding:1px;
+    /* margin-top:-2px; */
+    border-radius:55px;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 2px;;
+    padding-left:5px;
+    padding-right:5px;
+ }
+ .inUse{
+    /* background: #18ad2c; */
+    /* font-weight: bolder; */
+    width: 50px;
+    /* color: white; */
+    background: radial-gradient(#cbea3e,#66751f);
+    color: #117137;
+   
+ }
+
+ .disabled{
+     background: #4080bf;
+     color:white;
+     width:60px
+     /* font-weight:bold */
+ }
+
+ .idle{
+     background: #ebebe0;
+     font-weight:bold;
+     width: 50px;
+ }
+
+ .LocationBottomSection{
+     margin:5px;
+     margin-right: 10px;
+     border-top:2px solid black
+ }
+
+ .LocationBottomSection{
+     display:grid;
+     grid-template-columns: 50% 50%
+ }
+
+ .DetailsSection{
+     display: grid;
+     grid-template-columns: 10% 90%;
+     font-size:10px;
+     font-weight:bold;
+     margin-top:5px
+ }
+ #locationIcon{
+     height:12px;
+ }
+
+
+ .iconSection{
+     margin-right:2px
+ }
+ #leftDetailsSection{
+     border-right: 1px solid black
+ }
+ #TimeSection{
+     margin-left:2px
+ }
+
+ .custodianSummaryTab{
+     display:grid;
+     grid-template-columns: 55% 45%;
+     height:82px
+ }
+
+ .custodianHeader{
+    padding-left: 5px;
+    font-size: 20px;
+    font-weight: bolder;
+    /* color: grey; */
+    color: black;
+ }
+
+ .custodianBottomSection{
+     display:grid;
+     grid-template-columns: 25% 75%;
+     padding-left:5px;
+     color: black;
+ }
+
+ .leftCustodianSection {
+    display: grid;
+    grid-template-rows: 50% 50%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-right: 1px dashed grey;
+}
+.rightCustodianSection{
+    display:grid;
+    grid-template-rows: 70% 30%;
+}
+.rightTopSection{
+    display:grid;
+    grid-template-rows: 50% 50%;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border-bottom:1px dashed grey
+}
+
+.rangeHeaderSection{
+    font-size:12px;
+    font-weight:bold;
+    /* color:grey */
+    color: black;
+}
+
+ #userIcon{
+     height:25px
+ }
+
+ .custodianDetailsSection{
+    margin-top: 4px;
+    font-weight: bold;
+ }
+
+ .AssociateButton, .releaseButton{
+   
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 3px;
+    /* margin-left: 12px; */
+    position: relative;
+   
+    border-radius: 55px;
+ }
+
+ .AssociateButton{
+    background: #ffcc00;
+    color: black;
+    width: 65px;
+ }
+
+ .releaseButton{
+    background: #0077b3;
+    color: white;
+    width: 75px;
+ }
+
+ .AssociateButton:hover, .releaseButton:hover{
+     cursor:pointer
+ }
+ .UtilAlertSection{
+     /* margin:5px; */
+     /* border: 2px solid rgb(158, 158, 158); */
+     /* height:90px; */
+     display:grid;
+     grid-template-columns: 50% 50%
+ }
+
+ .utilSection{
+    display: grid;
+    height: 82px;
+    grid-template-rows: 40% 60%;
+ }
+
+
+ .utilHeaderSection{
+     text-align: center;
+     font-weight:bolder;
+     font-size:20px;
+     /* color:grey */
+     color: white;
+ }
+
+ .utilDetailsSection{
+     display:grid;
+     grid-template-columns: 30% 70%;
+     color: white;
+ }
+
+ #alertIcon{
+     height:32px;
+     margin-left:10px
+ }
+ .utilEventIconSection{
+     text-align:center
+ }
+
+ .valueSection{
+    font-size: 22px;
+    text-align: center;
+ }
+
+ #leftUtilSection{
+    border-right: 1px solid #e0dee0;
+ }
+ ::-webkit-scrollbar{
+    width:3px;
+}
+
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background: white;
+    /* border: 1px solid rgb(63, 60, 60); */
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #eeb541;
+    outline: 1px solid #eeb541;
+  }
+
+  ::-webkit-scrollbar-thumb:hover{
+    background: #cc9900;
+  }
+
+  #myChart{
+    height: 186px !important;
+    width: 185px !important;
+    margin-left: 20%;
+    align-items: center;
+    margin-top: 20%;
+  }
+  
+  .chartHolder{
+      background: white;
+    height: 54vh;
+    margin-top: 2%;
+    margin-left: -2%;
+    display:grid;
+    grid-template-columns:50% 50%
+      /* background-image: linear-gradient(#000000,#0E0E0F, #171619,#1a191d,#1E1D22); */
+  }
+  .chartHeader{
+    /* text-align: center; */
+    font-weight: bolder;
+    padding: 5px;
+    margin: 0px;
+    /* margin-bottom: -10px; */
+    background: #eeb541;
+    color: #101010;
+  }
+  /* canvas{
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin-left: 25%; 
+  } */
+  .heatChartSection,.utilizationChartSection, .CurrentLocationTab{
+    position: relative;
+    /* padding: 5px; */
+    margin: 5px;
+    /* border: 2px solid whitesmoke; */
+    background: #272727;
+  }
+
+  .tab-pane{
+    background:#272727;
+    height:62vh;
+    padding:10px
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    padding: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top:-5px
+}
+a{
+    font-weight:bold
+}
+
+  .LocationHeader{
+      text-align:center;
+      font-weight: bold
+  }
+  .LocationContent{
+      padding-top:5px
+  }
+.header{
+    margin-left:5px;
+    font-weight: bold;
+    color: #8600b3
+}
+
+#mapContainer{
+    height: 61vh;
+    margin-top: -4.5%;
+}
+.image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.zone-name{
+    color:white;
+    border-bottom: 1px solid white;
+}
+.zone .tooltiptext {
+  visibility: visible;
+  background-color: black;
+  color: #fff;
+  border-radius: 3px;
+  padding: 5px 0;
+  width: max-content; 
+  min-width: 130px;
+  bottom: 100%;
+  left: 50%; 
+  margin-left: -65px;
+  font-size: 12px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.zone {
+    position: absolute;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+
+  #warningModal{
+    height: 25px;
+    margin-right: 6px;
+  }
+
+.modal-header {
+    padding: 5px 10px;
+}
+
+
+   #userName{
+    width: 250px;
+    margin-top: -5px;
+    height: 33px;
+    font-size: 14px;
+    font-weight: bold;
+    }
+#dateValue{
+    color:black;
+    /* font-weight:lighter */
+}
+
+#dateValue{
+    font-size: 10px;
+}
+.toDate{
+    margin-left:14px;
+   
+}
+#releaseModalCenterTitle{
+    color:#CC0000
+}
+.headerSection{
+    font-size:14px;
+    font-weight:bold
+}
+/* a{
+    color: #10bfec !important;
+    text-decoration: none;
+    background-color: transparent;
+} */
+
+.AssetDetails{
+    border-radius:5px;
+    background:whitesmoke
+}
+
+.AssociateContainer{
+    display:grid;
+    grid-template-rows:32% 35% 33%;
+    height:100px
+}
+.AssociateContainer{
+    font-size:14px;
+}
+.divSection{
+    display:grid;
+    grid-template-columns: 20% 80%
+}
+#DateRange{
+    width:250px;
+    border:none;
+    border-bottom: 1px solid grey;
+}
+.black{
+    /* background: #101010; */
+    margin-top: -5px;
+}
+
+.legendTypeSection{
+    height: 15px;
+    width:15px;
+    border-radius: 4px;
+}
+.legendSection{
+    display: grid;
+    grid-template-rows: 50% 50%;
+    font-size: 12px;
+    margin: 2px;
+    padding: 5px;
+    color: black;
+    height: 15vh;
+    margin-top: 34%;
+}
+
+
+.legendDivSection{
+    display:grid;
+    grid-template-columns: 12% 88%
+}
+
+#UtilizedDays{
+    background: #18ad2c;
+}
+
+.typeDetailsSection{
+    font-size:12px;
+    font-weight:bold
+}
+#NonUtilizedDays{
+    background:#ff531a
+}
+
+.gpsOffline{
+    font-weight: bold;
+    color: red;
+    background: #ffffb3;
+    padding: 10px;
+    text-align: center;
+    border-radius: 55px;
+}
+
+.Notutlized{
+    font-weight: bold;
+    color: orangered;
+    background: whitesmoke;
+    border-radius: 55px;
+    margin: 15% 10px;
+    padding: 5px;
+    text-align: center;
+    font-size: 18px;
+}
+x-map .MicrosoftMap .Infobox .infobox-title {
+    padding: 10px 10px 5px 10px;
+    color: blue !important;
+}
+
+@media screen and (min-width:1440px){
+
+    .dashboardContent{
+        display:grid;
+        grid-template-rows: 10% 85%;
+        grid-row-gap: 5px;
+        margin-top:5px
+    }
+
+    #mixedchart{
+        margin-left:0px
+    }
+
+    .tab-pane{
+        height:39vh;
+    }
+
+    #myChart{
+        height:300px  !important;
+        width:300px  !important;
+        margin-left: 20%;
+        align-items: center;
+        margin-top: 26%;
+    }
+    
+    .chartHolder{
+        background: white;
+        height:39vh
+    }
+
+    #mapContainer{
+        height:38vh;
+        margin-top:-3%
+    }
+}
+.tooltiptext {
+    color: black;
+    border-radius: 3px;
+    padding: 5px 0;
+    font-size: 12px;
+    z-index: 1;
+  }
+  .image-container{
+    position: relative;
+    padding-left: 0px;
+    border: 1px dashed black;
+    height: 35vh;
+    width: 100%;
+}
+.green-circle{
+    stroke: #000;
+    stroke-miterlimit: 10;
+    fill: #20bc04;
+    animation: blinker 1s linear infinite;
+  }
+  .red-circle{
+    stroke: #000;
+    stroke-miterlimit: 10;
+    fill: red;
+    animation: blinker 1s linear infinite;
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  .image{
+    width:100%;
+    height: 100%;
+    position: relative;
+}
+.image-container{
+    padding-left: 0px;
+    border: 1px dashed black;
+    width: 100%;
+    height: 200%;
+}
+.scaling-svg-container {
+    position: relative; 
+    height: 100%;
+    width: 100%; 
+    padding: 0;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    /* override this inline for aspect ratio other than square */
+   }

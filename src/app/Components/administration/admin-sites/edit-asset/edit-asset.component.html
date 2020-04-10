@@ -1,0 +1,303 @@
+
+  <div class="p-2 main-link">Administration <img src="../../../assets/icon/fast-forward-double-right-arrows.svg"
+    id="breadcrumbIcon"> ProvisioningAsset</div>
+  <div class="main-container">
+<div class="container">
+  <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+
+    
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"> Category</label>
+        <i *ngIf="!drop1" class="fa fa-caret-down left" aria-hidden="true" (click)="drop1 =!drop1"></i>
+        <i *ngIf="drop1" class="fa fa-caret-right left" aria-hidden="true" (click)="drop1 =!drop1"></i>
+        <div *ngIf="!drop1" class="input-group mb-2 mr-sm-2 monitor details spacing2">
+          <select class="form-control spacing2 " placeholder="type" name="assetType" [(ngModel)]="assetType">
+          <option value="Material" selected>Asset</option>
+          <option value="People"> Workers</option>
+          </select>
+        </div>
+      </div>
+
+      
+
+        <div class="form-group">
+            <label *ngIf="assetType=='Material'" for="exampleFormControlSelect1">Asset Type</label>
+            <label *ngIf="assetType=='People'" for="exampleFormControlSelect1">Person Type</label>
+            <i *ngIf="!drop2" class="fa fa-caret-down left" aria-hidden="true" (click)="drop2 =!drop2"></i>
+            <i *ngIf="drop2" class="fa fa-caret-right left" aria-hidden="true" (click)="drop2 =!drop2"></i>
+            <div *ngIf="!drop2" class="details spacing">
+    
+              <div *ngIf="assetType=='Material'" class="form-inline spacing">
+                <label class="sr-only" for="inlineFormInputName2">Product-type</label>
+                <div class="input-group mb-2 mr-sm-2 spacing width">
+    
+                  <input type="text" class="form-control" name="product_type" placeholder="Product type" [(ngModel)]="product_type" autocomplete="off">
+                </div>
+    
+                <label class="sr-only" for="inlineFormInputName2">Product-Name</label>
+                <div class="input-group mb-2 mr-sm-2 spacing width2">
+                    <input type="text" class="form-control" name="asset_id" placeholder="Asset Name" [(ngModel)]="asset_name" autocomplete="off">
+                 
+                </div>
+                <label class="sr-only" for="inlineFormInputGroupUsername2">Serial No</label>
+                <div class="input-group mb-2 mr-sm-2 spacing">
+                  <input type="text" class="form-control" name="asset_id" placeholder="Serial no" [(ngModel)]="asset_id" autocomplete="off">
+                </div>
+              </div>
+    
+              <div *ngIf="assetType=='People'" class="form-inline spacing">
+                <label class="sr-only" for="inlineFormInputName2">Worker-type</label>
+                <div class="input-group mb-2 mr-sm-2 spacing width">
+    
+                  <input type="text" class="form-control" name="product_type" placeholder="Worker type" [(ngModel)]="product_type" autocomplete="off">
+                </div>
+    
+                <label class="sr-only" for="inlineFormInputName2">Worker-Name</label>
+                <div class="input-group mb-2 mr-sm-2 spacing">
+                  <input type="text" class="form-control" name="person_name" placeholder="Worker name" [(ngModel)]="asset_name" autocomplete="off">
+                </div>
+                <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                <div class="input-group mb-2 mr-sm-2 spacing">
+                  <input type="text" class="form-control" name="asset_id" placeholder="Worker id" [(ngModel)]="asset_id" autocomplete="off">
+                </div>
+              </div>
+            </div>
+          </div>
+ <!-- Tracing category: -->
+ <div class="form-group">
+    <label for="exampleFormControlSelect1"> Tracking Category</label>
+    <i *ngIf="!drop1" class="fa fa-caret-down left" aria-hidden="true" (click)="drop1 =!drop1"></i>
+    <i *ngIf="drop1" class="fa fa-caret-right left" aria-hidden="true" (click)="drop1 =!drop1"></i>
+    <div *ngIf="!drop1" class="input-group mb-2 mr-sm-2 monitor details spacing2">
+      <div *ngIf="assetType=='Material'">
+          <select class="form-control spacing2 " id="assetCategory" name="assetCategory" [(ngModel)]="assetCategory"required #assetCategoryRef="ngModel"> -->
+              <!-- <option value="" disabled >Select something...</option> -->
+              <option *ngFor="let param of asset_categories" [value]="param"> 
+                {{param}}
+                </option>
+              </select>
+  
+      </div>
+      <div *ngIf="assetType=='People'">
+          <div class="input-group mb-2 mr-sm-2 spacing2">
+              <input type="text" class="form-control" name="assetCategory" placeholder="" [(ngModel)]="assetCategory" autocomplete="off" readonly>
+            </div>
+      </div>
+
+    </div>
+  </div>
+
+    <!-- Asset Symbol -- ADDED BY ABHISHEK -->
+    <div class="form-group">
+        <label  *ngIf="assetType=='Material'" for="exampleFormControlSelect1">Add Asset Image<br> <small id="assetImgNote"> <b>Accepted Extension:</b> .svg , .jpg, .jpeg, .png</small></label>
+        <label *ngIf="assetType=='People'" for="exampleFormControlSelect1">Add Person Image<br> <small id="assetImgNote"> <b>Accepted Extension:</b> .svg , .jpg, .jpeg, .png</small></label>
+        <i *ngIf="!drop6" class="fa fa-caret-down left" aria-hidden="true" (click)="drop6 =!drop6"></i>
+        <i *ngIf="drop6" class="fa fa-caret-right left" aria-hidden="true" (click)="drop6 =!drop6"></i>
+        <div *ngIf="!drop6" class="details spacing">
+       
+            <div class="UploadContainer">
+
+                <!-- <input type="file" multiple="multiple" (change)="onFileChange($event)" accept=".svg,.gif,.jpg,.jpeg,.png"> (change)="onFileChange($event)" -->
+                <iframe id="theFrame" src=" https://image-upload.eu-gb.cf.appdomain.cloud/" style="width:100%;" frameborder="0">
+                </iframe>
+                <div *ngIf="filesSelected && showLoader">
+                        <pre style="display: none">{{uploadProgress$ | async | json}}</pre>
+                  
+                      <!-- <img id ="loader" src = "../../../../../assets/icons/GIF/Cube-1s-200px.svg">
+                      <span id="uploadTextProgress" > File Upload in progress!</span>       -->
+               </div> 
+               <div class= "UploadSuccess" *ngIf="showImageUploaded">
+                    <img id="uploadSuccess" src={{imageRefUrl}} >
+                    <span id="uploadText"> Image Uploaded Sucessfully!</span>
+                </div>
+
+            </div>
+        </div>
+      </div>
+    <!-- Asset Symbol Section OVER -->
+
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Map Devices</label>
+      <i *ngIf="!drop3" class="fa fa-caret-down left" aria-hidden="true" (click)="drop3 =!drop3"></i>
+      <i *ngIf="drop3" class="fa fa-caret-right left" aria-hidden="true" (click)="drop3 =!drop3"></i>
+      <div *ngIf="!drop3" class="details spacing">
+       <div  *ngIf="assetCategory=='Indoor Only'||assetCategory=='Indoor and Outdoor'" class="input-group mb-2 mr-sm-2 monitor">
+         <div id="subheader" class="spacing" >Ble Tag</div>
+        <select class="form-control spacing " id="assetBleTag" name="assetBleTag" [(ngModel)]="assetBleTag" >
+          <!--<option value="" disabled selected="selected">Select</option>-->
+          <option *ngFor="let param of array_of_ble" [value]="param">
+            {{param}}
+            </option>
+          </select>
+          <!--<div *ngIf="assetBleTagRef.invalid && (assetBleTagRef.dirty || assetBleTagRef.touched)" class="alert alert-danger">
+          <div *ngIf="assetBleTagRef.errors.required">
+           BLE Tag is required.
+          </div>
+          </div>-->
+      </div>
+      
+        <div  *ngIf="assetCategory=='Outdoor Only'||assetCategory=='Indoor and Outdoor'" class="input-group mb-2 mr-sm-2 monitor ">
+          <div  id="subheader" class="spacing">GPS Tracker</div>
+        <select class="form-control spacing " id="GPSTracker" name="GPSTracker" [(ngModel)]="GPSTracker">
+          <!--<option value="" disabled selected="selected">Select</option>-->
+          <option *ngFor="let param of array_of_gps" [value]="param">
+            {{param}}
+            </option>
+          </select>
+          <!--<div *ngIf="GPSTrackerRef.invalid && (GPSTrackerRef.dirty || GPSTrackerRef.touched)" class="alert alert-danger">
+          <div *ngIf="GPSTrackerRef.errors.required">
+           GPSTracker is required.
+          </div>
+          </div>-->
+      </div>
+      </div>
+    </div>
+     
+    <!-- <div class="form-group">
+      <label for="exampleFormControlSelect1">Outdoor Accessibility</label>
+      <i *ngIf="!drop4" class="fa fa-caret-down left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+      <i *ngIf="drop4" class="fa fa-caret-right left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+
+      <div *ngIf="!drop4" class="row details spacing">
+        <div class="col-3 block-list">
+          <div class="row underline">
+            <i class="material-icons green">exit_to_app</i>
+            <div class="tags-label">Accessible Zones</div>
+            <i data-toggle="modal" data-target="#exampleModalLong" class="material-icons  close">add</i>
+          </div>
+           <div *ngFor='let geofence of _dataService.geofences ; let j=index' class="zone-list active row">
+               <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{geofence.name}}" (change)="onCheckboxChange3($event,geofence,j)"id="defaultCheck1">
+                 <div class="form-check-label" for="defaultCheck1">
+                  {{geofence.name}}
+                  </div>
+                   </div>
+              </div>
+        </div>
+
+
+        <div class="col-3 block-list">
+          <div class="row underline">
+            <i class="material-icons red">not_interested</i>
+            <div class="tags-label">Restricted Zones</div>
+           <i data-toggle="modal" data-target="#exampleModalLong3"class="material-icons  close">add</i>
+          </div>
+           <div *ngFor='let geofence of _dataService.rest_geofences ; let j=index' class="zone-list active row">
+               <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{geofence.name}}" (change)="onCheckboxChange4($event,geofence,j)"id="defaultCheck1">
+                 <div class="form-check-label" for="defaultCheck1">
+                  {{geofence.name}}
+                  </div>
+                   </div>
+              </div>
+        </div>
+      </div>
+
+    </div> -->
+    <div *ngIf="assetCategory=='Outdoor Only'||assetCategory=='Indoor and Outdoor'" class="form-group">
+        <label for="exampleFormControlSelect1">Outdoor Accessibility</label>
+        <i *ngIf="!drop4" class="fa fa-caret-down left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+        <i *ngIf="drop4" class="fa fa-caret-right left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+  
+        <div *ngIf="!drop4" class="row details spacing">
+          <div class="col-3 block-list">
+            <div class="row underline">
+              <i class="material-icons green">exit_to_app</i>
+              <div id="subheader" class="tags-label">Accessible Zones</div>
+              <!--<i data-toggle="modal" data-target="#exampleModalLong" class="material-icons  close">add</i>-->
+            </div>
+             <div *ngFor='let geofence of _dataService.geofences ; let j=index' class="zone-list active row">
+                 <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="{{geofence.name}}" (change)="onCheckboxChange3($event,geofence,j)"id="defaultCheck1">
+                   <div class="form-check-label" for="defaultCheck1">
+                    {{geofence.name}}
+                    </div>
+                     </div>
+                </div>
+          </div>
+  
+  
+          <div class="col-3 block-list">
+            <div class="row underline">
+              <i class="material-icons red">not_interested</i>
+              <div id="subheader" class="tags-label">Restricted Zones</div>
+             <!--<i data-toggle="modal" data-target="#exampleModalLong3"class="material-icons  close">add</i>-->
+            </div>
+             <div *ngFor='let geofence of _dataService.rest_geofences ; let j=index' class="zone-list active row">
+                 <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="{{geofence.name}}" (change)="onCheckboxChange4($event,geofence,j)"id="defaultCheck1">
+                   <div class="form-check-label" for="defaultCheck1">
+                    {{geofence.name}}
+                    </div>
+                     </div>
+                </div>
+          </div>
+        </div>
+  
+      </div>
+    <div *ngIf="assetCategory=='Indoor Only'||assetCategory=='Indoor and Outdoor'" class="form-group">
+      <label for="exampleFormControlSelect1">Indoor Accessibility</label>
+      <i *ngIf="!drop5" class="fa fa-caret-down left" aria-hidden="true" (click)="drop5 =!drop5"></i>
+      <i *ngIf="drop5" class="fa fa-caret-right left" aria-hidden="true" (click)="drop5 =!drop5"></i>
+      <div *ngIf="!drop5" class="row details spacing">
+        <div class="col-3 block-list">
+          <div class="row underline">
+            <i class="material-icons green">exit_to_app</i>
+            <div id="subheader" class="tags-label">Accessible Zones</div>
+           <!--<i class="material-icons  close">add</i>-->
+          </div>
+          <div *ngFor='let facility of facilities; let i=index'>
+            <div class="zone-list active row">
+              <i *ngIf="!subList1[i]"(click)='onClick1($event.currentTarget.id,i)' id="{{facility.FacilityName}}" class="fa fa-caret-down icons green"></i>
+              <i *ngIf="subList1[i]" (click)='onClick1($event.currentTarget.id,i)' id="{{facility.FacilityName}}" class="fa fa-caret-right icons green"></i>
+              <div class="content">{{facility.FacilityName}}</div>
+              <!-- <i class="material-icons icons green delete">delete</i> -->
+            </div>
+            <div *ngIf="subList1[i]">
+              <div *ngFor='let zone of arr[this.facilities[i].FacilityName] ; let j=index' class="zone-list2 active row">
+               <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="zonecheck" value="{{zone.ZoneName}}" (change)="onCheckboxChange1($event,zone,i)"id="defaultCheck1">
+                 <div class="form-check-label" for="defaultCheck1">
+                  {{zone.ZoneName}}
+                  </div>
+                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-3 block-list">
+          <div class="row underline">
+            <i class="material-icons red">not_interested</i>
+            <div id="subheader" class="tags-label">Restricted Zones</div>
+            <!--<i class="material-icons  close">add</i>-->
+          </div>
+          <div *ngFor='let facility of facilities; let i=index'>
+            <div class="zone-list active row">
+              <i *ngIf="!subList2[i]"(click)='onClick2($event.currentTarget.id,i)' id="{{facility.FacilityName}}" class="fa fa-caret-down icons red"></i>
+              <i *ngIf="subList2[i]" (click)='onClick2($event.currentTarget.id,i)' id="{{facility.FacilityName}}" class="fa fa-caret-right icons red"></i>
+              <div class="content">{{facility.FacilityName}}</div>
+              <!-- <i class="material-icons icons red delete">delete</i> -->
+            </div>
+            <div *ngIf="subList2[i]">
+              <div *ngFor='let zone of arr[this.facilities[i].FacilityName] ; let j=index' class="zone-list2 active row">
+               <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{zone.ZoneName}}" (change)="onCheckboxChange2($event,zone,i)"id="defaultCheck1">
+                 <div class="form-check-label" for="defaultCheck1">
+                  {{zone.ZoneName}}
+                  </div>
+                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <div class="pull-right" style="margin:15px 0; margin-right: 25em;">
+        <button class="badge badge-pill badge-primary tab1" (click)="cancel()">Cancel</button><span> </span><button class="badge badge-pill badge-success tab1" type="submit"  [disabled]="formRef.invalid">Update</button>
+    </div>
+  </form>
+</div>

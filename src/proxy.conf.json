@@ -1,0 +1,10 @@
+{
+    "/imgUpload": {
+    "target": "https://cloudobjectstorageimageupload.eu-gb.cf.appdomain.cloud/api/buketdata/upload",
+    "secure": false,
+    "pathRewrite": {
+      "^/imgUpload": ""
+    },
+    "changeOrigin": true
+    }
+}

@@ -1,0 +1,180 @@
+<div class="d-flex">
+  <div class="mr-auto p-2 main-link">Administration <img src="../../../assets/icon/fast-forward-double-right-arrows.svg"
+    id="breadcrumbIcon"> Manage Tag</div>
+    <mat-form-field class="search-title" *ngIf="!busy">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+    <div class="p-2" *ngIf="!busy">
+        <!-- <span><i class="material-icons user-tab filter-icon" (click)= "showFilter = !showFilter">search</i>
+        </span> -->
+        <span class="user-tab"  [routerLink]="['../createTag']">+Tag</span>
+      <!--<i class="material-icons delete-icon" (click)="deleteTagList()">delete</i>-->
+      <i class="material-icons refresh"  (click)="RefreshPlan()">refresh</i>
+  </div>
+</div>
+<p class="errContainer" *ngIf="err">
+  {{errMsg}}
+</p>
+<!-- // mat table --> 
+<div class="mat-elevation-z8"*ngIf="!err && !busy">
+  <div class="scroll-container">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!--<ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="onChecked($event,row)"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>-->
+
+
+    <!-- Serial No Column -->
+    <ng-container matColumnDef="serialNo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial No </th>
+      <td mat-cell *matCellDef="let element" class="main-title"> {{element.DeviceSerialNo}} </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.DeviceType}} </td>
+    </ng-container>
+
+    <!-- State Column -->
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef> State </th>
+      <td mat-cell *matCellDef="let element" > {{element.DeviceState}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="make">
+      <th mat-header-cell *matHeaderCellDef> Make </th>
+      <td mat-cell *matCellDef="let element"> {{element.Make}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef> Model </th>
+      <td mat-cell *matCellDef="let element"> {{element.Model}} </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="asset">
+      <th mat-header-cell *matHeaderCellDef> Asset </th>
+      <td mat-cell *matCellDef="let element"> {{element.assetId}} </td>
+    </ng-container> -->
+
+    
+
+    <ng-container matColumnDef="more">
+      <th mat-header-cell *matHeaderCellDef> More </th>
+      <td mat-cell *matCellDef="let element"> <span><i (click)="onEdit(element)" class="material-icons edit">edit</i>
+      <i class="material-icons delete" data-toggle="modal" data-target="#createModal" (click)="setTag(element)">delete</i>
+             <!--<i class="material-icons more_vert">more_vert</i>-->
+    </span></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+  </table>
+</div>
+  <mat-paginator [pageSizeOptions]="[10, 20,30]" showFirstLastButtons></mat-paginator>
+</div>
+<!-- modal delete -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Do You Really Want To Delete?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closedelModal>No</button>
+        <button type="button" class="btn btn-primary" (click)="deleteTag()" >Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="toggleView" id="myModal" class="modal row justify-content-center">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header"> 
+        <button type="button" (click)="toggleView=!toggleView"class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="card">
+      <div class="card-body-modal">
+        
+        <mat-vertical-stepper  [linear]="isLinear" #stepper>
+          <mat-step  class="width"[stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel></ng-template>
+              <mat-form-field>
+                <input matInput placeholder="Name" formControlName="name" required>
+              </mat-form-field>
+              <mat-form-field>
+                 <input matInput placeholder="Role" formControlName="role" required>
+              </mat-form-field>
+              <div style="float:right;">
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel></ng-template>
+               <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email" required>
+              </mat-form-field>
+               <mat-form-field>
+                <input matInput placeholder="Account" formControlName="account" required>
+              </mat-form-field>
+              <div class="links">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+           <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel></ng-template>
+              <mat-form-field>
+                <input matInput placeholder="Site" formControlName="site" required>
+              </mat-form-field>
+               <mat-form-field>
+                <input matInput placeholder="Group" formControlName="group" required>
+              </mat-form-field>
+              <div class="links">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel></ng-template>
+            You are now done.
+            <div class="links">
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="SaveUser()">Save</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper >
+      </div>
+    </div>
+    <!--<div class="modal-footer-button">
+      <button class="button-align" (click)="SaveUser()">Save</button>
+      <button class="button-align" (click)="AbortOperation()"> Cancel</button>
+    </div>-->
+  </div>
+</div>
+<div *ngIf="busy" class="spinnerDiv">
+  <p-progressSpinner></p-progressSpinner>
+</div>

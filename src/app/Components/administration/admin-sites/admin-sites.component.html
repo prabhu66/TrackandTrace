@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="side-nav col-2">
+  <div class="d-flex Sites">
+  <div class="p-2">Sites</div>
+</div>
+    <ul *ngFor="let options of NavBarOptions; let i =index">
+      <li [routerLink]="['/admin/sites', options.routes]" routerLinkActive="active" (click) ="highlightOption(i, options)" [class.highlight]="options==Selected">{{options.name}}</li>
+    </ul>
+  </div>
+
+  <div class="col-10">
+<router-outlet></router-outlet>
+  </div>
+</div> 

@@ -1,0 +1,44 @@
+.map1{
+  padding: 0 0;
+ 
+  /* margin: 0 0px; */
+  /* box-sizing: border-box; */
+}
+.map-heading{
+  font-size: 1.2em;
+  padding: 1em;
+}
+.heading-set{
+  background-color:#3385ff;
+  color: #fff;
+}
+caption{
+  background-color: #3385ff;
+  color: #fff;
+  font-size: 1.3em;
+  text-align: center;
+  padding: 10px;
+}
+.table1{
+  padding: 2px 2px;
+}
+.form{
+  padding-top: 10px;
+}
+.tab2{
+  margin: 12px;
+}
+.active {
+    color: #ffffff;
+    background-color: #56A6B6;
+}
+
+.active .subtle {
+    color: #ffffff;
+}
+.mat-icon {
+    transform: scale(0.5);
+}
+.icon{
+  padding-left: 5em;
+}

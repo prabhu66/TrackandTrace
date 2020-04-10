@@ -1,0 +1,32 @@
+<form #formRef="ngForm" (ngSubmit)="onSubmit()">
+  <div class="links">
+    <span class="row form-group">
+        
+        <span><input type="text" id="input-small"  [(ngModel)]="tempGeofence.name" name="name" required placeholder="Geofence Name"  autocomplete="off" class="input-sm form-control-sm form-control"></span>
+          <span > <span id='searchBoxContainer'class="search-map">
+      <input type="text" name="searchText" [(ngModel)]="searchText" id= 'searchBox' placeholder="Search location.." class="text-search" autocomplete="off">
+    </span>
+            <i class="material-icons tab1 " (click)="onSubmit()">done</i>
+        <i  *ngIf='draw'  id="geofence" (click)="drawPolygonGeofence()"class="material-icons ">edit</i>
+        <i  *ngIf='!draw' (click)="endCurrentDraw()"class="material-icons blue">edit</i>  
+      </span>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </span>
+  </div>
+    <div class="row">
+       <div class="card" style='width: 100%; height: 600px;'>
+      <div class='map1'>
+      
+      <div #myMap style='width: 100%; height: 600px;'>
+
+      </div>
+   </div>
+       </div>
+        
+    </div>
+  </form>
+  
+

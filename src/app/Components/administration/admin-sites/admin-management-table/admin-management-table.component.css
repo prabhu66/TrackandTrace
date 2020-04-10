@@ -1,0 +1,145 @@
+table{
+    border:1;
+    margin-top: 10px;
+    width: 100%;
+   }
+th{
+    font-size:11px;
+    font-weight:bold;
+    background-color: #2799CF;
+    color:white;
+    width:60px !important;
+    
+}
+.scroll-container{
+    overflow-y: scroll;
+    max-height: 75vh;
+}
+tr{
+    width:90%;
+    background: #f2f2f2;
+    padding: 10px;
+}
+td{
+    font-size:12px;
+} 
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.user-tab{
+    /* float: right; */
+    border: 1px solid black;
+    padding: 7px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 13px;
+    text-shadow: none;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  .delete-icon{
+  margin: 5px;
+  color:red;
+  border: 1px solid red;
+  padding: 7px;
+  font-size: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  cursor: pointer;
+  }
+  .delete-icon:hover {
+    transform: scale(1.25);
+}
+  .main-link{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-shadow: 1px 1px 3px grey;
+    margin-right: 5%;
+  }
+  .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 80%;
+    height: 50%;
+}
+.modal-footer-button{
+    margin-top:3em;
+    bottom:0;
+    right:0;
+    position:absolute;
+    padding: 5px;
+  }
+.btn{
+    margin-right: 5px;
+    font-size: 10px;
+
+}
+.button-align{
+    background-color:#759b04;
+    cursor: pointer;
+    float: right;
+    font-size: 14px;
+    color: white;
+    width: 80px;
+    border-radius: 5px;
+    bottom:0;
+  }
+  ::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background: #7f9ddf62;
+    border: 1px solid rgb(63, 60, 60);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #2799CF;;
+    border: 1px solid rgb(77, 27, 27);
+  }
+
+  ::-webkit-scrollbar-thumb:hover{
+    background: #cc9900;
+  }
+.close{
+    margin-top: -1em;
+}
+mat-form-field{
+    display: block;
+    width:20%;
+}
+.mat-button{
+  
+   background-color:#759b04;
+   color: white;
+   border:1px solid grey;
+
+}
+.links{
+    display: inline-block;
+}
+.matStepperPrevious{
+    margin-left: 62em;
+}

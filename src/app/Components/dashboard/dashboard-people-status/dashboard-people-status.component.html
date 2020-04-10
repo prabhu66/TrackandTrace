@@ -1,0 +1,238 @@
+<div class="main-container">
+    <div class="modal fade" id="historyModalCenter" tabindex="-1" role="dialog" aria-labelledby="historyModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="historyModalCenterTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+
+          <div class="assetHeader">
+            <div class="assetSection">
+              <div class="historyHeaderSection">Asset Name</div>
+              <div class="historyValueSection"> {{modalAssetName}}</div>
+            </div>
+
+            <div class="assetSection">
+              <div class="historyHeaderSection">Asset Type</div>
+              <div class="historyValueSection"> {{modalAssetType}}</div>
+            </div>
+
+          </div>
+          <app-history-modal *ngIf="showModal"></app-history-modal>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- History Modal Ends -->
+
+  <!-- Alert Modal Here -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="alertModalCenter1" tabindex="-1" role="dialog" aria-labelledby="alertModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="alertModalCenterTitle">  </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+          <div class="assetHeader">
+            <div class="assetSection">
+              <div class="alertHeaderSection">Asset Name</div>
+              <div class="alertValueSection"> {{modalAssetName}}</div>
+            </div>
+
+            <div class="assetSection">
+              <div class="alertHeaderSection">Asset Type</div>
+              <div class="alertValueSection"> {{modalAssetType}}</div>
+            </div>
+
+          </div>
+          <app-alert-modal *ngIf="showModal"></app-alert-modal>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Alert Modal Ends -->
+
+
+    <div class="tabContent">
+      <div class="RefreshContainer">
+        <span id="refresh" data-toggle="tooltip" data-placement="bottom" title="Reload"> <img
+            src="../../../../assets/icon/refresh_yellow.svg" id="optionIcon" (click)="reload()"> </span>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col" id="viewDashboard"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Attendence</th>
+            <th scope="col">Holding Assets</th>
+            <th scope="col">Asset Dues</th>
+            <th scope="col">Location</th>
+            <th scope="col">Timestamp</th>
+            <th scope="col">BLE Tag</th>
+            <th scope="col">Tracker</th>
+            <th scope="col" id="Actions">Actions</th>
+  
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let asset of assetList'>
+            <th scope="row" id="viewDashboard">
+              <span><img (click)="setAssetName(asset.AssetID,asset.AssetName)" id="eyeIcon"
+                  src="../../../../assets/icon/eye-blue.svg"></span>
+            </th>
+            <td>
+              <div>
+                <div class="td-header">
+                  {{asset.AssetName}}
+                </div>
+              </div>
+            </td>
+     <!-- Worker Role -->
+            <td>
+                <div>
+                  <div class="">
+                        {{asset.AssetType}}
+                  </div>
+                </div>
+              </td>
+
+      <!-- Worker Tag -->
+              <td>
+                  <div>
+                    <div class="">
+                      {{asset.AssetTagSerialNo}}
+                    </div>
+                  </div>
+                </td>
+  
+            <!-- nIF -->
+            <td class="Status">
+              <div class="inUse" *ngIf="asset.Status == 'On Duty'">On Duty</div>
+              <div class="idle" *ngIf="asset.Status == 'Off Duty'"> Off Duty</div>
+              <div class="disabled" *ngIf="asset.Status == 'Disabled'"> Disabled</div>
+            </td>
+
+            <!--Holding Assets  -->
+
+            <td>
+                  <div class="holdingAsset">
+                    {{asset.Holdingassets}}
+                  </div>
+              </td>
+
+              <!-- Asset Dues -->
+              <td>
+                  <div id= "specialWidth" class="assetDues">
+                    {{asset.AssetDue}}
+                  </div>
+              </td>
+            <td>
+              <div class="locationCol">
+                <div class="icon"><img id="pin" src="../../../../assets/icon/Green-pin.svg"> </div>
+                <div *ngIf="asset.AssetLocation != null " class="locaionValue" data-toggle="tooltip"
+                  data-placement="bottom" [title]="asset.AssetLocation">
+                  {{(asset.AssetLocation.length>13)?(asset.AssetLocation| slice:0:13)+ ' ...' : (asset.AssetLocation)}}
+                </div>
+                <div *ngIf="asset.AssetLocation == null " class="locaionValue"> -- </div>
+              </div>
+            </td>
+            <!--  -->
+            <td id="time">{{asset.LastUpdatedtDateTime | date:'medium'}}</td>
+           
+            <td>
+              <!-- <div *ngIf="asset.BleStatus == 'online'" class="online"></div>
+              <div *ngIf="asset.BleStatus == 'offline' || asset.BleStatus ==null" class="offline"></div>
+              <div *ngIf="asset.BleStatus == 'No'" class="greyStatus"></div> -->
+              <!-- nIF BLE STATUS-->
+                <div class="">
+                  <div *ngIf="asset.BleStatus == 'online'" class="online"></div>
+                  <div *ngIf="asset.BleStatus == 'offline' || asset.BleStatus ==null" class="offline"></div>
+                  <div *ngIf="asset.BleStatus == 'No'" class="greyStatus"></div>
+                </div>
+
+            </td>
+            <td>
+                <!-- nIF GPS TRACKER STATUS-->
+                <div class="">
+                  <div class="online" *ngIf="asset.TrackerStatus == 'online'"></div>
+                  <div class="offline" *ngIf="asset.TrackerStatus == 'offline' || asset.TrackerStatus == null"></div>
+                  <div class="greyStatus" *ngIf="asset.TrackerStatus == 'No'"></div>
+                </div>
+            </td>
+
+            <!-- Action Column -->
+            <td class="actionCol">
+                <div class="actionList">
+                  <div class="actionItem">
+                    <img (click)="setAssetForModal(asset.AssetID,asset.AssetName,asset.AssetType)"
+                      src="../../../../assets/icon/history-clock-button_white.svg" id="actionIcon" data-toggle="tooltip"
+                      data-placement="bottom" title="View History" data-toggle="modal" data-target="#historyModalCenter">
+                  </div>
+    
+                  <div class="actionItem">
+                    <!-- with Alert -->
+                    <img *ngIf="asset.IndoorAlertsCount!= 0"
+                      (click)="setAssetForModal(asset.AssetID,asset.AssetName,asset.AssetType)"
+                      src="../../../../assets/image/warning_new.svg" id="actionIcon" data-toggle="tooltip"
+                      data-placement="bottom" title="View Alerts" data-toggle="modal" data-target="#alertModalCenter1">
+                    <!-- without alert -->
+                    <div *ngIf="asset.IndoorAlertsCount== 0" class="NoAlert" data-toggle="tooltip" data-placement="bottom"
+                      title="No Indoor Alerts">
+                      <img id="noAlertIcon" src="../../../../assets/icon/check-sign.svg">
+                    </div>
+                  </div>
+    
+    
+                  <!-- <div class="actionItem">
+                    <img src="../../../../assets/icon/pie-chart.svg" id="actionIcon" 
+                    data-toggle="tooltip" data-placement="bottom" title="View Utilization Chart"
+                    data-toggle="modal" data-target="#utilizationModalCenter">
+                  </div> -->
+                  <!-- <div class="actionItem">
+                    <img src="../../../../assets/icon/clips.svg" id="actionIcon" data-toggle="modal"
+                      data-target="#userNoteModalCenter"
+                      data-toggle="tooltip" data-placement="bottom" title="View User Notes">
+                  </div> -->
+                </div>
+              </td>
+  
+  
+            <!-- DUPLICATING FOR TEMPERATURE AND HUMIDITY -->
+  
+           
+            <!-- <td> {{asset.User}} </td> -->
+            <!--  -->
+          </tr>
+  
+          <!-- Duplicating Rows -->
+  
+  
+          <!-- Duplication  Ends-->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- <app-dashboard-assets-heatmap></app-dashboard-assets-heatmap> -->

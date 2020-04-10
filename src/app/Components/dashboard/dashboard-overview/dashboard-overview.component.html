@@ -1,0 +1,252 @@
+<div class="main-container">
+  <!-- card content -->
+  <div class="tab-body">
+
+    <div class="tab-1-box">
+      <div class="card-body">
+        <span class="img"><img src="../../../assets/image/font_black.svg"></span>
+        <div class="tab-header tab-heading"> Assets : <span>{{TotalAssetCount}}</span></div> 
+        <div class="AssetSection">
+          <div class="assetStatusSection"><span class="circle-online"></span>
+            <span class="assetStatus"> Online  : <span class="green-text"> {{InUseAssetCount}}</span></span> </div>
+          <div class="assetStatusSection"><span class="circle-offline"></span>
+            <span class="assetStatus"> Offline  : <span class="red-text">{{IdleAssetCount}}</span></span> </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="tab-1-box">
+        <div class="card-body">
+          <span class="img"><img id="img-worker" src="../../../assets/image/workerIcon.svg"></span>
+          <div class="tab-header tab-heading"> Workers : <span>{{PeopleCount}}</span></div> 
+          <div class="AssetSection">
+            <div class="assetStatusSection"><span class="circle-online"></span>
+              <span class="assetStatus"> Online  : <span class="green-text"> {{OnDutyCount}}</span></span> </div>
+            <div class="assetStatusSection"><span class="circle-offline"></span>
+              <span class="assetStatus"> Offline  : <span class="red-text">{{PeopleOffDuty}}</span></span> </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="tab-1-box">
+        <div class="card-body">
+          <span class="circle-online"></span>
+          <div class="tab-header tab-heading">Online Assets</div> <span class="asset-img img"><img src="../../../assets/image/font_grey_large.svg"></span>
+          <div class="count1 count-green">{{InUseAssetCount}}</div>
+        </div>
+      </div> -->
+  
+      <!-- <div class="tab-1-box">
+        <div class="card-body">
+          <span class="circle-offline"></span>
+          <div class="tab-header tab-heading">Offline Assets</div><span class="asset-img img"><img src="../../../assets/image/a-slash.svg"></span>
+          <div class="count1 count-red">{{IdleAssetCount}}</div>
+        </div>
+      </div> -->
+  
+  <div class="tab-2-box">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-9" id="AssetUtil">
+      <div class="asset-tab-heading">Asset Utilization</div>
+      <div class="count1 asset"><span class="total-grey">Total </span> {{TotalAssetCount}} <span class="inuse-green badge badge-pill">InUse  </span> {{InUseAssetCount}}  <span class="total-grey">Idle  </span> {{IdleAssetCount}}</div>
+      </div>
+      <div class="col-3">
+          <canvas class="canvas-style" id="myChart"></canvas>
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="tab-4-box">
+      <div class="card-body">
+        <div class="asset-tab-heading">Alerts</div>
+        <div class="count1 asset red-alert">
+          <img id="TabIcons"data-toggle="tooltip" data-placement="bottom" title="Geofence Alert" src="../../../assets/image/Geofence.svg"> <span> {{CurrentOutdoorAlertCount}}</span> 
+           <img class="spacing" id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="Zones Alert" src="../../../assets/image/3d-location-graph.svg"> <span>{{CurrentIndoorAlertCount}}</span>  
+           <img class="spacing" id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="Assets Alert" src="../../../assets/image/font_black.svg"> {{AlertAssetCount}}
+           <img id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="Workers Alert"src="../../../assets/image/worker_green.svg"> {{TotalAssetCount}} </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class=" tab-3-box">
+        <div class="card-body">
+          <div class="asset-tab-heading"> Site</div>
+         <div class="count1 asset"> 
+            <img id="TabIcons"  data-toggle="tooltip" data-placement="bottom" title="Workers"src="../../../assets/image/worker_green.svg"> {{PeopleCount}} 
+           <img id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="Assets" src="../../../assets/image/font_black.svg"> {{TotalAssetCount}} 
+          <img id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="BLE Tag" src="../../../assets/image/bluetooth_black_small.svg"> {{TagCount}} 
+          <img id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="GPS Tracker" src="../../../assets/icon/hard-disk.svg"> {{TrackerCount}}
+           <img id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="Geofence Count"  src="../../../assets/image/Geofence.svg">{{GeofenceCount}}
+           <img class="spacing" id="TabIcons" data-toggle="tooltip" data-placement="bottom" title="Zones Count"src="../../../assets/image/3d-location-graph.svg"> <span> {{FacilityCount}}</span>
+          </div>
+        </div>
+        </div>
+      </div>
+   
+ 
+ 
+<!-- </div> -->
+  <!-- Map & Facility shown Area -->
+  <div class='col-sm-9 panel'>
+                          <nav>
+                              <div class="nav nav-tabs heading-set" id="nav-tab" role="tablist">
+                                   <a class="nav-item nav-link active first-nav" (click)="onUtilizationClick($event)"  id="nav-utilization-tab" data-toggle="tab" href="#nav-utilization" role="tab" aria-controls="nav-utilization" aria-selected="false">Utilization</a>
+
+
+                                  <a class="nav-item nav-link" (click)="onFloorClick($event)" id="nav-floor-tab" data-toggle="tab" href="#nav-floor" role="tab" aria-controls="nav-floor" aria-selected="false">Floorplan</a>
+
+                                   <a class="nav-item nav-link " (click)="onMapClick($event)" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Map</a>
+                   
+                              </div>
+                          </nav>
+                          <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                              <div class="tab-pane fade " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <app-dashboard-overview-bingmap></app-dashboard-overview-bingmap>
+                              </div>
+                              <div class="tab-pane fade" id="nav-floor" role="tabpanel" aria-labelledby="nav-floor-tab">
+                                <div class="facilityTabpane"><app-dashboard-overview-facility (messageEvent)="receiveMessage($event)" (zoneEvent)="recieveZone($event)"></app-dashboard-overview-facility></div>
+                                  
+                             </div>
+
+                            
+
+
+                              <div class="tab-pane fade show active" id="nav-utilization" role="tabpanel" aria-labelledby="nav-utilization-tab">
+                             <!-- charts -->
+                                <app-dashboard-utilization></app-dashboard-utilization>
+
+                             </div>
+
+
+                      </div>
+  </div>
+ 
+
+
+    <div class="col-md-3 panel ">
+      <nav>
+        <div class="nav nav-tabs heading-set" id="nav-tab" role="tablist">
+          <a  *ngIf="onShow!='nav-home-tab'" class="nav-item nav-link active second-nav" id="nav-person-tab" data-toggle="tab" href="#nav-person" role="tab" aria-controls="nav-person" aria-selected="true">Workers</a>
+        <a class="nav-item nav-link " [ngClass]="'class-'+ onShow" [class.active]="onShow=='nav-home-tab'" id="nav-matter-tab" data-toggle="tab" href="#nav-matter" role="tab" aria-controls="nav-matter" aria-selected="false">Assets</a>
+          <i (click)="click=!click;searchText=''" id="searchbutton" data-toggle="search" aria-haspopup="true" aria-expanded="false"class="material-icons search">search</i>
+        <!--<a class="nav-item nav-link " id="nav-indoor-tab" data-toggle="tab" href="#nav-indoor" role="tab" aria-controls="nav-indoor" aria-selected="false">Indoor Zones</a>
+
+        <a class="nav-item nav-link" id="nav-outdoor-tab" data-toggle="tab" href="#nav-outdoor" role="tab" aria-controls="nav-outdoor"
+          aria-selected="false">Outdoor Zones</a>-->
+
+      </div>
+      </nav>
+      <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+          <span *ngIf="click" class="search-button" aria-labelledby="searchbutton">
+              <input type="text"  [(ngModel)]="searchText" (keyup.enter)="click=!click" placeholder="Search"/></span> 
+        <div class="tab-pane fade tab-pane1" [class.show]="onShow=='nav-home-tab'" [class.active]="onShow=='nav-home-tab'" id="nav-matter" role="tabpanel" aria-labelledby="nav-matter-tab">
+            <div class="asset-list">
+                <div *ngFor="let asset of displayList | search : searchText;let pic of imgs; let i = index" class="card1 row">
+                  <div class="col-1 icon-header">
+                      <img *ngIf="asset.AssetImageUrl != null" class="icon-style" [src]="asset.AssetImageUrl">
+                      <img *ngIf="asset.ImageUrl " class="icon-style" [src]="asset.ImageUrl">
+                      <img *ngIf="asset.AssetImageUrl == '' && asset.ImageUrl == ''" class="icon-style" src="../../../../assets/icon/broken-image (1).svg">
+                  </div>
+                  <div class="col-7 block-link" id="infoHolder">
+                  <div class="asset-list-header">{{asset.AssetName}}</div><span [ngClass]="'circle-'+asset.BleStatus"></span>
+                  <div class="asset-list-subheader" ><div *ngIf="asset.AssetLocation != null"
+              data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetLocation">
+              {{(asset.AssetLocation.length>15)?(asset.AssetLocation| slice:0:15)+ ' ...' : (asset.AssetLocation)}}
+            </div>
+            <div *ngIf="asset.Address != null"
+              data-toggle="tooltip" data-placement="bottom" [title]="asset.Address">
+              {{(asset.Address.length>15)?(asset.Address| slice:0:15)+ ' ...' : (asset.Address)}}
+            </div>
+               </div>
+                  <span *ngIf="id!='floor'"><img  class="img-clock" src="../../../../assets/image/clock_white.svg">
+                  </span>
+                  <span class="asset-list-footer">
+                    <div *ngIf="asset.LastUpdatedtDateTime !=null">{{asset.LastUpdatedtDateTime| date:'short'}}</div>
+                    <div *ngIf="asset.lastUpdatedTime !=null" class="timepadding">{{asset.lastUpdatedTime | date:'short'}}</div>
+                    <div *ngIf="asset.AssetStatus" [class.OUT]="asset.AssetStatus === 'IN RESTRICTED ZONE'" [class.IN]="asset.AssetStatus === 'IN AUTHORIZED ZONE'">{{asset.AssetStatus}}</div>
+                    <div *ngIf="asset.zoneState" [class.OUT]="asset.zoneState === 'IN RESTRICTED ZONE'" [class.IN]="asset.zoneState === 'IN AUTHORIZED ZONE'">{{asset.zoneState}}</div>
+                    <span *ngIf="asset.FacilityZone" class="facility-data">{{asset.FacilityZone}}</span>
+                    <span *ngIf="asset.zoneName" class="facility-data">{{asset.zoneName}}</span>
+                    <span *ngIf="asset.FacilityLocation" class="User-Info">{{asset.FacilityLocation}}</span>
+                    <span *ngIf="asset.facilityName" class="User-Info">{{asset.facilityName}}</span>
+
+                  </span>
+
+                </div>
+                <div class="col-4 asset-icons block-link ">
+                  <!-- <div class="bleTag">{{asset.AssetTagSerialNo}}</div> -->
+                  
+                  <div>
+                    <!-- <span *ngIf="asset.Temperature <= 12 && asset.Temperature>0"><img id ="storeIcon" src = "../../../../assets/icon/in-ref.svg"></span> <span *ngIf="asset.Temperature > 12 || asset.Temperature==0"><img id ="storeIcon" src = "../../../../assets/icon/out-ref.svg"></span> -->
+                  <img class="assetListIcon" data-toggle="tooltip" data-placement="bottom" title="Click here to view detailed information" routerLink="/dashboard/specific-asset" (click)="setAssetId(asset.AssetID,asset.AssetName)" src="../../../../assets/icon/eye-white.svg">
+                  <span *ngIf="id=='map'" [class.blink-image]="highlightStatus[i]" (click)="onClick(i)" ><img class="assetListIcon" src="../../../../assets/image/map-marker_blue_small.svg"></span></div>
+
+                  <!--<img class="assetListIcon" src="../../../../assets/image/warning_small.svg"> {{asset.alert}}-->
+                  <!-- <div  *ngIf="asset.Temperature <= 12 && asset.Temperature>0" class="inrefText">IR</div><div *ngIf="asset.Temperature > 12 || asset.Temperature==0" class="outrefText">OR</div> -->
+                </div>
+               
+                </div>
+               </div>
+             
+        </div>
+
+        <div class="tab-pane fade tab-pane1 show active" id="nav-person" role="tabpanel" aria-labelledby="nav-person-tab">
+            <div class="asset-list">
+                <div *ngFor="let asset of displayPeopleList | search : searchText;let pic of imgs; let i = index" class="card1 row">
+                  <div class="col-1 icon-header">
+                    <img *ngIf="asset.AssetImageUrl != null" class="icon-style" [src]="asset.AssetImageUrl">
+                    <img *ngIf="asset.ImageUrl " class="icon-style" [src]="asset.ImageUrl">
+                    <img *ngIf="asset.AssetImageUrl == '' && asset.ImageUrl == ''" class="icon-style" src="../../../../assets/icon/broken-image (1).svg">
+                  </div>
+                  <div class="col-7 block-link" id="infoHolder">
+                  <div class="asset-list-header">{{asset.AssetName}}</div><span [ngClass]="'circle-'+asset.BleStatus"></span>
+                  <div class="asset-list-subheader" ><div *ngIf="asset.AssetLocation != null"
+              data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetLocation">
+              {{(asset.AssetLocation.length>15)?(asset.AssetLocation| slice:0:15)+ ' ...' : (asset.AssetLocation)}}
+            </div>
+            <div *ngIf="asset.Address != null"
+              data-toggle="tooltip" data-placement="bottom" [title]="asset.Address">
+              {{(asset.Address.length>15)?(asset.Address| slice:0:15)+ ' ...' : (asset.Address)}}
+            </div>
+               </div>
+                  <span *ngIf="id!='floor'"><img  class="img-clock" src="../../../../assets/image/clock_white.svg">
+                  </span>
+                  <span class="asset-list-footer">
+                    <div *ngIf="asset.LastUpdatedtDateTime !=null">{{asset.LastUpdatedtDateTime | date:'short'}}</div>
+                    <div *ngIf="asset.lastUpdatedTime !=null" class="timepadding">{{asset.lastUpdatedTime | date:'short'}}</div>
+                    <div *ngIf="asset.AssetStatus" [class.OUT]="asset.AssetStatus === 'IN RESTRICTED ZONE'" [class.IN]="asset.AssetStatus === 'IN AUTHORIZED ZONE'">{{asset.AssetStatus}}</div>
+                    <div *ngIf="asset.zoneState" [class.OUT]="asset.zoneState === 'IN RESTRICTED ZONE'" [class.IN]="asset.zoneState === 'IN AUTHORIZED ZONE'">{{asset.zoneState}}</div>
+                    <span *ngIf="asset.FacilityZone" class="facility-data">{{asset.FacilityZone}}</span>
+                    <span *ngIf="asset.zoneName" class="facility-data">{{asset.zoneName}}</span>
+                    <span *ngIf="asset.FacilityLocation" class="User-Info">{{asset.FacilityLocation}}</span>
+                    <span *ngIf="asset.facilityName" class="User-Info">{{asset.facilityName}}</span>
+                  </span>
+                    
+
+                </div>
+                <div class="col-4 asset-icons block-link ">
+                 
+                  
+                  <div>
+                  
+                  <img class="assetListIcon" data-toggle="tooltip" data-placement="bottom" title="Click here to view detailed information" routerLink="/dashboard/people-specific" (click)="setAssetId(asset.AssetID,asset.AssetName)" src="../../../../assets/icon/eye-white.svg">
+                  <span *ngIf="id=='map'" [class.blink-image]="highlightStatus[i]" (click)="onClick(i)" ><img class="assetListIcon" src="../../../../assets/image/map-marker_blue_small.svg"></span></div>
+
+
+                </div>
+               
+                </div>
+               </div>
+             
+        </div>
+      
+            
+          </div>
+
+     
+
+
+    </div>
+  </div>
+</div>

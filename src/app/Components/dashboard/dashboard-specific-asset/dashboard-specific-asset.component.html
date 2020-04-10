@@ -1,0 +1,460 @@
+<!-- MODAL Code Here -->
+  <!-- Release Modal -->
+  <div class="modal fade" id="releaseModalCenter" tabindex="-1" role="dialog" aria-labelledby="releaseModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="releaseModalCenterTitle"> <img id="warningModal" src="../../../../assets/image/warning_new.svg">Release Asset</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>s
+        </div>
+        <div class="modal-body">
+          Are you sure you want to release this asset?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abort</button>
+          <button type="button" class="btn btn-primary" (click)="releaseAsset()" data-dismiss="modal">Release Asset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Associate Modal -->
+  <div class="modal fade" id="associateModalCenter" tabindex="-1" role="dialog" aria-labelledby="associateModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="associateModalCenterTitle">Associate Asset</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="AssociateContainer">
+
+          <div class="divSection">
+            <div class="headerSection">Asset Name:</div>
+            <div class="ValueSection"> {{AssetName}} </div>
+          </div>
+          <div class="divSection">
+              <div class="headerSection">Username: </div>
+              <div class="ValueSection">  
+                  <select class="form-control spacing " id="userName" name="userName" [(ngModel)]="userName" >
+                  <option *ngFor="let param of Users" [value]="param.AssetName">
+                    {{param.AssetName}}
+                    </option>
+                  </select></div>
+          </div>
+          <div class="divSection">
+              <div class="headerSection">Select Date Range:</div>
+              <div class="ValueSection">     <input id="DateRange"  name="DateRange" [(ngModel)] = "DateRange"
+                type="text" bsDaterangepicker [bsConfig]= "datePickerConfig"  placeholder="Click here to select date range"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abort</button>
+          <button type="button" class="btn btn-primary"  (click)="AssociateAsset()" data-dismiss="modal"> Associate Asset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+<!-- Modal Code Ends Here -->
+
+<div class="mainContent">
+    <div class="dashboardContent">
+
+
+    <div class="summaryTabSection">
+  <!--  ===================================================================== -->
+  <div class="assetSummaryTab"> 
+      <div class="assetSummaryLeftSection">
+        <div class="assetNameSection"> 
+          
+          <!-- {{AssetName}} -->
+
+          {{(AssetName && AssetName.length > 15)? (AssetName | slice:0:1)+'..':(AssetName)}} 
+        
+        <div class="assetTypeSection">{{AssetType}} </div>
+        </div>
+        <!-- <div class="assetCreationTimeSection"> 
+     <b>Onboarded:</b> {{AssetCreatedTime | date:'mediumDate'}}
+      </div> -->
+
+      <!-- <div class="SensorDataSection">
+        <div class="dataSection">
+        <img src="../../../../assets/icon/thermometer.svg" id ="labelIcon"> <span *ngIf="AssetTemp > 0">{{AssetTemp}}  &deg;C </span><span *ngIf="AssetTemp ==0"> -</span>
+        </div>
+        <div class="dataSection">
+          <img src="../../../../assets/icon/humidity (1).svg" id ="labelIcon"> <span *ngIf="AssetHumidity> 0">{{AssetHumidity}}%</span> <span *ngIf="AssetHumidity== 0"> - </span>  
+        </div>
+      </div> -->
+
+      <!-- <div class="DetailsSection" id="TimeSection"> 
+          <div class="iconSection"> 
+            <img src = "../../../../assets/icon/clock-circular-outline.svg" id ="locationIcon">
+          </div>
+          <div *ngIf="AssetCategory == 'Indoor Only' || AssetCategory == 'Indoor and Outdoor'" class="infoSection"> {{LastBleDateTime | date: 'short'}}  </div>
+          <div *ngIf="AssetCategory == 'Outdoor Only'" class="infoSection"> - - -   </div>
+        </div> -->
+      </div>
+      <div class="assetSummaryRightSection">
+         
+        <img id ="assetIcon" src = "../../../../assets/icon/asset-Icon.svg">
+
+        <!-- Added to acomodate CREATED TIME -->
+        <div class="assetStatusSection">
+            <div *ngIf="Status == 'In-Use'" class="inUse"> {{Status}}</div>
+            <div *ngIf="Status == 'Idle'" class="idle">{{Status}}</div>
+            <div *ngIf="Status == 'Disabled'" class="disabled"> {{Status}}</div>
+        </div>
+        <!-- Addition ENDS -->
+      </div>
+    </div>
+  
+  <!-- ========================================================================== -->
+      <div class="LocationSummaryTab">
+        <div class="locationTopSection">
+  
+          <div *ngIf="TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor'" class="sensorIDSection">
+            <!-- {{AssetTagSerialNo | truncate:[15, '...'] }} -->
+            {{(AssetTagSerialNo && AssetTagSerialNo.length > 15)? (AssetTagSerialNo | slice:0:15)+'..':(AssetTagSerialNo)}}
+            <!-- {{AssetTagSerialNo}} -->
+          </div>
+          <div *ngIf="TrackMode == 'Outdoor Only'" class="sensorIDSection"> NO INDOOR DATA </div>
+  
+          <div class="sensorStatusSection">
+             <div *ngIf="(TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor') && (BleStatus == 'online')" class="online"></div>
+             <div *ngIf="(TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor') && (BleStatus == 'offline' || BleStatus == null )" class="offline"></div>
+             <div *ngIf="TrackMode == 'Outdoor Only'" class="grey"></div>
+          </div>
+  
+          <div class="sensorIconSection">
+            <img id ="sensorIcon" src ="../../../../assets/icon/bleTagIcon.svg">
+          </div>
+  
+        </div>
+  
+        <div class="LocationBottomSection">
+          <div class="DetailsSection" id="leftDetailsSection"> 
+            <div class="iconSection"> 
+              <img src="../../../../assets/icon/maps-and-flags.svg" id ="locationIcon">
+            </div>
+            <div *ngIf="TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor'" class="infoSection"  data-toggle="tooltip" data-placement="bottom" [title]="AssetBLELocation">
+                {{(AssetBLELocation && AssetBLELocation.length>15)?(AssetBLELocation| slice:0:15)+ ' ...' : (AssetBLELocation)}}
+                <!-- {{AssetBLELocation | truncate:[15, '...'] }} -->
+                <!-- {{AssetBLELocation}} -->
+            </div>
+
+            <div *ngIf="TrackMode == 'Outdoor Only'" class="infoSection">  - - -     </div>
+          </div>
+          <div class="DetailsSection" id="TimeSection"> 
+              <div class="iconSection"> 
+                <img src = "../../../../assets/icon/clock-circular-outline.svg" id ="locationIcon">
+              </div>
+              <div *ngIf="TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor'" class="infoSection"> {{LastBleDateTime | date: 'short'}}  </div>
+              <div *ngIf="TrackMode == 'Outdoor Only'" class="infoSection"> - - -   </div>
+            </div>
+        </div>
+      </div>
+  
+      <!-- ======================================================================= -->
+    
+      <div class="LocationSummaryTab">
+          <div class="locationTopSection">
+  
+            <!--  -->
+    
+            <div *ngIf="TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor'" class="sensorIDSection">
+              <!-- {{AssetTrackerNo | truncate:[15, '...'] }} -->
+            {{(AssetTrackerNo.length>15)?(AssetTrackerNo| slice:0:15)+ ' ...' : (AssetTrackerNo)}}
+            <!-- {{AssetTrackerNo}} -->
+            </div>
+            <div *ngIf="TrackMode == 'Indoor Only'" class="sensorIDSection"> NO OUTDOOR DATA </div>
+            <!--  -->
+            <div class="sensorStatusSection">
+               <div *ngIf="(TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor') && (TrackerStatus== 'online')" class="online"></div>
+               <div *ngIf="(TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor') && (TrackerStatus== 'offine' || TrackerStatus == null)" class="offline"></div>
+               <div *ngIf="TrackMode == 'Indoor Only'" class="grey"></div>
+            </div>
+            <div class="sensorIconSection">
+              <img id ="sensorIcon" src ="../../../../assets/icon/hard-diskWhite.svg">
+            </div>
+          </div>
+          <div class="LocationBottomSection">
+            <div class="DetailsSection" id="leftDetailsSection"> 
+              <div class="iconSection"> 
+                <img src="../../../../assets/icon/maps-and-flags.svg" id ="locationIcon">
+              </div>
+              <div *ngIf="TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor'" class="infoSection"  data-toggle="tooltip" data-placement="bottom" [title]="AssetTrackerLocation">
+                  <div *ngIf="AssetTrackerLocation">{{(AssetTrackerLocation.length>15)?(AssetTrackerLocation| slice:0:15)+ ' ...' : (AssetTrackerLocation)}}</div>
+                  <!-- {{AssetTrackerLocation | truncate:[15, '...'] }} -->
+              </div>
+  
+              <div *ngIf="TrackMode == 'Indoor Only'" class="infoSection">  - - -     </div>
+            </div>
+            <div class="DetailsSection" id="TimeSection"> 
+                <div class="iconSection"> 
+                  <img src = "../../../../assets/icon/clock-circular-outline.svg" id ="locationIcon">
+                </div>
+                <div *ngIf="TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor'" class="infoSection"> {{LastTrackerDateTime | date: 'short'}} </div>
+                <div *ngIf="TrackMode == 'Indoor Only'" class="infoSection"> - - -  </div>
+              </div>
+          </div>
+        </div>
+    
+        <!-- ======================================================================= -->
+
+      <div class="custodianSummaryTab">
+       <div class="leftCustodianSection">
+        <div class="custodianTopSection"> 
+          <div class="custodianHeader"> Custodian</div>
+        </div>
+        <div class="custodianBottomSection">
+          <div class="custodianIconSection">
+              <img src="../../../../assets/icon/user.svg" id ="userIcon">
+          </div>
+          <div class="custodianDetailsSection"
+          data-toggle="tooltip" data-placement="bottom" [title]="Custodian"> 
+            {{(Custodian.length>10)?(Custodian| slice:0:10)+ ' ...' : (Custodian)}}
+            <!-- {{Custodian}} -->
+            <!-- {{Custodian | truncate:[10, '...'] }} -->
+          </div>
+        </div>
+       </div>
+
+       <div class="rightCustodianSection">
+         <div class="rightTopSection">
+    
+            <div class="rangeSection">
+              <div class="rangeHeaderSection">
+                From:
+              <span *ngIf="Status == 'In-Use'" id="dateValue">{{AssetUseStartTime | date: 'mediumDate'}}</span>
+              <span *ngIf="Status != 'In-Use'" id="dateValue">- - - -</span>
+              </div>
+              <div class="rangeValueSection"></div>
+            </div>
+          
+            <div class="rangeSection">
+                <div class="rangeHeaderSection">
+                  To:
+                <span *ngIf="Status == 'In-Use'" id="dateValue" class="toDate">{{AssetUseEndTime | date: 'mediumDate'}}</span>
+                <span *ngIf="Status != 'In-Use'" id="dateValue" class="toDate">- - - -</span>
+
+                </div>
+                <div class="rangeValueSection"></div>
+              </div>
+         
+         </div>
+         <div class="rightBottomSection">
+         
+          <!-- <div *ngIf="Status == 'Idle'" class="AssociateButton" data-toggle="modal" data-target="#associateModalCenter">Associate</div>
+          <div *ngIf="Status == 'In-Use'" class="releaseButton"  data-toggle="modal" data-target="#releaseModalCenter">Release</div> -->
+         </div>
+       </div>
+      </div>
+
+      <!-- ============================================ CUSTODIAN SECTION ENDS ======================================= -->
+
+      <div class="eventUtilizationTab">
+        <div class="UtilAlertSection">
+          <div class="utilSection" id="leftUtilSection"> 
+            <div class="utilHeaderSection"> Events</div>
+            <div class="utilDetailsSection">
+              <div class="utilEventIconSection">
+                  <img src="../../../../assets/icon/warning.svg" id ="alertIcon">
+              </div>
+              <div class="valueSection">{{Alerts}}</div>
+            </div>
+          </div>
+          <div class="utilSection"> 
+              <div class="utilHeaderSection"> Utilization</div>
+              <div class="utilDetailsSection">
+                <div class="utilEventIconSection">
+                    <img src="../../../../assets/icon/stats.svg" id ="alertIcon">
+                </div>
+                <div class="valueSection"> {{Utilization | number}} %</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="chartSection">
+        <div class="CurrentLocationTab">
+  
+            <!-- <div class="LocationHeader"> Current Location</div> -->
+            <div class="LocationContent">
+              
+                <nav>
+                    <div class="nav nav-tabs black" id="nav-tab" role="tablist">
+                      
+                        <a *ngIf="TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor'" class="nav-item nav-link active" id="nav-Map-tab" data-toggle="tab" href="#nav-Map" role="tab"
+                            aria-controls="nav-Map" aria-selected="false">Map</a>
+        
+                        <a *ngIf="TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor'" (onClick)="OnFloor($event)" class="nav-item nav-link" [class.active]="selectedTab=='nav-Floor-tab'" id="nav-Floor-tab" data-toggle="tab" href="#nav-Floor" role="tab"
+                            aria-controls="nav-Floor" aria-selected="true">Floor</a>
+                      
+                    </div>
+                   
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div *ngIf="TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor'" class="tab-pane fade show active" id="nav-Map" role="tabpanel" aria-labelledby="nav-Map-tab"> 
+          
+                        <!-- MAP TAB -->
+                        <div class="gpsOffline" *ngIf="TrackerStatus== 'offine' || TrackerStatus == null">
+                            GPS Tracker is Offline
+                          </div>
+                        <i class="fa"></i>
+                        <div *ngIf="hide"  id="mapContainer">
+                            <x-map  [ngClass]="'Geofence-' + GeoAccessibilityState" #xmap [Options]="_options" [Box]="_box">
+                              <div *ngIf="GeoAccessibilityState=='NOT REACHABLE'">
+                                  <x-map-marker 
+                                  [Latitude]="Latitude" 
+                                  [Longitude]="Longitude" 
+                                  [Title]="AssetName"
+                                  [IconInfo]="_iconInfo1">
+                                  <x-info-box [Title]="'Geofence: OUTSIDE KNOWN GEOFENCES'" [Description]="" (InfoBoxClose)="_close($event)">
+                                    <!-- <h1 style="color:white" (InfoBoxClose)="_close($event)"> INFOBOX INSIDE</h1> -->
+                                    </x-info-box>
+                                </x-map-marker>
+                              </div>
+                              <div *ngIf="GeoAccessibilityState=='IN AUTHORIZED GEOFENCE'">
+                                  <x-map-marker 
+                                  [Latitude]="Latitude" 
+                                  [Longitude]="Longitude" 
+                                  [Title]="AssetName"
+                                  [IconInfo]="_iconGeofence">
+                                  <x-info-box [Title]="'Geofence:' + GeoAccessibilityState" [Description]="" (InfoBoxClose)="_close($event)">
+                                    <!-- <h1 style="color:white" (InfoBoxClose)="_close($event)"> INFOBOX INSIDE</h1> -->
+                                    </x-info-box>
+                                </x-map-marker>
+                              </div>
+                              <div *ngIf="GeoAccessibilityState=='IN RESTRICTED GEOFENCE'">
+                                  <x-map-marker 
+                                  [Latitude]="Latitude" 
+                                  [Longitude]="Longitude" 
+                                  [Title]="AssetName"
+                                  [IconInfo]="_iconZone">
+                                  <x-info-box [Title]="'Geofence:' + GeoAccessibilityState" [Description]="" (InfoBoxClose)="_close($event)">
+                                    <!-- <h1 style="color:white" (InfoBoxClose)="_close($event)"> INFOBOX INSIDE</h1> -->
+                                    </x-info-box>
+                                </x-map-marker>
+                              </div>
+                              
+                            </x-map>
+                        </div>
+                        
+                      
+                        <!-- Map Tab Ends -->
+                      </div>
+        
+                      <div *ngIf="TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor'" class="tab-pane fade " [class.active]="selectedTab=='nav-Floor-tab'" [class.show]="selectedTab=='nav-Floor-tab'" id="nav-Floor" role="tabpanel" aria-labelledby="nav-Floor-tab">
+        
+                        <div class="scaling-svg-container">
+                          <svg id="mySvg" class="image-container" viewBox="0 70 338 303"  preserveAspectRatio="none">
+                            <image [attr.xlink:href]=FacilityImageUrl class="image"  alt="" data-toggle="modal"></image> 
+                           <svg:circle *ngIf="FacilityImageUrl" id=i [ngbPopover]="popContent" container="body" [ngClass]="!Alerts ? 'green-circle' : 'red-circle'" r="6" [attr.cx]=Left [attr.cy]=Top ></svg:circle>
+                          </svg>
+                          </div>
+        
+                      <!-- <svg id="mySvg" class="image-container" viewBox="0 0 338 303"  preserveAspectRatio="xMidYMid meet">
+                          <image [attr.xlink:href]=FacilityImageUrl class="image"  alt="" data-toggle="modal"></image> 
+                         <svg:circle *ngIf="FacilityImageUrl" id=i [ngbPopover]="popContent" container="body" [ngClass]="!Alerts ? 'green-circle' : 'red-circle'" r="4" [attr.cx]=Left [attr.cy]=Top ></svg:circle>
+                        </svg>
+                        <ng-template #popContent>{{ZoneName}} - {{GatewaySlNo}}
+                        </ng-template> -->
+                    </div>
+                    <ng-template #popContent>{{ZoneName}} - {{GatewaySlNo}}
+                    </ng-template> 
+        
+        
+        
+        
+        
+                    <!-- <div class="tab-pane fade " id="nav-Floor" role="tabpanel" aria-labelledby="nav-Floor-tab">
+                        <img src={{FacilityImageUrl}} class="image" alt="">
+                          <div *ngIf="FacilityImageUrl" class="zone" [style.left.px]= Left [style.top.px]= Top>
+                            <img src="../../../../../assets/image/dot.svg" class="icon" (click)="showtooltip = !showtooltip;">
+                            <span *ngIf="!showtooltip" class="tooltiptext">
+                              <div class="zone-name">{{ZoneName}} - {{GatewaySlNo}}</div>
+                            </span>
+                            </div>
+                    </div> -->
+               
+                  
+                </div>
+            </div>
+          </div>
+     
+  
+      <!-- Doughnut Chart -->
+      <div class="utilizationChartSection">
+          <nav>
+              <div class="nav nav-tabs heading-set" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active first-nav " id="nav-chart-tab" data-toggle="tab" href="#nav-chart" role="tab" aria-controls="nav-chart" aria-selected="true">Utilization </a>
+                  <a class="nav-item nav-link " id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">History</a>
+                  <!-- <a class="nav-item nav-link " id="nav-outdoor-history-tab" data-toggle="tab" href="#nav-outdoor-history" role="tab" aria-controls="nav-outdoor-history" aria-selected="false">Outdoor History</a> -->
+                  <a class="nav-item nav-link " id="nav-alerts-tab" data-toggle="tab" href="#nav-alerts" role="tab" aria-controls="nav-alerts" aria-selected="false">Alerts</a>
+                  
+                
+                  
+                   
+              </div>
+            </nav>
+            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-chart" role="tabpanel" aria-labelledby="nav-chart-tab">
+                  
+                    <!-- <div class="chartHeader"> Utilization Rate</div> -->
+                    <div class="chartHolder">
+                      <div>
+                          <canvas id="myChart"></canvas>
+                      </div>
+                       
+                      <div class="legendSection">
+                        <div class="legendDivSection">
+                          <div class="legendTypeSection" id="NonUtilizedDays"></div>
+                          <div class="typeDetailsSection">Unutilized Days - {{NonUtilizedDays}}</div>
+                        </div>
+                       
+                        <div class="legendDivSection">
+                            <div class="legendTypeSection" id="UtilizedDays"></div>
+                            <div class="typeDetailsSection">Utilized Days - {{UtilizedDays}}</div>
+                        </div>
+                      </div>
+                      <!-- <div *ngIf="UtilizedDays==0 && NonUtilizedDays==0 " class="Notutlized">
+                          The asset was never utilized
+                        </div> -->
+                        
+                        
+                      </div>
+                    </div>
+             
+              <div class="tab-pane fade" id="nav-alerts" role="tabpanel" aria-labelledby="nav-alerts-tab">
+          
+                  <app-alerts-tab></app-alerts-tab>
+                      </div>
+  
+                   
+                    <div class="tab-pane fade " id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
+                       
+                        <app-history-tab></app-history-tab>
+    
+               </div>
+               <!-- <div class="tab-pane fade " id="nav-outdoor-history" role="tabpanel" aria-labelledby="nav-outdoor-history">
+                       
+                <app-outdoor-history-tab></app-outdoor-history-tab>
+
+       </div> -->
+              
+      </div>
+     
+      </div>
+  
+      <!-- Current Location Tabs -->
+  
+  
+    </div>
+    
+    </div>
+  </div>

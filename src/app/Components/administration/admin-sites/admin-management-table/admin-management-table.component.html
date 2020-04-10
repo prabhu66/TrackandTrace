@@ -1,0 +1,82 @@
+<div class="d-flex">
+    <div class="mr-auto p-2 main-link">Administration > AssetManagement</div>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+    <div class="p-2">
+        <!-- <span><i class="material-icons user-tab filter-icon" (click)= "showFilter = !showFilter">search</i>
+        </span> -->
+        <span class="user-tab" (click)="toggleView = true">+User</span>
+      <i class="material-icons delete-icon" (click)="removeSelectedRows()">delete</i>
+  </div>
+</div>
+
+<!-- // mat table -->
+<div class="mat-elevation-z8">
+  <div class="scroll-container">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="serialNo">
+        <th mat-header-cell *matHeaderCellDef> Serial No. </th>
+        <td mat-cell *matCellDef="let element">{{element.serialNo}}</td>
+      </ng-container>
+    
+    <!-- Weight Column -->
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef> State </th>
+      <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element" > {{element.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> Category </th>
+      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bletag">
+      <th mat-header-cell *matHeaderCellDef> Ble Tag </th>
+      <td mat-cell *matCellDef="let element"> {{element.bletag}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tracker">
+      <th mat-header-cell *matHeaderCellDef> Tracker </th>
+      <td mat-cell *matCellDef="let element"> {{element.tracker}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+  </table>
+</div>
+  <mat-paginator [pageSizeOptions]="[10, 20,30]" showFirstLastButtons></mat-paginator>
+</div>

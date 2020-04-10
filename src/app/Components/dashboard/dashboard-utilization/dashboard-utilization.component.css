@@ -1,0 +1,117 @@
+.colm{
+    padding:4px;
+}
+.subscript{
+    color:grey;
+}
+.count{
+    margin: 10px;
+    color: #e74c3c;
+
+}
+.utilization-content{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 70vh;
+    /* background-image: linear-gradient(#000000,#0E0E0F, #171619,#1a191d,#1E1D22); */
+}
+.card-content{
+    position: relative;
+    max-height: 20%;
+    min-height: 125px;
+    max-width: 22%;
+    display: flex;
+    /* border: 1px solid #d0d0d0; */
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 200;
+    margin: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    display: inline-block;
+    font-family: "Roboto";
+    background: #1a1a1a
+}
+::-webkit-scrollbar{
+    width:4px;
+}
+.green{
+    color:  #c7f954;;
+}
+.white{
+   color: #646464;
+}
+
+.title{
+    /* color: black; */
+    color: white;
+    font-weight:200
+}
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background: white;
+    /* border: 1px solid rgb(63, 60, 60); */
+}
+
+.nav-link{
+    padding: 0px 5px !important;
+}
+#categoryIcon{
+    
+    transition: all .2s ease-in-out
+}
+
+#categoryIcon:hover {
+    transform: scale(3)
+}
+#categoryIcon{
+    height:45px;
+    margin-left:-5px
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #eeb541;
+    outline: 1px solid #eeb541;
+  }
+
+  ::-webkit-scrollbar-thumb:hover{
+    background: #cc9900;
+  }
+
+  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    padding: 3px 10px;
+    font-weight: bolder;
+    font-size: 13px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #101010;
+    /* background: rgb(216, 216, 216); */
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+/* CODE ADDED BY ABHISHEK */
+
+.TypeIconSection{
+    /* background: #cc9900; */
+    height:60px;
+    width:60px;
+    position:relative;
+    margin:5px auto
+}
+
+#typeIcon{
+    height:45px;
+    margin-left:5px
+}
+/* ABHISHEK's CODE ENDS */
+@media screen and (min-width:1440px){
+
+    .card-content {
+        max-width: 18%;
+    }
+}

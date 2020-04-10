@@ -1,0 +1,43 @@
+<nav>
+    <div class="nav nav-tabs heading-set" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active first-nav " id="nav-worker-tab" data-toggle="tab" href="#nav-worker" role="tab" aria-controls="nav-worker" aria-selected="true">Workers</a>
+        <a class="nav-item nav-link" id="nav-materials-tab" data-toggle="tab" href="#nav-materials" role="tab" aria-controls="nav-materials" aria-selected="false">Assets</a>
+        
+         
+    </div>
+  </nav>
+<div class="tab-content pl-3 pt-2" id="nav-tabContent">
+ 
+  <div class="tab-pane fade show active" id="nav-worker" role="tabpanel" aria-labelledby="nav-worker-tab">
+      <div class="utilization-content">
+          <app-dashboard-overview-people></app-dashboard-overview-people>
+        </div>
+      
+   </div>
+
+  <div class="tab-pane fade  " id="nav-materials" role="tabpanel" aria-labelledby="nav-materials-tab">
+      <div class="utilization-content">
+          <div class="card-content row" *ngFor="let content of chartData; let i = index">
+              <div class="title">{{content.AssetType}}</div>
+            <div  class="row">
+            <div class="colm col-4">
+              <!-- <canvas>{{content.chart}}</canvas> -->
+            <!-- <canvas id="assetChart{{i}}" width="38" height="38" style="display:block"></canvas>  ABHISHEK COMMENTED THIS SECTION BEFORE ADDING TYPE IMAGE -->
+            <div class="TypeIconSection">
+              <img id="typeIcon" [src]="content.AssetTypeImage">
+            </div>
+            </div>
+            <div class="colm col-5">
+              <label class="green"><span class="white">Total</span> <span>&nbsp;&nbsp; {{content.TotalAssetCount}}</span></label>
+              <label class="green"><span class="white">InUse</span> <span>&nbsp; {{content.InUseAssetCount}}</span> </label>
+              <label class="subscript"><span class="white">Idle</span> <span>&nbsp; &nbsp; &nbsp; {{content.IdleAssetCount}}</span></label>
+            </div>
+            <div class="colm col-3">
+              <img src="../../../../assets/image/warning_new.svg">
+              <div class="count">{{content.AlertAssetCount}}</div>
+            </div>
+          </div>
+          </div>
+        </div>
+  </div>
+  </div>

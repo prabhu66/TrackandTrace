@@ -1,0 +1,190 @@
+<div class="mainContent">
+  <div class="dashboardPeopleSpecific">
+    <div class="summaryTabSection">
+      <div class="personDetailsSection">
+        <div class="personName">PERSON DETAILS</div>
+        <div class="personDetails">
+          <div><img id="personImage" [src]=AssetImageUrl></div>
+          <div class="person">
+            <div class="name">{{AssetName}}</div>
+            <div class="role">{{AssetType}}</div>
+          </div>
+          </div>
+        </div>
+      <div class="indoorLocationSection">
+        <div class="indoorLocation">INDOOR LOCATION</div>
+        <div class="zoneLocation">{{AssetBLELocation}}</div>
+        <div *ngIf="ZoneAccessibilityState=='IN AUTHORIZED ZONE'"class="toz toz-green">TOZ <span>
+            <span *ngIf="uniqueZoneTime.hour !=0">{{uniqueZoneTime.hour}} Hrs </span><span *ngIf="uniqueZoneTime.minute !=0">{{uniqueZoneTime.minute}} Min </span>
+            <span *ngIf="uniqueZoneTime.second !=0">{{uniqueZoneTime.second}}sec </span>
+          </span></div>
+        <div *ngIf="ZoneAccessibilityState=='IN RESTRICTED ZONE'"class="toz toz-red">TOZ <span>
+            <span *ngIf="uniqueZoneTime.hour !=0">{{uniqueZoneTime.hour}} Hrs </span><span *ngIf="uniqueZoneTime.minute !=0">{{uniqueZoneTime.minute}} Min </span>
+            <span *ngIf="uniqueZoneTime.second !=0">{{uniqueZoneTime.second}} sec </span>
+        </span></div>
+        <div *ngIf="ZoneAccessibilityState=='NOT REACHABLE'"class="toz toz-red">TOZ <span>NOT REACHABLE</span></div>
+      </div>
+      <!-- <div class="indoorLocationSection">
+          <div class="indoorLocation">OUTDOOR LOCATION</div>
+          <div class="zoneLocation">ZONE 1,FACILITY SEC 1</div>
+          <div class="toz">TOZ <span>6 Hrs 20 Min</span></div>
+        </div> -->
+      <div class="personDetailsSection">
+          <div class="personName">HOLDING ASSETS</div>
+          <div class="personDetails">
+            <div><img id="personImage1" src="../../../../assets/image/hold-assets.svg"></div>
+            <div class="holdingNo">
+              {{holdingAssets}}
+            </div>
+            </div>
+          </div>
+          <div class="personDetailsSection">
+              <div class="personName">ASSET DUES</div>
+              <div class="personDetails">
+                <div><img id="personImage1" src="../../../../assets/image/asset-dues.svg"></div>
+                <div class="assetDues">
+                  {{assetDues}}
+                </div>
+                </div>
+              </div>
+              <div class="personDetailsSection">
+                  <div class="personName">ONFLOOR TIME</div>
+                  <div class="personDetails">
+                    <div><img id="personImage1" src="../../../../assets/image/duration.svg"></div>
+                    <div class="holdingNo1">
+                     <span *ngIf="totalFLoorTime.hour !='00'">{{totalFLoorTime.hour}} H </span><span *ngIf="totalFLoorTime.minute !='00'">{{totalFLoorTime.minute}} M </span>
+                     <span *ngIf="totalFLoorTime.minute=='00' && totalFLoorTime.hour=='00'">--</span>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="personDetailsSection">
+                      <div class="personName">ATTENDANCE</div>
+                      <div class="personDetails">
+                        <div><img id="personImage1" src="../../../../assets/image/dates.svg"></div>
+                        <div class="holdingNo1">
+                           {{this.MonthAttendance}} Days
+                        </div>
+                        </div>
+                      </div>
+    </div>
+    <div class="pictorialSection">
+      <div class="graphSection">
+        <div class="attendenceHeading">ATTENDANCE TRENDS</div>
+        <div class="graphContainer">
+            <canvas id="myChart" width="400" height="200" class="canvas-style"></canvas>
+            <div class="Attendancecaption">* In UTC Timezone</div>
+        </div>
+      </div>
+      <div class="locationSection">
+          <nav>
+              <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                
+                  <a *ngIf="TrackMode == 'Outdoor Only' || TrackMode == 'Indoor and Outdoor'" class="nav-item nav-link " id="nav-Map-tab" data-toggle="tab" href="#nav-Map" role="tab"
+                      aria-controls="nav-Map" aria-selected="false">Map</a>
+  
+                  <a *ngIf="TrackMode == 'Indoor Only' || TrackMode == 'Indoor and Outdoor'" class="nav-item nav-link active" id="nav-Floor-tab" data-toggle="tab" href="#nav-Floor" role="tab"
+                      aria-controls="nav-Floor" aria-selected="true">Floor</a>
+                
+              </div>
+          </nav>
+
+          <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade " id="nav-Map" role="tabpanel" aria-labelledby="nav-Map-tab"> 
+    
+                  <!-- MAP TAB -->
+                  <div class="gpsOffline" *ngIf="TrackerStatus== 'offine' || TrackerStatus == null">
+                      GPS Tracker is Offline
+                    </div>
+                  <i class="fa"></i>
+                  <div *ngIf="hide"  id="mapContainer">
+                      <x-map  [ngClass]="'Geofence-' + GeoAccessibilityState" #xmap [Options]="_options" [Box]="_box">
+                        <div *ngIf="GeoAccessibilityState=='NOT REACHABLE'">
+                            <x-map-marker 
+                            [Latitude]="Latitude" 
+                            [Longitude]="Longitude" 
+                            [Title]="AssetName"
+                            [IconInfo]="_iconInfo1">
+                            <x-info-box [Title]="'Geofence: OUTSIDE KNOWN GEOFENCES'" [Description]="" (InfoBoxClose)="_close($event)">
+                              <!-- <h1 style="color:white" (InfoBoxClose)="_close($event)"> INFOBOX INSIDE</h1> -->
+                              </x-info-box>
+                          </x-map-marker>
+                        </div>
+                        <div *ngIf="GeoAccessibilityState=='IN AUTHORIZED GEOFENCE'">
+                            <x-map-marker 
+                            [Latitude]="Latitude" 
+                            [Longitude]="Longitude" 
+                            [Title]="AssetName"
+                            [IconInfo]="_iconGeofence">
+                            <x-info-box [Title]="'Geofence:' + GeoAccessibilityState" [Description]="" (InfoBoxClose)="_close($event)">
+                              <!-- <h1 style="color:white" (InfoBoxClose)="_close($event)"> INFOBOX INSIDE</h1> -->
+                              </x-info-box>
+                          </x-map-marker>
+                        </div>
+                        <div *ngIf="GeoAccessibilityState=='IN RESTRICTED GEOFENCE'">
+                            <x-map-marker 
+                            [Latitude]="Latitude" 
+                            [Longitude]="Longitude" 
+                            [Title]="AssetName"
+                            [IconInfo]="_iconZone">
+                            <x-info-box [Title]="'Geofence:' + GeoAccessibilityState" [Description]="" (InfoBoxClose)="_close($event)">
+                              <!-- <h1 style="color:white" (InfoBoxClose)="_close($event)"> INFOBOX INSIDE</h1> -->
+                              </x-info-box>
+                          </x-map-marker>
+                        </div>
+                        
+                      </x-map>
+                  </div>
+                  
+                
+                  <!-- Map Tab Ends -->
+                </div>
+  
+                <div class="tab-pane fade show active " id="nav-Floor" role="tabpanel" aria-labelledby="nav-Floor-tab">
+                  
+  
+  
+                  <div class="scaling-svg-container">
+                    <svg id="mySvg" class="image-container" viewBox="0 70 338 303"  preserveAspectRatio="none">
+                      <image [attr.xlink:href]=FacilityImageUrl class="image"  alt="" data-toggle="modal"></image> 
+                     <svg:circle *ngIf="FacilityImageUrl && BleStatus=='online'" id=i [ngbPopover]="popContent" container="body" [ngClass]="ZoneAccessibilityState=='IN RESTRICTED ZONE'? 'red-circle' : 'green-circle'" r="6" [attr.cx]=Left [attr.cy]=Top ></svg:circle>
+                     <svg:circle *ngIf="FacilityImageUrl && BleStatus=='offline'" id=i [ngbPopover]="popContentDisable" container="body" class="grey-circle" r="6" [attr.cx]=Left [attr.cy]=Top ></svg:circle>
+                    </svg>
+                    </div>
+  
+              </div>
+              <ng-template #popContent>{{ZoneName}} - {{GatewaySlNo}}
+              </ng-template> 
+              <ng-template #popContentDisable>Ble Offline
+                </ng-template>
+    
+          </div>
+      </div>
+    </div>
+    <div class="assetSection">
+        <nav>
+            <div class="nav nav-tabs heading-set" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active first-nav " id="nav-movements-tab" data-toggle="tab" href="#nav-movements" role="tab" aria-controls="nav-movements" aria-selected="true">Movements</a>
+                <a class="nav-item nav-link " id="nav-holding-tab" data-toggle="tab" href="#nav-holding" role="tab" aria-controls="nav-holding" aria-selected="false">Holding Assets</a>
+                
+              
+                
+                 
+            </div>
+          </nav>
+          <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+           
+            <div class="tab-pane fade" id="nav-holding" role="tabpanel" aria-labelledby="nav-holding-tab">
+        
+                    <app-holding-assets></app-holding-assets>
+                    </div>
+
+                 
+                  <div class="tab-pane fade show active" id="nav-movements" role="tabpanel" aria-labelledby="nav-movements-tab">
+                     
+                          <app-movements></app-movements>
+  
+             </div>
+            
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+.tabsPane{
+    padding:0px;
+    margin-left:10px;
+    margin-right: -95px;
+    /* border-top: 2px solid whitesmoke; */
+}
+
+.flex-column{
+    height: 57vh;
+    /* background: #ffd740; */
+    display: block;
+    width: 230px;
+    /* background-image: linear-gradient(#ffc107,#ffd740); */
+    background: #eeb541;
+
+}
+
+.tab-content{
+    height:50vh;
+    /* background:red; */
+    width:76vw;
+    padding:5px;
+    /* border-top: 2px solid whitesmoke; */
+}
+
+.nav >.active{
+    /* background: #d699ff;
+    color:#660066;
+    font-weight: bold */
+    background: #101010;
+    color: #eeb541;
+    font-weight: bold;
+}
+
+.nav-link{
+    /* color: #9900ff */
+    color: black;
+}

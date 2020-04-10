@@ -1,0 +1,170 @@
+<div class="main-container">
+  <div class="d-flex"  *ngIf="!busy">
+    <div class="mr-auto p-2 main-link">Administration <img src="../../../assets/icon/fast-forward-double-right-arrows.svg"
+      id="breadcrumbIcon"> Facility</div>
+      <i class="material-icons ml-auto p-2 refresh"  (click)="RefreshPlan()">refresh</i>
+  </div>
+<div class="row" *ngIf="!busy">
+  <div class="col-3">
+      <div class="d-flex headFacility">
+          <div class="p-2">Facilities</div>
+          <div class="p-2 ml-auto addIcon">
+            <img src="../../../../../assets/image/add.svg" (click)="Abort(); new =true;">
+            </div>
+        <div class="p-2 ml-auto">
+            <span><i (click)="click=!click; searchText=''" id="searchbutton" data-toggle="search" aria-haspopup="true" aria-expanded="false" class="material-icons search">search</i></span>
+        </div>
+            <!-- <div class="p-2">
+            <span><i class="material-icons filter">filter_list</i></span>
+            </div> -->
+        </div>
+        <div  *ngIf="click"> 
+            <span class="search-button" aria-labelledby="searchbutton">
+              <input type="text"  [(ngModel)]="searchText" (keyup.enter)="click=!click" placeholder="Search"/></span> 
+          </div>
+    <div id="" *ngFor="let floor of facilityList | search : searchText; let i =index">
+        <div class="items" (click) ="highlightOption(i, floor); getFloorImage(floor); new=false" [class.highlight]="highlight[i]">
+         <span id="FacilityName">  {{floor.FacilityName}}</span>
+            <div class="subscript">{{floor.Location}}</div>
+            <span>
+              <!-- <i class="material-icons more_vert">more_vert</i> -->
+              <i class="material-icons delete"  data-toggle="modal" data-target="#createModal" (click)="selectdId(floor.FacilityID)">delete</i>
+              <div>
+                                        <!-- Button trigger modal -->
+                        
+
+                       
+              </div>
+              <!-- <i class="material-icons edit">edit</i> -->
+            </span>
+            </div>
+      </div>
+  </div>
+ <!-- Modal -->
+ <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Do You Really Want To Delete?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closedelModal>No</button>
+        <button type="button" class="btn btn-primary" (click)="DeleteFacility()" >Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="col-9">
+      <div class="header">
+          <label class="Facility">
+              Facility Name:
+              <input type="text" [(ngModel)]="facilityName" value="name">
+            </label>
+            <label class="Facility" >
+                Location:
+                <input type="text" [(ngModel)]="Location" value="location">
+              </label>
+            <button *ngIf="new" class ="btn btn-success create-btn" (click)="CreateFacility()">Create</button>
+            <button *ngIf="!new" class ="btn btn-success create-btn" (click)="UpdateFacility()">Update</button>
+            <button class ="btn btn-success delete-btn" (click)="Abort()">Cancel</button>
+
+            </div>
+    <div *ngIf="!showImage" class="image-container">
+          <div class="image-upload row justify-content-center">
+              <label for="file-input">
+                  <div class="uploadButton"  *ngIf="!showLoader">
+                      <img id="uploadImage" src="../../../../../assets/icon/picture (1).svg" /> <span> Upload Facility Image</span>
+                  </div>
+              </label>
+              <!-- new uploader -->
+              <input type="file" id="file-input"  (change)="onFileChange($event,'FacilityImages/')" accept=".svg,.gif,.jpg,.jpeg,.png"> 
+              
+               <!-- <input type="file" id="file-input" name="sampleFile" (change)="uploadFile($event)"/> -->
+              <!-- <div *ngIf="filesSelected && showLoader"> -->
+                <div *ngIf="showLoader">
+                      <pre style="display:none"></pre>   
+                      <img src = "../../../../../../assets/GIFs/Wedges-3s-200px.svg" id="Loader">  
+             </div> 
+          </div>
+    </div>
+            <svg id="mySvg" *ngIf="showImage" class="image-container" viewBox="0 0 338 303">
+              <image [attr.xlink:href]=imageRefUrl class="image" (click)="getLocationPoints($event)" alt="" data-toggle="modal" data-target="#FacilityEdit"></image>
+              <!-- <a *ngIf="imageRefUrl"> -->
+              <svg:circle [ngbPopover]="popContent" container="body" class="circle" *ngFor = "let zone of zones ; let i=index " r="6" [attr.cx]=zone.Left [attr.cy]=zone.Top (click)="selected=zone"></svg:circle>
+              <!-- </a> -->
+            </svg>
+            <ng-template #popContent>{{selected.ZoneName}} - {{selected.GatewaySlNo}}
+            </ng-template>
+        </div>
+
+</div>
+</div>
+<div class="modal fade" id="FacilityEdit" tabindex="-1" role="dialog" aria-labelledby="FacilityEditTitle" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form (ngSubmit)="SaveZones(ZoneForm.value)" [formGroup]="ZoneForm">
+            <div class="row">
+              <div class="col-6">
+                  <div class="align-self-center tags">Ble GatewaySerial Number</div>
+                  <div class="align-self-center tags">Zone Name</div>
+                </div>
+                <div class="col-6">
+                    <select class="form-control spacing " formControlName="bleGatewaySno">
+                        <!-- <option *ngFor="let param of GatewayList" [value]="param.gatewaySerialNo">
+                          {{param.gatewaySerialNo}}
+                          </option> -->
+                          <option *ngFor="let param of GatewayList" [value]="param.GATEWAYSERIALNO">
+                            {{param.GATEWAYSERIALNO}}
+                            </option>
+                        </select>
+                    <!-- <input class="tags clr" autocomplete="off" maxlength="15" formControlName="bleGatewaySno"> -->
+                    <input class="tags clr" autocomplete="off" maxlength="15" formControlName="zoneName">
+                </div>
+            </div>
+                  <div class="modal-footer">
+                      <button class ="btn btn-success" type="submit" value="confirm">Save</button>
+                      <button class ="btn btn-danger" #closebutton type="button" data-dismiss="modal">Close</button>
+                   </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit zones  -->
+  <div class="modal fade" id="FacilityEdit" tabindex="-1" role="dialog" aria-labelledby="FacilityEditTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form (ngSubmit)="SaveZones(ZoneForm.value)" [formGroup]="ZoneForm">
+              <div class="row">
+                <div class="col-6">
+                    <div class="align-self-center tags">Ble GatewaySerial Number</div>
+                    <div class="align-self-center tags">Zone Name</div>
+                  </div>
+                  <div class="col-6">
+                      <select class="form-control spacing " formControlName="bleGatewaySno">
+                          <option *ngFor="let param of GatewayList" [value]="param.gatewaySerialNo">
+                            {{param.gatewaySerialNo}}
+                            </option>
+                          </select>
+                      <!-- <input class="tags clr" autocomplete="off" maxlength="15" formControlName="bleGatewaySno"> -->
+                      <input class="tags clr" autocomplete="off" maxlength="15" formControlName="zoneName">
+                  </div>
+              </div>
+                    <div class="modal-footer">
+                        <button class ="btn btn-success" type="submit" value="confirm">Save</button>
+                        <button class ="btn btn-danger" type="button" data-dismiss="modal">Close</button>
+                     </div>
+                </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="busy" class="spinnerDiv">
+      <p-progressSpinner></p-progressSpinner>
+    </div>

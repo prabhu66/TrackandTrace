@@ -1,0 +1,35 @@
+li{
+    list-style-type: none;
+}
+
+a{
+    cursor: pointer;
+    color: black;
+}
+.active{
+    color: #46b3b0;
+}
+
+.fa{
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+.fa:active{
+    text-decoration: underline;
+}
+.highlight{
+    /*background-color: white;*/
+    color: #0f0fd8;
+}
+.col-1-5{
+    width: 10px;
+    /* background-image: linear-gradient(#330033, #cc00cc); */
+    /* background: #e60000; */
+    height: 94vh;
+    margin-left: -9px;
+
+}
+.admin-container{
+overflow: hidden;
+}

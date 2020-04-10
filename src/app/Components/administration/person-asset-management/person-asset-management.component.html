@@ -1,0 +1,291 @@
+<!-- Release ASset Modal -->  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle"><img id="warningModal" src="../../../../assets/icon/warning.svg">Release Asset</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              Are you sure you want to release this asset?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" (click)="ReleaseAsset()" data-dismiss="modal">Release Asset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <!-- Release ASset Modal Ends -->
+  
+  
+    <div class="row d-flex align-self-center main-background">
+      <div class="col list-panel">
+        <!-- <div > -->
+        <div *ngFor="let asset of displayList | search : searchText ; let i = index"
+          [className]="!select ? 'card' : 'small-card'" (click)="slideshow = true; addClass(i,asset)"
+          [class.highlight]=" highlightStatus[i]">
+          <div [ngClass]="'card-header' +' ' + 'card-' +'In-Use'">
+            <div class="row">
+              <div class="col-1">
+                <img [src]="asset.AssetImageUrl" class="card-icon">
+                <!-- <i class="material-icons card-icon">local_printshop</i> -->
+              </div>
+              <div class="col-5 flex-header">
+                <div class="d-flex justify-content-start head-title card-detail headerColor" data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetName">
+                  <!-- {{(asset.AssetName && asset.AssetName.length > 15)? (asset.AssetName | slice:0:1)+'..':(asset.AssetName)}} -->
+                  {{asset.AssetName }}
+                  <!-- <span class="tooltiptext">{{asset.AssetName}}</span> -->
+                </div>
+                <div class="d-flex justify-content-start subscript">{{asset.AssetSerialNo}}</div>
+              </div>
+  
+              <!-- ABHISHEK CODE HERE -->
+              <div class="col-4 categorySection card-detail" data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetType" >
+                {{asset.AssetType}}
+                <!-- <span class="tooltiptext">{{asset.AssetType}}</span> -->
+              </div>
+              <!-- ABHISHEK CODE ENDS -->
+  
+              <div class="col-1">
+                <!-- <i class="material-icons card-icon" (click)="DeleteAsset(asset, $event)">delete</i> -->
+                <img id ="Icons" src ="../../../../../assets/icon/bin.svg" (click)="DeleteAsset(asset, $event)">
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col-1">
+                    <!-- <i class="material-icons card-icon">bluetooth</i> -->
+                    <img id="Icons" src="../../../../../assets/icon/bluetooth.svg">
+                  </div>
+                  <div class="col flex-header">
+                    <div class="footerSection">
+                        <div class="d-flex justify-content-start head-title">
+                            <span class="card-detail">ble Serial No:
+                              <!-- {{(asset.ble && asset.ble.length > 6)? (asset.ble | slice:0:6)+'..':(asset.ble)}} -->
+                            </span>
+                            <span [ngClass]="'circle-' + asset.BleStatus"></span>
+                          </div>
+                          <div class=" justify-content-start subscript1">{{asset.AssetTagSerialNo}}</div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-7">
+                <div class="row">
+                  <div class="col-1 flex-icon">
+                    <i class="material-icons card-icon">pin_drop</i>
+                    <img id ="Icons" src ="../../../../../assets/icon/map-marker-variant-tool.svg">
+                  </div>
+                  <div class="col-10 flex-header">
+                    <div class="d-flex justify-content-start head-title">
+                      <div class="card-detail" data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetLocation">
+                        {{(asset.AssetLocation && asset.AssetLocation.length > 15)? (asset.AssetLocation | slice:0:15)+'..':(asset.AssetLocation)}}
+                        <span class="tooltiptext">{{asset.AssetLocation}}</span>
+                      </div>
+                      <div [ngClass]="'circle-' + asset.TrackerStatus"></div>
+                    </div>
+                    <div class="d-flex justify-content-start subscript">{{asset.AssetTrackerNo}}</div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+         
+        </div>
+      </div>
+      <div *ngIf="slideshow" [class.detail-panel]="slideshow">
+        <button class=" close close-panel" (click)="closeModal()"><span aria-hidden="true">&times;</span></button>
+        <div class="container">
+          <ul>
+            <li>
+              <pre class="link d-flex">
+                  <div class="p-2"><b>Person Information</b></div>
+                  <!-- <div class="p-2"><i class="fa fa-edit" (click)="edit = true"></i></div> -->
+                  <div *ngIf = "edit" class="p-2"><i class="fa fa-check green" (click)="edit = false"></i></div>
+              </pre>
+              <i *ngIf="!drop1" class="fa fa-caret-down left" aria-hidden="true" (click)="drop1 =!drop1"></i> 
+              <i *ngIf="drop1" class="fa fa-caret-right left" aria-hidden="true" (click)="drop1 =!drop1"></i>
+  
+              <span>
+              </span>
+              <div *ngIf="!drop1" class="d-flex flex-row">
+                <!-- <form (ngSubmit)="SaveZones(ZoneForm.value)" class="form-inline"> -->
+                <div class="col-6">
+                  <div class="align-self-center tags">Person Category</div>
+                  <div class="align-self-center tags">Name</div>
+                  <div class="align-self-center tags">Person Id</div>
+                </div>
+                <div class="col-6">
+                  <div [attr.contenteditable]="edit" class="tags clr" [class.focus-field]="edit" autocomplete="off"
+                    maxlength="15">{{assetDetails.AssetType}}</div>
+                  <div [attr.contenteditable]="edit" class="tags clr" [class.focus-field]="edit" autocomplete="off"
+                    maxlength="15">{{assetDetails.AssetName}}</div>
+                  <div [attr.contenteditable]="edit" class="tags clr" [class.focus-field]="edit" autocomplete="off"
+                    maxlength="15">{{assetDetails.AssetSerialNo}}</div>
+                </div>
+                <!-- </form> -->
+              </div>
+            </li>
+  
+            <li>
+              <pre class="link"><b>Assigned Devices</b></pre>
+              <i *ngIf="!drop2" class="fa fa-caret-down left" aria-hidden="true" (click)="drop2 =!drop2"></i>
+              <i *ngIf="drop2" class="fa fa-caret-right left" aria-hidden="true" (click)="drop2 =!drop2"></i>
+              <span></span>
+              <div *ngIf="!drop2" class="d-flex flex-row">
+                <div class="col-2">
+                  <div *ngIf="!(assetDetails.TrackMode =='Outdoor Only')">
+  
+                    <i class="fa fa-bluetooth icons-big" aria-hidden="true"></i>
+                    <!-- <img class="icons-big" src="../../../../../assets/icon/bluetooth.svg"> -->
+                  </div>
+                  <div *ngIf="!(assetDetails.TrackMode =='Indoor Only')">
+                    <i class="material-icons icons-big">pin_drop</i>
+                    <!-- <img class="icons-big" src="../../../../../assets/icon/map-marker-variant-tool.svg"> -->
+                  </div>
+                </div>
+                <!-- <div class="col-3">
+                            <div class="align-self-center tags">Type</div>
+                            <div class="align-self-center tags">Name</div>
+                        </div> -->
+                <div class="col-8">
+                  <div *ngIf="!(assetDetails.TrackMode =='Outdoor Only')" class="tags clr" autocomplete="off">
+                    {{assetDetails.AssetTagSerialNo}}</div>
+                  <div *ngIf="!(assetDetails.TrackMode =='Indoor Only')" class="tags clr" autocomplete="off">
+                    {{assetDetails.AssetTrackerNo}}</div>
+                </div>
+                <div class="col-1">
+                  <div><i *ngIf="edit" class="material-icons icons-big red">delete</i></div>
+                  <div><i *ngIf="edit" class="material-icons icons-big red">delete</i></div>
+                </div>
+              </div>
+            </li>
+  
+        
+            <li *ngIf="(assetDetails.TrackMode =='Indoor Only' || assetDetails.TrackMode =='Indoor and Outdoor')">
+              <pre class="link"><b>Indoor Accessibility</b></pre>
+              <i *ngIf="drop4" class="fa fa-caret-down left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+              <i *ngIf="!drop4" class="fa fa-caret-right left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+              <span>
+              </span>
+              <div *ngIf="drop4" class="row">
+                <div class="col-5 block-list">
+                  <div class="row underline">
+                    <i class="material-icons green">exit_to_app</i>
+                    <label class="tags-label">Authorized Zones</label>
+                  </div>
+                  <div>
+                    <!-- for facility name -->
+                    <div class="zone-list facility row">
+                      <i class="material-icons icons green">map</i>
+                      <label class="content">{{assetDetails.AccessibilityZones[0].FacilityName}}</label>
+                    </div>
+                    <!-- ///ends here -->
+                    <div class="zone-list active row" *ngFor="let zone of assetDetails.AccessibilityZones">
+                      <i class="material-icons icons green">format_align_justify</i>
+                      <label class="content">{{zone.ZoneName}}</label>
+                      <!-- <i class="material-icons icons green public">public</i> -->
+                      <i *ngIf="edit" class="material-icons icons green delete">delete</i>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-5 block-list">
+                  <div class="row underline">
+                    <i class="material-icons red">not_interested</i>
+                    <label class="tags-label">Restricted Zones</label>
+                  </div>
+                  <div>
+                    <!-- for facility name -->
+                    <div class="zone-list facility row">
+                      <i class="material-icons icons green">map</i>
+                      <label class="content">{{assetDetails.RestrictedZones[0].FacilityName}}</label>
+                    </div>
+                    <!-- ///ends here -->
+                    <div class="zone-list inactive row" *ngFor="let zone of assetDetails.RestrictedZones">
+                      <i class="material-icons icons red">format_align_justify</i>
+                      <label class="content">{{zone.ZoneName}}</label>
+                      <!-- <i class="material-icons icons red">public</i> -->
+                      <i *ngIf="edit" class="material-icons icons red">delete</i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+ 
+  <!-- <router-outlet></router-outlet> -->
+  
+  
+  <div class="modal " id="associateUser" tabindex="-1" role="dialog" aria-labelledby="associateUserTitle" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+        <div class="main-container2">
+            <div class="container">
+              <form #formRef="ngForm" > <!-- (ngSubmit)="onSubmit()"-->
+  
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Asset Name :</label>
+                  <div  class="details spacing2 ">
+                  <input type="text" class="form-control mb-2 mr-sm-2 monitor1 input-border" name="assetName" [(ngModel)]="assetName" placeholder="" autocomplete="off" readonly >
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">User :</label>
+                  <div  class="details spacing">
+                  <div class="input-group mb-2 mr-sm-2 monitor">
+                    <select class="form-control spacing " id="userName" name="userName" [(ngModel)]="userName" >
+                      <option *ngFor="let param of Users" [value]="param.userName">
+                        {{param.userName}}
+                        </option>
+                      </select>
+                  </div>
+                  </div>
+                </div>
+                <div>Select dates :</div>
+                  <form class="example-container" [formGroup]="options">
+                <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="startdate" placeholder="Choose Start date" formControlName="startdate">
+                    <mat-datepicker-toggle matSuffix [for]="startdate" ></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #startdate></mat-datepicker>
+                  </mat-form-field>
+  
+                      <mat-form-field class="spacing">
+                      <input matInput [matDatepicker]="enddate" placeholder="Choose End date" formControlName="enddate">
+                      <mat-datepicker-toggle matSuffix [for]="enddate" ></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #enddate></mat-datepicker>
+                    </mat-form-field> 
+                    
+                </form>
+              
+                
+            
+                <div class="pull-right" style="margin:15px 0;">
+                    <button class="badge badge-pill badge-primary tab1" (click)="cancel()">Cancel</button><span> </span><button class="badge badge-pill badge-success tab1" type="submit"  value="confirm" (click)="SubmitData()">Associate</button>
+                </div>
+              </form>
+            </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+    <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  

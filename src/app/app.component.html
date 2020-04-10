@@ -1,0 +1,17 @@
+
+<div class="main-container">
+<div class="d-flex navbar">
+        <div class="mr-auto p-2"><span class="logo">TRACK <img class="header1"src="../assets/image/header1.svg">TRACE</span><img class="header1"src="../assets/image/header2.svg"></div>
+        <div class="mr-auto p-2">
+            <nav class="nav">
+                <a routerLink="/dashboard" routerLinkActive="active" (click)="onClick($event)" id="Dashboard" class="nav-link" >DASHBOARD</a>
+                <!-- <a routerLink="/reports" routerLinkActive="active" class="nav-link">REPORTS</a> -->
+                <a routerLink="/admin/sites" routerLinkActive="active" (click)="onClick($event)" id="Administration" class="nav-link">ADMINISTRATION</a>
+              </nav>
+        </div>
+        <div class="p-2"></div>
+      </div>
+<div class="col">
+  <router-outlet></router-outlet>
+</div>
+</div>

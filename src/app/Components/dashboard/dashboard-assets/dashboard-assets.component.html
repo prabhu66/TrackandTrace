@@ -1,0 +1,344 @@
+<div class="main-container">
+
+  <!-- Modal Code Here -->
+
+  <!-- Utilization Pie Chart -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="utilizationModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="utilizationModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="utilizationModalCenterTitle">Utilization</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+
+          <div class="assetHeader">
+            <div class="assetSection">
+              <div class="headerSection">Asset Name</div>
+              <div class="valueSection"> {{modalAssetName}}</div>
+            </div>
+
+            <div class="assetSection">
+              <div class="headerSection">Asset Type</div>
+              <div class="valueSection"> {{modalAssetType}}</div>
+            </div>
+
+          </div>
+          <h5 class="modal-title" id="utilizationModalCenterTitle">Utilization</h5>
+          <div class="chartSection">
+            <app-utilization-pie-chart></app-utilization-pie-chart>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Utilization Pie Chart Modal Ends -->
+
+  <!-- History Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="historyModalCenter1" tabindex="-1" role="dialog" aria-labelledby="historyModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="historyModalCenterTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+
+          <div class="assetHeader">
+            <div class="assetSection">
+              <div class="historyHeaderSection">Asset Name</div>
+              <div class="historyValueSection"> {{modalAssetName}}</div>
+            </div>
+
+            <div class="assetSection">
+              <div class="historyHeaderSection">Asset Type</div>
+              <div class="historyValueSection"> {{modalAssetType}}</div>
+            </div>
+
+          </div>
+          <app-history-modal *ngIf="showModal"></app-history-modal>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- History Modal Ends -->
+
+  <!-- Alert Modal Here -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="alertModalCenter" tabindex="-1" role="dialog" aria-labelledby="alertModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="alertModalCenterTitle">  </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+          <div class="assetHeader">
+            <div class="assetSection">
+              <div class="alertHeaderSection">Asset Name</div>
+              <div class="alertValueSection"> {{modalAssetName}}</div>
+            </div>
+
+            <div class="assetSection">
+              <div class="alertHeaderSection">Asset Type</div>
+              <div class="alertValueSection"> {{modalAssetType}}</div>
+            </div>
+
+          </div>
+          <app-alert-modal *ngIf="showModal"></app-alert-modal>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Alert Modal Ends -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="userNoteModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="userNoteModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="userNoteModalCenterTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+          <div class="assetHeader">
+            <div class="assetSection">
+              <div class="headerSection">Asset Name</div>
+              <div class="valueSection"> {{modalAssetName}}</div>
+            </div>
+
+            <div class="assetSection">
+              <div class="headerSection">Asset Type</div>
+              <div class="valueSection"> {{modalAssetType}}</div>
+            </div>
+
+          </div>
+          <app-user-notes-tab></app-user-notes-tab>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Code Ends -->
+
+
+  <div class="tabContent">
+    <div class="RefreshContainer">
+      <span id="refresh" data-toggle="tooltip" data-placement="bottom" title="Reload"> <img
+          src="../../../../assets/icon/refresh_yellow.svg" id="optionIcon" (click)="reload()"> </span>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" id="viewDashboard"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Type</th>
+          <th scope="col">State</th>
+          <th scope="col">Location</th>
+          <th scope="col" id="timeHeader">C.Timestamp</th>
+
+          <th scope="col">BLE Tag</th>
+          <th scope="col">Tracker</th>
+
+
+          <!-- <th scope="col" id="specificTh">
+            <div class="TheadSection">
+              <div id="theader">Sensor</div>
+              <div class="SubHeader">
+                <div class="StatusHeader" id="leftSubSection"> Temp.</div>
+                <div class="StatusHeader"> Hum.</div>
+              </div>
+            </div>
+          </th> -->
+          <!-- <th scope="col">Custodian</th> -->
+          <th scope="col" id="Actions">Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let asset of assetList'>
+          <th scope="row" id="viewDashboard">
+            <span><img (click)="setAssetName(asset.AssetID,asset.AssetName)" id="eyeIcon"
+                src="../../../../assets/icon/eye-blue.svg"></span>
+          </th>
+          <td>
+            <div class="typeColumn2">
+              <div class="iconSection">
+                <!-- <div *ngIf="asset.Temperature <=12 && asset.Temperature>0" ><img  id="storeIcon" src="../../../../assets/icon/in-ref.svg"> </div>
+                <div *ngIf="asset.Temperature > 12" ><img  id="storeIcon" src="../../../../assets/icon/out-ref.svg"></div> -->
+              </div>
+              <div class="td-header">
+                {{asset.AssetName}}
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="typeColumn">
+              <div class="iconSection">
+                <img *ngIf="asset.AssetImageUrl != ''" id="typeIcon" [src]="asset.AssetImageUrl">
+                <img *ngIf="asset.AssetImageUrl == ''" id="noImageIcon"
+                  src="../../../../assets/icon/broken-image (1).svg" data-toggle="tooltip" data-placement="bottom"
+                  title="Image Not Found">
+              </div>
+              <div class="typeValue" style="text-align:left">{{asset.AssetType}}</div>
+            </div>
+          </td>
+          <!-- nIF -->
+          <td class="Status">
+            <div class="inUse" *ngIf="asset.Status == 'In-Use'"> In-Use</div>
+            <div class="idle" *ngIf="asset.Status == 'Idle'"> Idle</div>
+            <div class="disabled" *ngIf="asset.Status == 'Disabled'"> Disabled</div>
+          </td>
+          <!--  -->
+          <td>
+            <div class="locationCol">
+              <div class="icon"><img id="pin" src="../../../../assets/icon/Green-pin.svg"> </div>
+              <div *ngIf="asset.AssetLocation != null " class="locaionValue" data-toggle="tooltip"
+                data-placement="bottom" [title]="asset.AssetLocation">
+                {{(asset.AssetLocation.length>13)?(asset.AssetLocation| slice:0:13)+ ' ...' : (asset.AssetLocation)}}
+              </div>
+              <div *ngIf="asset.AssetLocation == null " class="locaionValue"> -- </div>
+            </div>
+          </td>
+          <!--  -->
+          <td id="time">{{asset.LastUpdatedtDateTime| date:'medium'}}</td>
+          <!-- nIF BLE STATUS-->
+
+          <!-- 
+            <div class="SubHeader">
+                <div class="StatusHeader"> 
+                   <div *ngIf="asset.BleStatus == 'online'" class="online"></div>
+            <div *ngIf="asset.BleStatus == 'offline' || asset.BleStatus ==null" class="offline"></div>
+            <div *ngIf="asset.BleStatus == 'No'" class="greyStatus"></div>
+                </div>
+                <div class="StatusHeader"> 
+                   <div class="online"      *ngIf="asset.TrackerStatus == 'online'"></div>
+            <div class="offline"     *ngIf="asset.TrackerStatus == 'offline' || asset.TrackerStatus == null"></div>
+            <div class="greyStatus"  *ngIf="asset.TrackerStatus == 'No'" ></div>
+                </div>
+              </div>
+           -->
+           <td>
+              <!-- <div *ngIf="asset.BleStatus == 'online'" class="online"></div>
+              <div *ngIf="asset.BleStatus == 'offline' || asset.BleStatus ==null" class="offline"></div>
+              <div *ngIf="asset.BleStatus == 'No'" class="greyStatus"></div> -->
+              <!-- nIF BLE STATUS-->
+                <div class="">
+                  <div *ngIf="asset.BleStatus == 'online'" class="online"></div>
+                  <div *ngIf="asset.BleStatus == 'offline' || asset.BleStatus ==null" class="offline"></div>
+                  <div *ngIf="asset.BleStatus == 'No'" class="greyStatus"></div>
+                </div>
+
+            </td>
+            <td>
+                <!-- nIF GPS TRACKER STATUS-->
+                <div class="">
+                  <div class="online" *ngIf="asset.TrackerStatus == 'online' || asset.TrackerStatus=='In-Use'"></div>
+                  <div class="offline" *ngIf="asset.TrackerStatus == 'offline' || asset.TrackerStatus == null"></div>
+                  <div class="greyStatus" *ngIf="asset.TrackerStatus == 'Idle' || asset.TrackerStatus == 'No'"></div>
+                </div>
+            </td>
+  
+
+
+          <!-- DUPLICATING FOR TEMPERATURE AND HUMIDITY -->
+
+          <!-- <td> -->
+            <!-- <div *ngIf="asset.BleStatus == 'online'" class="online"></div>
+            <div *ngIf="asset.BleStatus == 'offline' || asset.BleStatus ==null" class="offline"></div>
+            <div *ngIf="asset.BleStatus == 'No'" class="greyStatus"></div> -->
+            <!-- nIF BLE STATUS-->
+            <!-- <div class="SubHeader">
+              <div class="sensorData">
+                <span *ngIf="asset.Temperature>0">{{asset.Temperature}} &deg;C</span> <span *ngIf="asset.Temperature==0">-</span>
+              </div>
+              nIF GPS TRACKER STATUS
+              <div class="sensorData">
+                <span *ngIf="asset.Humidity>0">{{asset.Humidity}}%</span><span *ngIf="asset.Humidity==0">-</span>
+              </div>
+            </div>
+          </td> -->
+          <!-- <td> {{asset.User}} </td> -->
+          <!--  -->
+          <td class="actionCol">
+            <div class="actionList">
+              <div class="actionItem">
+                <img (click)="setAssetForModal(asset.AssetID,asset.AssetName,asset.AssetType)"
+                  src="../../../../assets/icon/history-clock-button_white.svg" id="actionIcon" data-toggle="tooltip"
+                  data-placement="bottom" title="View History" data-toggle="modal" data-target="#historyModalCenter1">
+              </div>
+
+              <div class="actionItem">
+                <!-- with Alert -->
+                <img *ngIf="asset.IndoorAlertsCount!= 0"
+                  (click)="setAssetForModal(asset.AssetID,asset.AssetName,asset.AssetType)"
+                  src="../../../../assets/image/warning_new.svg" id="actionIcon" data-toggle="tooltip"
+                  data-placement="bottom" title="View Alerts" data-toggle="modal" data-target="#alertModalCenter">
+                <!-- without alert -->
+                <div *ngIf="asset.IndoorAlertsCount== 0" class="NoAlert" data-toggle="tooltip" data-placement="bottom"
+                  title="No Indoor Alerts">
+                  <img id="noAlertIcon" src="../../../../assets/icon/check-sign.svg">
+                </div>
+              </div>
+
+
+              <!-- <div class="actionItem">
+                <img src="../../../../assets/icon/pie-chart.svg" id="actionIcon" 
+                data-toggle="tooltip" data-placement="bottom" title="View Utilization Chart"
+                data-toggle="modal" data-target="#utilizationModalCenter">
+              </div> -->
+              <!-- <div class="actionItem">
+                <img src="../../../../assets/icon/clips.svg" id="actionIcon" data-toggle="modal"
+                  data-target="#userNoteModalCenter"
+                  data-toggle="tooltip" data-placement="bottom" title="View User Notes">
+              </div> -->
+            </div>
+          </td>
+        </tr>
+
+        <!-- Duplicating Rows -->
+
+
+        <!-- Duplication  Ends-->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <app-dashboard-assets-heatmap></app-dashboard-assets-heatmap> -->

@@ -1,0 +1,30 @@
+<div class="row">
+<div class="col-4 user-list" >
+  <pre>Users List</pre>
+  <div *ngFor ="let user of Users ; let i = index" (click)="SelectUser(i,user.userName)" class="user" [class.highlight]="highLightUsers[i]">
+    <div>{{user.userName}}</div></div>
+</div>
+<div class="col-4 asset-list">
+    <pre>Assets List</pre>
+  <div  *ngFor ="let asset of assets; let j = index" (click)="SelectAsset(j,asset)" [class.highlight]="highLightAssets[j]" class="asset">{{asset.AssetName}}</div>
+</div>
+<div class="col-3">
+    <pre>Select dates :</pre>
+
+    <form class="example-container" [formGroup]="options">
+    <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="startdate" placeholder="Choose Start date" formControlName="startdate">
+        <mat-datepicker-toggle matSuffix [for]="startdate" ></mat-datepicker-toggle>
+        <mat-datepicker touchUi #startdate></mat-datepicker>
+      </mat-form-field>
+
+           <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="enddate" placeholder="Choose End date" formControlName="enddate">
+          <mat-datepicker-toggle matSuffix [for]="enddate" ></mat-datepicker-toggle>
+          <mat-datepicker touchUi #enddate></mat-datepicker>
+        </mat-form-field> 
+        <button class ="btn btn-success" type="submit" value="confirm" (click)="SubmitData()">Associate</button>
+    </form>
+
+</div>
+</div>

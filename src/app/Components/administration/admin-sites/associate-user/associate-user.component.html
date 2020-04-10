@@ -1,0 +1,52 @@
+
+  <div class="main-container">
+<div class="container">
+  <form #formRef="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Asset Name :</label>
+      <div  class="details spacing2 ">
+      <input type="text" class="form-control mb-2 mr-sm-2 monitor1" name="assetName" [(ngModel)]="assetName" placeholder="" autocomplete="off" required >
+      </div>
+    </div>
+
+  
+    <!-- Asset Symbol Section OVER -->
+
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">User :</label>
+      <div  class="details spacing">
+       <div class="input-group mb-2 mr-sm-2 monitor">
+        <select class="form-control spacing " id="userName" name="userName" [(ngModel)]="userName" >
+          <option *ngFor="let param of Users" [value]="param.AssetName">
+            {{param.AssetName}}
+            </option>
+          </select>
+      </div>
+      </div>
+    </div>
+     <div class="select-title">Select dates:</div>
+      <form class="example-container" [formGroup]="options">
+    <mat-form-field class="example-full-width white">
+        <input matInput [matDatepicker]="startdate" placeholder="Choose Start date" formControlName="startdate">
+        <mat-datepicker-toggle matSuffix [for]="startdate" ></mat-datepicker-toggle>
+        <mat-datepicker touchUi #startdate></mat-datepicker>
+      </mat-form-field>
+
+           <mat-form-field class="spacing white">
+          <input matInput [matDatepicker]="enddate" placeholder="Choose End date" formControlName="enddate">
+          <mat-datepicker-toggle matSuffix [for]="enddate" ></mat-datepicker-toggle>
+          <mat-datepicker touchUi #enddate></mat-datepicker>
+        </mat-form-field> 
+        
+    </form>
+   
+    
+ 
+    <div class="pull-right" style="margin:15px 0; margin-right: 25em;">
+        <button class="badge badge-pill badge-primary tab1" (click)="cancel()">Cancel</button><span> </span><button class="badge badge-pill badge-success tab1" type="submit"  value="confirm" (click)="onSubmit()">Associate</button>
+    </div>
+  </form>
+</div>
+

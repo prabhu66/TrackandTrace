@@ -1,0 +1,55 @@
+
+
+  <div class="p-2 main-link">Tag <img src="../../../assets/icon/fast-forward-double-right-arrows.svg"
+    id="breadcrumbIcon"> Create Tag</div>
+  <div class="main-container">
+<div class="container">
+  <form #formRef="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Serial No</label>
+      <div  class="details spacing2">
+      <input type="text" class="form-control mb-2 mr-sm-2 spacing" name="serial_no" [(ngModel)]="serial_no" placeholder="" autocomplete="off">
+
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <label for="exampleFormControlSelect1">State</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="state" placeholder="" [(ngModel)]="state" autocomplete="off">
+        </div>
+      </div>
+    </div>-->
+   <div class="form-group">
+      <label for="exampleFormControlSelect1">Make</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="make" placeholder="" [(ngModel)]="make" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">model</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="model" placeholder="" [(ngModel)]="model" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">type</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="type" placeholder="" [(ngModel)]="type" autocomplete="off">
+        </div>
+      </div>
+    </div>
+ 
+    <div class="pull-right" style="margin:15px 0; margin-right: 25em;">
+        <button class="badge badge-pill badge-primary tab1" (click)="cancel()">Cancel</button><span> </span>
+        <button class="badge badge-pill badge-success tab1" type="submit" [disabled]="isValid()" [ngStyle]="{'cursor': isValid() ? 'not-allowed':'default'}">Create</button>
+    </div>
+  </form>
+</div>
+
+

@@ -1,0 +1,218 @@
+#breadcrumbIcon{
+    height:15px;
+    margin-top: -5px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+.highlight{
+    background-color: #b9b8e8 !important;
+}
+.headFacility{
+  list-style-type: none;
+  background-color: #101010;
+  color: #eeb541;
+  padding-left: 10px;
+}
+
+.image-container{
+    position: relative;
+    padding-left: 0px;
+    border: 1px dashed black;
+    height: 80vh;
+    width: 100%;
+}
+.image-upload > input
+{
+    display: none;
+}
+.image{
+    width:100%;
+    height: 100%;
+    position: relative;
+}
+.addIcon{
+    cursor: pointer;
+}
+.modal-sm {
+    max-width:30vw !important;
+    margin:30px auto;
+}
+.modal-body{
+    height: 30vh;
+}
+.Facility{
+  margin-left: 15px;
+  color: #10bfec;
+}
+.header{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.subscript{
+    font-size:9px;
+    color:black;
+  }
+  .highlight{
+    background-color: #f9d181 !important;
+}
+.highlight .subscript{
+  color: #0e305a;
+}
+  .btn-success{
+    background: radial-gradient(#cbea3e,#66751f);
+    color: #117137;
+  }
+.tags{
+    padding: 5px;
+    font-size: 13px;
+    max-width: 100%;
+    margin: 4px;
+  }
+  .create-btn{
+      position: absolute;
+      right:70px;
+      padding: 5px;
+  }
+  .delete-btn{
+    position: absolute;
+    right:0px;
+    padding: 5px;
+  }
+  .delete{
+    margin-top: -1em;
+    float:right;
+    font-size: 18px;
+    /* background-color: white; */
+    
+}
+.edit{
+  font-size: 18px;
+  margin-right: 1em;
+  margin-top: -1em;
+  float:right;
+ 
+}
+
+#uploadImage{
+    height:50px
+}
+#FacilityName{
+    font-weight:bold
+}
+.items {
+    height: 3.5em;
+    position: relative;
+    display: block;
+    color: #272727;
+    background-color:whitesmoke;
+    box-shadow: 0px 0px 18px rgba(0,0,0,.1);
+    margin-bottom:4px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-top: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px;
+    border-radius: none;
+    cursor: pointer;
+}
+.more_vert{
+    float: right;
+    font-size: 18px;
+     margin-top: -17px;
+  }
+ 
+  .main-link{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* text-shadow: 1px 1px 3px grey; */
+    font-weight:bold;
+    margin-right: 5%;
+    color: #eeb541;
+  }
+  .dot{
+    position: absolute;
+    box-shadow: 0 0 0 3px #6581b5;
+    border-radius: 50%;
+}
+.tooltiptext {
+    visibility: visible;
+    background-color: black;
+    color: #fff;
+    border-radius: 3px;
+    padding: 5px 0;
+    width: max-content; 
+    min-width: 130px;
+    bottom: 100%;
+    left: 50%; 
+    margin-left: -65px;
+    font-size: 12px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  .zone-name{
+    color:white;
+}
+.zone {
+    position: absolute;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  .delete:hover{
+      font-size:25px;
+  }
+
+  .uploadButton{
+      background:#f5f5f0;
+      color:black;
+      font-weight: bold;
+      padding:10px 40px;
+      border-radius:55px;
+      margin-top: 10px
+  }
+
+  .uploadButton:hover{
+      cursor: pointer;
+  }
+
+  .header1{
+    display: inline-block;
+    font-size: 14px;
+    border: 1px solid #270433;
+    background-color: #270433;
+    color: white;
+    height: 3em;
+    padding: 8px;
+}
+  .circle{
+    stroke: #000;
+    stroke-miterlimit: 10;
+    fill: #c7f954;
+
+  }
+  .refresh{
+    border: 1ps solid;
+    background: #101010;
+    margin-left: 98%;
+    cursor: pointer;
+    display: inline;
+    color: white;
+    border-radius: 50%;
+    /* border: 1px solid yelo; */
+    border: 1px solid #eeb541;
+  }
+.search{
+  cursor: pointer;
+}
+.material-icons{
+  font-size: 20px !important;
+}
+.spinnerDiv {
+  width: 120px;
+  height: 120px;
+  z-index: 99999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

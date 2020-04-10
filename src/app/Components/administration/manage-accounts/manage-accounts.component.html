@@ -1,0 +1,70 @@
+<div class="main-container">
+  <div class="d-flex">
+    <pre class="p-2 main-link">Administration > Manage Accounts</pre>
+    <div class="ml-auto p-2">
+      <span class="account-tab">+Account</span>
+      <span><i (click)="click=!click" id="searchbutton" data-toggle="search" aria-haspopup="true" aria-expanded="false"class="material-icons search">search</i></span>
+      <span class="search-button" *ngIf="click"aria-labelledby="searchbutton">
+        <input type="text" (keyup.enter)="click=!click" [(ngModel)]="search" placeholder="Search..."/></span>
+        <span><i class="material-icons filter">filter_list</i></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col list-panel">
+      <!-- <div > -->
+      <div *ngFor="let account of displayList | searchAccount:search  ; let i = index" class="card">
+        <div [ngClass]="'card-header' +' ' + 'card-' + account.Status">
+          <div  class="row">
+            <div  [ngClass]="'head-' + account.Status" class="  col-5 flex-header">
+              <div class="d-flex justify-content-start head-title">{{account.AccountName}}
+              </div>
+              <div class="d-flex justify-content-start subscript">{{account.AccountUser}}</div>
+            </div>
+            <div class="col-6 status">
+             <div [ngClass]="'circle-' + account.Status"></div>
+             <span [ngClass]="'status-' + account.Status"class="title"> {{account.Status}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+         <div class="container">
+            <div class="row">
+              <div class="col col-card">
+                <div class="body-text"> Sites</div>
+                <span class="col-2"><img src="../../../../assets/image/hierarchy_grey.svg"></span>
+                <span class="account_data">{{account.Sites}}</span>
+
+                </div>
+              <div class="col col-card">
+                <div class="body-text"> Assets</div>
+                 <span class="col-2"><img src="../../../../assets/image/font_grey.svg"></span>
+                  <span class="account_data">{{account.Assets}}</span>
+                </div>
+              <div class="w-100"></div>
+              <div class="col col-card">
+                <div class="body-text"> Devices</div>
+               <span class="col-2"><img src="../../../../assets/image/data-storage_grey.svg"></span>
+                <span class="account_data">{{account.Devices}}</span>
+                </div>
+              <div class="col col-card">
+                <div class="body-text"> Users</div>
+                <span class="col-2"><img src="../../../../assets/image/businessman_grey.svg"></span>
+                <span class="account_data">{{account.Users}}</span>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+         <span class="footer_body">Start date: {{account.StartDateTime| date: 'dd/MM/yyyy h:mm a'}}</span>
+         <div class="footer-end dropdown">
+            <div class=" dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OPTIONS </div>
+             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Edit <i class="material-icons edit">edit</i></a>
+                <a class="dropdown-item" (click)="onDelete(i)">Delete <i class="material-icons delete">delete</i></a>
+                <a class="dropdown-item" href="#">Disable</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,395 @@
+<!-- Release ASset Modal -->  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle"><img id="warningModal" src="../../../../assets/icon/warning.svg">Release Asset</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to release this asset?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" (click)="ReleaseAsset()" data-dismiss="modal">Release Asset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Release ASset Modal Ends -->
+
+
+<div class="main-container">
+  <div class="d-flex">
+    <div class="p-2 main-link">Administration <img src="../../../assets/icon/fast-forward-double-right-arrows.svg"
+        id="breadcrumbIcon"> Asset Management</div>
+    <div class=" mr-auto p-2">
+      <input type="text" [(ngModel)]="searchText" (keyup)="onKey()" placeholder="Search.." class="text-search" autocomplete="off">
+    </div>
+    <div class="ml-auto p-2">
+      <!-- <span>
+        <i class="fa fa-navicon filter-icon" aria-hidden="true" routerLink="/admin/sites/AssetTable"></i>
+      </span> -->
+      <!-- <span>
+        <i class="fa fa-filter provision-tab filter-icon" (click)="showFilter = !showFilter"></i>
+      </span> -->
+      <span> <i class="material-icons refresh"  (click)="RefreshPlan()">refresh</i></span>
+      <span class="provision-tab" routerLink="../ProvisioningAsset" routerLinkActive="active">+ Add</span>
+    </div>
+  </div>
+
+
+  <!-- nav-tabs for asset and worker Information -->
+<nav>
+  <div class="nav nav-tabs heading-set" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active first-nav" id="nav-peopleAsset-tab" data-toggle="tab" href="#nav-peopleAsset" role="tab" aria-controls="nav-peopleAsset" aria-selected="true">Workers</a>
+
+    <a class="nav-item nav-link " id="nav-materials-tab" data-toggle="tab" href="#nav-materials" role="tab" aria-controls="nav-materials" aria-selected="false">Assets</a>
+
+
+</div>
+</nav>
+
+
+<div class="tab-content pl-3 pt-2" id="nav-tabContent">
+    <div class="tab-pane fade " id="nav-materials" role="tabpanel" aria-labelledby="nav-materials-tab">
+        <div class="row d-flex align-self-center main-background">
+            <div class="col list-panel">
+              <!-- <div > -->
+              <div *ngFor="let asset of displayList | search : searchText ; let i = index"
+                [className]="!select ? 'card' : 'small-card'" (click)="slideshow = true; addClass(i,asset)"
+                [class.highlight]=" highlightStatus[i]">
+                <div [ngClass]="'card-header' +' ' + 'card-' + asset.Status">
+                  <div class="row">
+                    <div class="col-1">
+                      <img [src]="asset.AssetImageUrl" class="card-icon">
+                      <!-- <i class="material-icons card-icon">local_printshop</i> -->
+                    </div>
+                    <div class="col-5 flex-header">
+                      <div class="d-flex justify-content-start head-title card-detail headerColor" data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetName">
+                        <!-- {{(asset.AssetName && asset.AssetName.length > 15)? (asset.AssetName | slice:0:1)+'..':(asset.AssetName)}} -->
+                        {{asset.AssetName | truncate:[10, '...']}}
+                        <!-- <span class="tooltiptext">{{asset.AssetName}}</span> -->
+                      </div>
+                      <div class="d-flex justify-content-start subscript">{{asset.AssetSerialNo}}</div>
+                    </div>
+        
+                    <!-- ABHISHEK CODE HERE -->
+                    <div class="col-4 categorySection card-detail" data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetType" >
+                      {{asset.AssetType| truncate:[7, '...']}}
+                      <!-- <span class="tooltiptext">{{asset.AssetType}}</span> -->
+                    </div>
+                    <!-- ABHISHEK CODE ENDS -->
+        
+                    <div class="col-1" (click)="setAsset(asset,$event)">
+                      <!-- <i class="material-icons card-icon" (click)="DeleteAsset(asset, $event)">delete</i> -->
+                      <img id ="Icons" src ="../../../../../assets/icon/bin.svg" (click)="DeleteAsset(asset, $event)">
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5 vertical-part">
+                      <div class="row">
+                        <div class="col-1">
+                          <!-- <i class="material-icons card-icon">bluetooth</i> -->
+                          <img id="Icons" src="../../../../../assets/icon/bluetooth.svg">
+                        </div>
+                        <div class="col flex-header">
+                          <div class="d-flex justify-content-start head-title">
+                            <span class="card-detail">ble
+                              <!-- {{(asset.ble && asset.ble.length > 6)? (asset.ble | slice:0:6)+'..':(asset.ble)}} -->
+                            </span>
+                            <span [ngClass]="'circle-' + asset.BleStatus"></span>
+                          </div>
+                          <div class="d-flex justify-content-start subscript">{{asset.AssetTagSerialNo}}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-7">
+                      <div class="row">
+                        <div class="col-1 flex-icon">
+                          <!-- <i class="material-icons card-icon">pin_drop</i> -->
+                          <img id ="Icons" src ="../../../../../assets/icon/map-marker-variant-tool.svg">
+                        </div>
+                        <div class="col-10 flex-header">
+                          <div class="d-flex justify-content-start head-title">
+                            <div class="card-detail" data-toggle="tooltip" data-placement="bottom" [title]="asset.AssetLocation">
+                              {{(asset.AssetLocation && asset.AssetLocation.length > 15)? (asset.AssetLocation | slice:0:15)+'..':(asset.AssetLocation)}}
+                              <!-- <span class="tooltiptext">{{asset.AssetLocation}}</span> -->
+                            </div>
+                            <div [ngClass]="'circle-' + asset.TrackerStatus"></div>
+                          </div>
+                          <div class="d-flex justify-content-start subscript">{{asset.AssetTrackerNo}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <!-- <div class="d-flex bd-highlight">
+                    Category - {{asset.AssetType}}
+                    <div class="flex-fill bd-highlight">
+                                      <i class="material-icons footer-icon">all_out</i>0</div>
+                                  <div class="flex-fill bd-highlight">
+                                      <i class="material-icons footer-icon">map</i>1</div>
+                                  <div class="flex-fill bd-highlight">
+                                      <i class="material-icons footer-icon">public</i> </div>
+                  </div> -->
+        
+                  <!-- ABHISHEK's CODE -->
+                  <div *ngIf="asset.Status =='In-Use'" class="InUsefooterContent">
+                    <div class="userSection">
+                      <div class="userIconSection">
+                        <img src="../../../../../assets/icon/man-user_blue.svg" id="userIcon">
+                      </div>
+                      <div class="userNameSection" data-toggle="tooltip" data-placement="bottom" [title]="asset.User"> {{asset.User| truncate:[15, '...']}}
+                        <!-- <span class="tooltiptext">{{asset.User}}</span> -->
+                      </div>
+                    </div>
+                    <div class="associationDateSection">
+                     
+        <div class="dateSection"> 
+          <div class="iconSection">
+            <!-- <img src="../../../../../assets/icon/appointment.svg" id="calendarIcon"> -->
+            From:
+          </div>
+          <div class="dateValueSection"> {{asset.AssetUseStartTime |date: 'mediumDate'}}</div>
+        </div>
+        
+        <div class="dateSection"> 
+            <div class="iconSection"> 
+              <!-- <img src="../../../../../assets/icon/appointment.svg" id="calendarIcon"> -->
+              To: 
+            </div>
+            <div class="dateValueSection"> {{asset.AssetUseEndTime |date: 'mediumDate'}}</div>
+          </div>
+        
+                    </div>
+                    <div class="actionSection">
+                      <div class="releaseButton"  (click)="setReleaseAssetId(asset.AssetID,asset.User,asset.AssetName,asset.AssetSerialNo)" data-toggle="modal" data-target="#exampleModalCenter">
+                        Release
+                        <!-- Click on this Modal To Release Asset-->
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="asset.Status =='Idle'" class="IdleFooterContent">
+        <div class="Section"></div>
+        <div class="actionSection">
+          <div class="associatebutton" (click)="AssociateAsset(asset, $event)"[routerLink]="['../Associate',asset.AssetID]" > Associate</div>
+        </div>
+                  </div>
+        
+                  <!-- ABHISHEK's Code ENds Here -->
+                </div>
+              </div>
+            </div>
+            <div *ngIf="slideshow" [class.detail-panel]="slideshow">
+              <button class=" close close-panel" (click)="closeModal()"><span aria-hidden="true">&times;</span></button>
+              <div class="container">
+                <ul>
+                  <li>
+                    <pre class="link d-flex">
+                        <div class="p-2"><b>Asset Information</b></div>
+                        <!-- <div class="p-2"><i class="fa fa-edit" (click)="OnEdit()"></i></div> -->
+                        <div *ngIf = "edit" class="p-2"><i class="fa fa-check green" (click)="edit = false"></i></div>
+                    </pre>
+                    <i *ngIf="!drop1" class="fa fa-caret-down left" aria-hidden="true" (click)="drop1 =!drop1"></i> 
+                    <i *ngIf="drop1" class="fa fa-caret-right left" aria-hidden="true" (click)="drop1 =!drop1"></i>
+        
+                    <!-- <img *ngIf="!drop1" src="../../../../../assets/icon/down.svg" aria-hidden="true" (click)="drop1 =!drop1">
+                    <img id="Icons" *ngIf="drop1"  aria-hidden="true" (click)="drop1 =!drop1" src="../../../../../assets/icon/right.svg"> -->
+        
+                    <span>
+                    </span>
+                    <div *ngIf="!drop1" class="d-flex flex-row">
+                      <!-- <form (ngSubmit)="SaveZones(ZoneForm.value)" class="form-inline"> -->
+                      <div class="col-6">
+                        <div class="align-self-center tags">AssetType</div>
+                        <div class="align-self-center tags">AssetName</div>
+                        <div class="align-self-center tags">Serial No.</div>
+                      </div>
+                      <div class="col-6">
+                        <div [attr.contenteditable]="edit" class="tags clr" [class.focus-field]="edit" autocomplete="off"
+                          maxlength="15">{{assetDetails.AssetType}}</div>
+                        <div [attr.contenteditable]="edit" class="tags clr" [class.focus-field]="edit" autocomplete="off"
+                          maxlength="15">{{assetDetails.AssetName}}</div>
+                        <div [attr.contenteditable]="edit" class="tags clr" [class.focus-field]="edit" autocomplete="off"
+                          maxlength="15">{{assetDetails.AssetSerialNo}}</div>
+                      </div>
+                      <!-- </form> -->
+                    </div>
+                  </li>
+        
+                  <li>
+                    <pre class="link"><b>Assigned Devices</b></pre>
+                    <i *ngIf="!drop2" class="fa fa-caret-down left" aria-hidden="true" (click)="drop2 =!drop2"></i>
+                    <i *ngIf="drop2" class="fa fa-caret-right left" aria-hidden="true" (click)="drop2 =!drop2"></i>
+                    <span></span>
+                    <div *ngIf="!drop2" class="d-flex flex-row">
+                      <div class="col-2">
+                        <div *ngIf="!(assetDetails.TrackMode =='Outdoor Only')">
+        
+                          <i class="fa fa-bluetooth icons-big" aria-hidden="true"></i>
+                          <!-- <img class="icons-big" src="../../../../../assets/icon/bluetooth.svg"> -->
+                        </div>
+                        <div *ngIf="!(assetDetails.TrackMode =='Indoor Only')">
+                          <i class="material-icons icons-big">pin_drop</i>
+                          <!-- <img class="icons-big" src="../../../../../assets/icon/map-marker-variant-tool.svg"> -->
+                        </div>
+                      </div>
+                      <!-- <div class="col-3">
+                                  <div class="align-self-center tags">Type</div>
+                                  <div class="align-self-center tags">Name</div>
+                              </div> -->
+                      <div class="col-8">
+                        <div *ngIf="!(assetDetails.TrackMode =='Outdoor Only')" class="tags clr" autocomplete="off">
+                          {{assetDetails.AssetTagSerialNo}}</div>
+                        <div *ngIf="!(assetDetails.TrackMode =='Indoor Only')" class="tags clr" autocomplete="off">
+                          {{assetDetails.AssetTrackerNo}}</div>
+                      </div>
+                      <div class="col-1">
+                        <div><i *ngIf="edit" class="material-icons icons-big red">delete</i></div>
+                        <div><i *ngIf="edit" class="material-icons icons-big red">delete</i></div>
+                      </div>
+                    </div>
+                  </li>
+        
+                  <li
+                    *ngIf="(assetDetails.TrackMode =='Outdoor Only' || assetDetails.TrackMode =='Indoor and Outdoor')">
+                    <pre class="link"><b>Outdoor Accessibility</b></pre>
+                    <i *ngIf="!drop3" class="fa fa-caret-down left" aria-hidden="true" (click)="drop3 =!drop3"></i>
+                    <i *ngIf="drop3" class="fa fa-caret-right left" aria-hidden="true" (click)="drop3 =!drop3"></i>
+                    <span>
+                    </span>
+                    <div *ngIf="!drop3" class="row">
+                      <div class="col-5 block-list">
+                        <div class="row underline">
+                          <i class="material-icons green">exit_to_app</i>
+                          <!-- <img src="../../../../../assets/icon/sign-in.svg" id ="AcccessIcons"> -->
+                          <label class="tags-label">Authorized Zones</label>
+                        </div>
+                        <div>
+                          <div class="zone-list active row" *ngFor="let zone of assetDetails.AccessibleGeofence">
+                            <i class="material-icons icons green">format_align_justify</i>
+                            <label class="content">{{zone.GeofenceName}}</label>
+                            <!-- <i class="material-icons icons green ">public</i> -->
+                            <i *ngIf="edit" class="material-icons icons green ">delete</i>
+                          </div>
+                        </div>
+                      </div>
+        
+        
+                      <div class="col-5 block-list">
+                        <div class="row underline">
+                          <i class="material-icons red">not_interested</i>
+                          <label class="tags-label">Restricted Zones</label>
+                        </div>
+                        <div>
+                          <div class="zone-list inactive row" *ngFor="let zone of assetDetails.RestrictedGeofence">
+                            <i class="material-icons icons red">format_align_justify</i>
+                            <label class="content">{{zone.GeofenceName}}</label>
+                            <!-- <i class="material-icons icons red">public</i> -->
+                            <i *ngIf="edit" class="material-icons icons red">delete</i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+        
+                  <li *ngIf="(assetDetails.TrackMode =='Indoor Only' || assetDetails.TrackMode =='Indoor and Outdoor')">
+                    <pre class="link"><b>Indoor Accessibility</b></pre>
+                    <i *ngIf="drop4" class="fa fa-caret-down left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+                    <i *ngIf="!drop4" class="fa fa-caret-right left" aria-hidden="true" (click)="drop4 =!drop4"></i>
+                    <span>
+                    </span>
+                    <div *ngIf="drop4" class="row">
+                      <div class="col-5 block-list">
+                        <div class="row underline">
+                          <i class="material-icons green">exit_to_app</i>
+                          <label class="tags-label">Authorized Zones</label>
+                        </div>
+                        <div>
+                          <!-- for facility name -->
+                          <div class="zone-list facility row">
+                            <i class="material-icons icons green">map</i>
+                            <label class="content">{{assetDetails.AccessibilityZones[0].FacilityName}}</label>
+                          </div>
+                          <!-- ///ends here -->
+                          <div class="zone-list active row" *ngFor="let zone of assetDetails.AccessibilityZones">
+                            <i class="material-icons icons green">format_align_justify</i>
+                            <label class="content">{{zone.ZoneName}}</label>
+                            <!-- <i class="material-icons icons green public">public</i> -->
+                            <i *ngIf="edit" class="material-icons icons green delete">delete</i>
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div class="col-5 block-list">
+                        <div class="row underline">
+                          <i class="material-icons red">not_interested</i>
+                          <label class="tags-label">Restricted Zones</label>
+                        </div>
+                        <div>
+                          <!-- for facility name -->
+                          <div class="zone-list facility row">
+                            <i class="material-icons icons green">map</i>
+                            <label class="content">{{assetDetails.RestrictedZones[0].FacilityName}}</label>
+                          </div>
+                          <!-- ///ends here -->
+                          <div class="zone-list inactive row" *ngFor="let zone of assetDetails.RestrictedZones">
+                            <i class="material-icons icons red">format_align_justify</i>
+                            <label class="content">{{zone.ZoneName}}</label>
+                            <!-- <i class="material-icons icons red">public</i> -->
+                            <i *ngIf="edit" class="material-icons icons red">delete</i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+        <!-- 
+                  <li>
+                    <pre class="link">Monitoring Parameters</pre>
+                    <i *ngIf="drop5" class="fa fa-caret-down left" aria-hidden="true" (click)="drop5 =!drop5"></i>
+                    <i *ngIf="!drop5" class="fa fa-caret-right left" aria-hidden="true" (click)="drop5 =!drop5"></i>
+                    <span>
+                    </span>
+                    <div *ngIf="drop5">
+                      <div class="row input-group mb-2 mr-sm-2 monitor details">
+                        <select (change)="onSelect($event.target.value)" class="form-control " id="exampleFormControlSelect1"
+                          name="mon_param" [(ngModel)]="mon_param">
+                          <option value="" disabled selected="selected">Select</option>
+                          <option *ngFor="let param of monitor_params" [value]="param">
+                            {{param}}
+                          </option>
+                        </select>
+                      </div>
+                      <div *ngFor="let param of array_of_param, let i=index">
+                        <label class="badge badge-pill badge-primary link">{{param}}<i (click)="delete(i)" *ngIf="param"
+                            class="material-icons icons cross ">close</i></label>
+                      </div>
+                    </div>
+                  </li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <router-outlet></router-outlet> -->
+        
+        
+       
+    <div class="tab-pane fade show active" id="nav-peopleAsset" role="tabpanel" aria-labelledby="nav-peopleAsset-tab">
+   
+      <app-person-asset-management></app-person-asset-management>
+
+   </div>
+</div>
+  
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

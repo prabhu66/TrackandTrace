@@ -1,0 +1,40 @@
+ 
+<div class="row">
+    <div class="col-1-5">
+    <li> 
+        <a *ngIf="selected=='Asset'"  routerLink="/dashboard/overview" routerLinkActive="active" class="nav-link side-link" id="Executive"   (click)="onClick($event)" data-toggle="tooltip" data-placement="bottom" title="Executive"><i class="fa fa-eye" aria-hidden="true"></i></a>
+        <a *ngIf="selected=='Executive'" routerLink="/dashboard/assets" routerLinkActive="active" class="nav-link" id="Asset" [class.highlight]="selected=='Executive'" (click)="onClick($event)" data-toggle="tooltip" data-placement="bottom" title="Executive"><img src="../../../assets/icon/visible-opened-eye-interface-option (1) _purple.svg"></a>
+
+    </li>
+    <li>    
+         <a  *ngIf="selected=='Executive'" routerLink="/dashboard/assets" routerLinkActive="active" class="nav-link side-link" id="Asset" (click)="onClick($event)" data-toggle="tooltip" data-placement="bottom" title="Status"><img  class="green-circle"src="../../../assets/image/dot-and-circle.svg"></a>
+           <a *ngIf="selected=='Asset'" routerLink="/dashboard/assets" routerLinkActive="active" class="nav-link" id="Asset" [class.highlight]="selected=='Asset'" (click)="onClick($event)" data-toggle="tooltip" data-placement="bottom" title="Status"><img class="green-circle" src="../../../assets/image/dot-and-circle_black.svg"></a>
+    </li>
+  </div>
+  <div class="col-11-5 dashboard-container">
+      <div class="d-flex main-header">
+      <!-- <div class="side-nav">
+        <div class="header">Sites </div>
+        <select class="select-button" (change)="filterForeCasts($event.currentTarget.value)" name="account" required>
+         <option class="option" value="0">All Sites</option>
+          <option  class ="option"*ngFor='let account of accounts' value="{{account.name}}">{{account.name}}</option>
+        </select>
+      </div> -->
+      <div *ngIf="breadcrumb.subheader=='Executive'" class="p-2 main-link">Dashboard <img src ="../../../assets/icon/fast-forward-double-right-arrows.svg" id="breadcrumbIcon"> {{breadcrumb.subheader}}</div>
+      <div  *ngIf="breadcrumb.subheader=='Asset'" class="p-2 main-link">Dashboard  
+        <img src ="../../../assets/icon/fast-forward-double-right-arrows.svg" id="breadcrumbIcon">  Status
+       <span *ngIf="asset_status" ><img src ="../../../assets/icon/fast-forward-double-right-arrows.svg" id="breadcrumbIcon">  {{asset_status}}</span> 
+      </div>
+  
+      <!-- <div class="ml-auto p-2 right-nav">
+        <span><i (click)="click=!click" id="searchbutton" data-toggle="search" aria-haspopup="true" aria-expanded="false"class="material-icons search">search</i></span>
+        <span class="search-button" *ngIf="click" aria-labelledby="searchbutton">
+          <input type="text" (keyup.enter)="click=!click" [(ngModel)]="search" placeholder="Search..."/></span>
+        <span><i class="material-icons more_vert">more_vert</i></span>
+        <span><i class="material-icons filter">filter_list</i></span>
+  
+      </div> -->
+    </div>
+  <router-outlet></router-outlet>
+  </div>
+  </div>

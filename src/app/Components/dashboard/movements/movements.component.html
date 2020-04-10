@@ -1,0 +1,79 @@
+<div class="main-container">
+    <div class="dep-select2">
+        <select (change)="navigateTo($event.target.value)">
+          <option class="op" value="utcTime" >UTC-Time</option>
+          <option class="op" value="localTime">Local Time</option>
+        </select>
+      </div>
+
+    <div class="tabContent">
+      <div class="RefreshContainer">
+        <span id="refresh" data-toggle="tooltip" data-placement="bottom" title="Reload"> <img
+            src="../../../../assets/icon/refresh_yellow.svg" id="optionIcon" (click)="reload()"> </span>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <tr>
+              <!-- <th scope="col" id="viewDashboard"  ></th> -->
+              <th scope="col">Location</th>
+              <th scope="col"> Entry</th>
+              <th scope="col"> Exit</th>
+              <th scope="col">Status</th>
+              <th scope="col">Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let asset of assetHistory">
+                <!-- <th scope="row" id="viewDashboard">
+                  <img id="eyeIcon" src="../../../../assets/icon/visible-opened-eye-interface-option (1).svg" routerLink="/dashboard/specific-asset" >
+                </th> -->
+                <td class="AssetNameSection">
+                  <div>
+                  <img id="pin" src="../../../../assets/icon/Green-pin.svg">
+                </div>
+                <div>{{asset.FacilityName}} , {{asset.ZoneName}}</div>
+              </td>
+                <td *ngIf="clickedTime=='utcTime'">{{asset.EntryTime   | date:'short':'UTC'}} </td>
+                <td *ngIf="clickedTime=='localTime'">{{asset.EntryTime | date:'short'}} </td>
+                <td *ngIf="clickedTime=='utcTime'">
+                  <span *ngIf="asset.Status== 'current'"> - - - </span> 
+                  <span *ngIf="asset.Status== 'old'">{{asset.ExitTime | date:'short':'UTC'}}</span> 
+                </td>  <!-- *ngIf="asset.Status== 'current'"-->
+                <td *ngIf="clickedTime=='localTime'">
+                    <span *ngIf="asset.Status== 'current'"> - - - </span> 
+                    <span *ngIf="asset.Status== 'old'">{{asset.ExitTime | date:'short'}}</span> 
+                  </td> 
+                <td> 
+<!-- ngIF Status == 'OLD' -->
+
+<div *ngIf="asset.Status == 'old'" class="exitStatusLabel"> EXIT</div>
+
+<!-- ngIF Status == ' current' -->
+
+<div *ngIf="asset.Status == 'current'" class="inStatusLabel"> IN </div>
+
+                </td>
+                <td> 
+                    <span *ngIf = "!asset.Duration">- - - -</span>
+            <span *ngIf="asset.Duration">
+                    <span *ngIf="asset.Duration_months != 0">{{asset.Duration_months | number :'1.0-0'}}M </span>
+                     <span *ngIf="asset.Duration_days != 0">{{asset.Duration_days | number :'1.0-0'}}D </span> 
+                     <span *ngIf="asset.Duration_hours != 0">{{asset.Duration_hours | number :'1.0-0'}}H </span> 
+                     <span *ngIf="asset.Duration_minutes != 0"> {{asset.Duration_minutes | number :'1.0-0'}}m</span>
+                     <span *ngIf="asset.Duration_seconds != 0"> {{asset.Duration_seconds | number :'1.0-0'}}s</span>
+            </span> 
+                </td>
+         </tr>
+<!-- Duplicating Rows -->
+
+<!-- Duplication Ends -->
+        </tbody>
+      </table>
+      <div *ngIf="showNoHistory" class="noHistory">
+          No records Available
+        </div>
+    </div>
+  </div>
+  
+  <!-- <app-dashboard-assets-heatmap></app-dashboard-assets-heatmap> -->

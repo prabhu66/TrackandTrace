@@ -1,0 +1,259 @@
+.main-link{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-shadow: 0px 0px 3px grey;
+    margin-right: 5%;
+    font-family:Roboto;
+    font-size: 15px;
+}
+.main-container{
+    margin-left: 30px;
+    padding-right: 0px;
+    font-family:-apple-system, Roboto, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+pre{
+    padding: 10px;
+    margin-bottom: 0px;
+}
+.list-panel{
+   
+    margin-top:1em;
+    height: 80vh;
+    overflow-y: scroll;
+}
+.account-tab{
+  border: 1px solid #4f308c;
+  padding: 3px;
+  padding-right: 8px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-size: 13px;
+  text-shadow: none;
+  cursor: pointer;
+}
+
+ ::-webkit-scrollbar{
+    width:3px;
+}
+
+::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c266ff;
+  outline: 1px solid #c266ff;
+  }
+
+  ::-webkit-scrollbar-thumb:hover{
+    background: #cc9900;
+  }
+.search{
+    font-size: 20px !important;
+    margin-top: 4px;
+    color:lightgrey;
+    cursor: pointer;
+}
+.card{
+    /* width:32%; */
+    max-width: 23%;
+    /* min-width: 23%; */
+    min-width: 250px;
+    margin: 10px;
+    display: inline-block;
+    background: white;
+    /* box-shadow: 5px 4px 7px 2px #dadada; */
+   
+}
+.subscript{
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: -4px; 
+  max-width: 100%;
+  word-wrap: break-word;
+}
+.head-title{
+  font-size: 13px;
+    font-weight: 500;
+      max-width: 100%;
+  word-wrap: break-word;
+
+}
+.card-header{
+    padding:unset;
+    padding-left: 30px;
+}
+.material-icons{
+  font-size: 18px;
+  padding: 5px;
+ 
+}
+.circle-DELETED{
+  width: 10px;
+  height: 10px;
+  border: 2px solid red;
+  display: inline-block;
+  border-radius: 50%;
+}
+.circle-Active{
+  width: 10px;
+  height: 10px;
+  border: 2px solid green;
+  display: inline-block;
+  border-radius: 50%;
+}
+.circle-SUSPENDED{
+  width: 10px;
+  height: 10px;
+  border: 2px solid white;
+  display: inline-block;
+  border-radius: 50%;
+}
+.circle-DISABLED{
+  width: 10px;
+  height: 10px;
+  border: 2px solid black;
+  display: inline-block;
+  border-radius: 50%;
+}
+.flex-header{
+  word-wrap: break-word;
+  padding-left: 7px;
+}
+.title{
+    font-size:11px;
+    font-weight: 500;
+   word-wrap: break-word;
+
+}
+.head-Active{
+ color:black;
+}
+.head-DELETED{
+    color:black;
+}
+.head-SUSPENDED{
+    color:white;
+}
+.head-DISABLED{
+    color:black;
+}
+.status{
+    float:right;
+    padding-left:35px;
+}
+.col-card{
+    border:0.1px solid rgba(0, 0, 0, 0.05);
+    height: 3em;
+    
+}
+
+.card-Active{
+  background-color: white;
+}
+.card-DELETED{
+   background-color: white;
+}
+.card-SUSPENDED{
+ background-image: linear-gradient(to right, #4d0000, #f54e34)
+}
+.card-DISABLED{
+    background-image: linear-gradient(to right, #b7b5b5, #e2e2d9)
+}
+.status-Active{
+ color:green;
+
+}
+.status-DELETED{
+    color:red;
+}
+.status-SUSPENDED{
+    color:white;
+}
+.status-DISABLED{
+    color:black;
+}
+.card-body{
+    padding:unset;
+}
+.body-text{
+    font-size: 10px;
+    margin-left: 30px;
+    color: #a7a2a2;
+    margin-bottom: -4px;
+    margin-top: 6px;
+}
+.card-footer{
+    background-color: white;
+    padding: 2px;
+    padding-left:10px;
+    
+}
+img{
+  
+}
+.col-2{
+    margin-left: 12px;
+}
+.account_data{
+    color:#4f308c;
+    font-size:13px;
+    text-shadow: 0px 0px 3px grey;
+    margin: -7px;
+}
+.footer_body{
+    font-size:10px;
+    color:#a7a2a2;
+    padding-top:-2px;
+}
+.footer-end{
+    float:right;
+    font-size:7px;
+    margin-right:5px;
+    margin-top:2px;
+    font-weight: bold;
+    color:#4f308c;
+     border: 1px solid #e6e5e8;
+    padding: 3px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    cursor:pointer;
+
+}
+
+.dropdown{
+    position: relative;
+}
+.material-icons{
+    font-size:14px;
+}
+.delete{
+    float:right;
+    color:green;
+}
+.edit{
+    float:right;
+    color:red;
+}
+
+.dropdown-item{
+    border: 0.1px solid #f9f5f5;
+}
+.filter{
+  font-size: 20px !important;
+    display: inline-block;
+    margin-top: 4px;
+    color:lightgrey;
+    cursor: pointer;
+    float: right;
+    margin-right: 4px;
+}
+.search-button{
+    position:relative;
+    -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}

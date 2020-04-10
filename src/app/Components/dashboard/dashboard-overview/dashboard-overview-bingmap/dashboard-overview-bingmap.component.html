@@ -1,0 +1,157 @@
+<div *ngIf="show" class="map1">
+     <div > <!-- *ngIf="hide && posts"--> 
+       <i class="fa"></i>
+       <div >
+          <i (click)="showMap()" class="material-icons zoom-in">zoom_in</i>
+          <i class="material-icons zoom-in1"  (click)="RefreshPlan()">refresh</i>
+          <div id="mapContainer" style=" text-align:center;" *ngIf="_markers.length==0"> <!--height:500px-->
+            <div class="text_box">NO ACTIVE ASSETS</div>
+            <x-map #xmap [Options]="_options" [Box]="_box2">
+               <!--<x-map-marker   [Latitude]="12.8367" [Longitude]="77.6599" >
+             </x-map-marker>-->
+            </x-map>
+          </div>
+
+          <div id="mapContainer" *ngIf="_markers.length>0">
+         <x-map #xmap [Options]="_options" [Box]="_box">
+          <div *ngFor="let m of _markers; let i=index">
+            <div *ngIf="i<posts.length"> 
+              <div *ngIf="!specific_asset"> 
+          <div *ngIf="_markers.length>0 && posts[i].GeoFenceState=='NOT REACHABLE'" >
+          <x-map-marker   [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="title[i]"
+            [IconInfo]="_iconInfo1">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence: OUTSIDE KNOWN GEOFENCES'" [Description]="posts[i].Address">
+              
+            </x-info-box>
+          </x-map-marker>
+          </div>
+          <div *ngIf="_markers.length>0 && posts[i].GeoFenceState=='IN AUTHORIZED GEOFENCE' " >
+          <x-map-marker   [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="title[i]"
+            [IconInfo]="_iconGeofence">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:' + posts[i].GeoFenceState" [Description]="posts[i].Address">
+             
+            </x-info-box>
+          </x-map-marker>
+          </div>
+           <div *ngIf="_markers.length>0 && posts[i].GeoFenceState=='IN RESTRICTED GEOFENCE'" >
+          <x-map-marker   [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="title[i]"
+            [IconInfo]="_iconZone">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:' + posts[i].GeoFenceState" [Description]="posts[i].Address">
+              
+            </x-info-box>
+          </x-map-marker>
+          </div>
+          </div>
+           </div>
+          </div>
+        
+           <div *ngIf="specific_asset">
+           <div *ngIf="_markers.length==1 && this.address" >
+            <x-map-marker   *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="mark_title"
+            [IconInfo]="_iconInfo1">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence: OUTSIDE KNOWN GEOFENCES'" [Description]="desc">
+             
+            </x-info-box>
+          </x-map-marker>
+           </div>
+           <div *ngIf="_markers.length==1 && this.geofence" >
+            <x-map-marker   *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="mark_title"
+            [IconInfo]="_iconGeofence">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:'+ state" [Description]="desc">
+            
+            </x-info-box>
+          </x-map-marker>
+           </div>
+           <div *ngIf="_markers.length==1 && this.zone" >
+            <x-map-marker   *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="mark_title"
+            [IconInfo]="_iconZone">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:' + state" [Description]="desc">
+              
+            </x-info-box>
+          </x-map-marker>
+           </div>
+           </div>
+        </x-map>
+          </div>
+       </div>
+     </div> 
+    
+
+</div>
+<div  *ngIf="!show" class="map-zoom-container">
+    <div>
+      <i class="fa"></i>
+      <div class="zoom-map" >
+         <i (click)="showMap()"class="material-icons zoom-out">zoom_out</i>
+         <i class="material-icons zoom-out1"  (click)="RefreshPlan()">refresh</i>
+        <div  class="zoom-map" *ngIf="_markers.length==0">
+            <x-map #xmap [Options]="_options" [Box]="_box2">
+              <div class="text_box">NO ACTIVE ASSETS</div>
+               <!--<x-map-marker   [Latitude]="12.8367" [Longitude]="77.6599" >
+             </x-map-marker>-->
+            </x-map>
+          </div>
+           <div class="zoom-map" *ngIf="_markers.length>0">
+         <x-map #xmap [Options]="_options" [Box]="_box">
+          <div *ngFor="let m of _markers; let i=index">
+            <div *ngIf="i<posts.length"> 
+              <div *ngIf="!specific_asset"> 
+          <div *ngIf="_markers.length>0 && posts[i].GeoFenceState=='NOT REACHABLE'" >
+          <x-map-marker   [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="title[i]"
+            [IconInfo]="_iconInfo1">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence: OUTSIDE KNOWN GEOFENCES'" [Description]="posts[i].Address">
+              
+            </x-info-box>
+          </x-map-marker>
+          </div>
+          <div *ngIf="_markers.length>0 && posts[i].GeoFenceState=='IN AUTHORIZED GEOFENCE' " >
+          <x-map-marker   [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="title[i]"
+            [IconInfo]="_iconGeofence">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:' + posts[i].GeoFenceState" [Description]="posts[i].Address">
+             
+            </x-info-box>
+          </x-map-marker>
+          </div>
+           <div *ngIf="_markers.length>0 && posts[i].GeoFenceState=='IN RESTRICTED GEOFENCE'" >
+          <x-map-marker   [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="title[i]"
+            [IconInfo]="_iconZone">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:' + posts[i].GeoFenceState" [Description]="posts[i].Address">
+              
+            </x-info-box>
+          </x-map-marker>
+          </div>
+          </div>
+           </div>
+          </div>
+        
+           <div *ngIf="specific_asset">
+           <div *ngIf="_markers.length==1 && this.address" >
+            <x-map-marker   *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="mark_title"
+            [IconInfo]="_iconInfo1">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence: OUTSIDE KNOWN GEOFENCES'" [Description]="desc">
+             
+            </x-info-box>
+          </x-map-marker>
+           </div>
+           <div *ngIf="_markers.length==1 && this.geofence" >
+            <x-map-marker   *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="mark_title"
+            [IconInfo]="_iconGeofence">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:'+ state" [Description]="desc">
+            
+            </x-info-box>
+          </x-map-marker>
+           </div>
+           <div *ngIf="_markers.length==1 && this.zone" >
+            <x-map-marker   *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="mark_title"
+            [IconInfo]="_iconZone">
+            <x-info-box [DisableAutoPan]="true" [Title]="'Geofence:' + state" [Description]="desc">
+              
+            </x-info-box>
+          </x-map-marker>
+           </div>
+           </div>
+        </x-map>
+          </div>
+</div>
+</div>
+</div>

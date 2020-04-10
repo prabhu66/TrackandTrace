@@ -1,0 +1,70 @@
+
+
+  <div class="p-2 main-link">User <img src="../../../assets/icon/fast-forward-double-right-arrows.svg"
+    id="breadcrumbIcon"> Create User</div>
+  <div class="main-container">
+<div class="container">
+  <form #formRef="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">User Name</label>
+      <div  class="details spacing2">
+      <input type="text" class="form-control mb-2 mr-sm-2 spacing" name="user_name" [(ngModel)]="user_name" placeholder="" autocomplete="off">
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">User Role</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="user_role" placeholder="" [(ngModel)]="user_role" autocomplete="off">
+        </div>
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="exampleFormControlSelect1">User Email</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="user_email" placeholder="" [(ngModel)]="user_email" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <label for="exampleFormControlSelect1">Account</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="account" placeholder="" [(ngModel)]="account" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Site</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="site" placeholder="" [(ngModel)]="site" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Groups</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="group" placeholder="" [(ngModel)]="group" autocomplete="off">
+        </div>
+      </div>
+    </div>-->
+    <!--<div class="form-group">
+      <label for="exampleFormControlSelect1">Status</label>
+      <div  class="details spacing">
+        <div class="form-inline spacing">
+          <input type="text" class="form-control mb-2 mr-sm-2" name="status" placeholder="" [(ngModel)]="status" autocomplete="off">
+        </div>
+      </div>
+    </div>-->
+ 
+    <div class="pull-right" style="margin:15px 0; margin-right: 25em;">
+        <button class="badge badge-pill badge-primary tab1" (click)="cancel()">Cancel</button><span> </span><button class="badge badge-pill badge-success tab1" type="submit">Create</button>
+    </div>
+  </form>
+</div>
+
+

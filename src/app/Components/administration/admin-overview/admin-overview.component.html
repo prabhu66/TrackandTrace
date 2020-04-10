@@ -1,0 +1,133 @@
+<div class="main-container">
+  <pre class="main-link">Administration>Summary</pre>
+  <div class="row">
+    <div class="col-2-5 row main-card">
+      <div class="col-2 img"><img src="../../../../assets/image/businessman.svg"></div>
+      <div class="col">
+        <div class="count">1</div>
+      </div>
+      <div class="subtitle col"><label>Accounts Managed</label></div>
+    </div>
+    <div class="col-2-5 row sub-card">
+        <div class="col-2 img"><img src="../../../../assets/image/hierarchy.svg"></div>
+        <div class="col">
+          <div class="count">1</div>
+        </div>
+        <div class="subtitle col"><label>Monitoring Sites</label></div>
+    </div>
+    <div class="col-2-5 row sub-card">
+        <div class="col-2 img"><img src="../../../../assets/image/font.svg"></div>
+        <div class="col">
+          <div class="count">1</div>
+        </div>
+        <div class="subtitle col"><label>Provisioned Assets</label></div>
+    </div>
+    <div class="col-2-5 row sub-card">
+        <div class="col-2 img"><img src="../../../../assets/image/bluetooth.svg"></div>
+        <div class="col">
+          <div class="count">1</div>
+        </div>
+        <div class="subtitle col"><label>Provisioned Ble Assets</label></div>
+    </div>
+    <div class="col-2-5 row sub-card">
+        <div class="col-2 img"><img src="../../../../assets/image/data-storage.svg"></div>
+        <div class="col">
+          <div class="count">1</div>
+        </div>
+        <div class="subtitle col"><label>Provisioned GPS Tracker</label></div>
+    </div>
+    <div class="col-2-5 row danger-card">
+        <div class="col-2 img"><img src="../../../../assets/image/businessman.svg"></div>
+        <div class="col-10">
+          <div class="count">1</div>
+        </div>
+        <div class="subtitle col"><label>Lost Assets</label></div>
+    </div>
+  </div>
+<!-- content -->
+<div class="row">
+<div class="col-5 large-container">
+  <div class="d-flex">
+  <div class="p-2"><pre>Activities</pre></div>
+  <!-- <div class=" ml-auto p-2">
+      <input type="text" [(ngModel)]="searchText" placeholder="Search.." class="text-search" autocomplete="off">
+    </div> -->
+  <div class="p-2 ml-auto"><i class="material-icons">search</i>
+          <i class="material-icons">view_headline</i>
+  </div>
+</div>
+  <div class="container">
+      <ul *ngFor = "let activity of displayList | search : searchText">
+      <p>{{activity.date}}</p>
+      <li *ngFor = "let act of activity.activity"><label>{{act.ts}}</label><span></span>
+      <div class="d-flex align-items-start">{{act.actionType | uppercase}}-
+        <div class="d-flex align-items-start site-text">&nbsp;{{act.objects[0].assetName}}&nbsp;</div>
+        <div class="d-flex align-items-start" *ngIf="act.objects.length>1">+{{act.objects.length}}&nbsp;</div>
+        <div [ngClass]= "{deleted:'delete d-flex align-items-start',added:'add d-flex align-items-start',edited:'edit d-flex align-items-start'}[act.action]">..{{act.action}}</div>
+        <div *ngIf="act.action == 'deleted'" class="d-flex align-items-start">&nbsp;from &nbsp;</div>
+        <div *ngIf="act.action == 'added'" class="d-flex align-items-start">&nbsp; to &nbsp;</div>
+        <div class="d-flex align-items-start site-text">{{act.user}}</div> 
+        <div class="d-flex align-items-start">&nbsp;site</div>
+      </div>
+      <div class="d-flex align-items-start"><img src="../../../../assets/image/manager_grey.svg">
+        <div class="sub-name"> &nbsp; &nbsp;{{act.doer}}</div>
+      </div>
+      <span></span>
+    </li>
+      </ul>
+</div>
+</div>
+<div class="col-3-5 large-container"><pre>Manage Accounts</pre>
+  <div class="timeline">
+      <div class="timeline-circle"></div>
+      <ul *ngFor = "let a of array; let i = index">
+        <li><div></div>
+          <span class="align-tree">
+            <img *ngIf="!drop[i]" src="../../../../assets/image/play-video-button.svg" (click)="drop[i]= true">
+            <img *ngIf="drop[i]" src="../../../../assets/image/collapse-window-option.svg" (click)="drop[i]= false">
+          </span>
+          <label class="timeline-label">Wipro</label>
+          <div *ngIf="drop[i]" id="timeline-line">
+            <div *ngFor = "let a of array; let i = index" class="d-flex vertical-line">
+                <span></span>
+              <div class="p-2"><img *ngIf="!subdrop[i]" src="../../../../assets/image/play-video-button.svg" (click)="subdrop[i]= true">
+              <img *ngIf="subdrop[i]" src="../../../../assets/image/collapse-window-option.svg" (click)="subdrop[i]= false">
+              </div>
+              <div class="p-2">{{a.Id}}-
+                  <div *ngIf="subdrop[i]">
+                      <img src="../../../../assets/image/manager_grey.svg">{{a.name}}
+                    </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+</div>
+<div class="col-3">
+  <div class="small-container">
+      <pre>Quick Links</pre>
+      <div class="row">
+        <div class="col-2"></div>
+          <div class="col-4 img"><img src="../../../../assets/image/hierarchy_blue.svg"></div>
+          <div class="col-4 img"><img src="../../../../assets/image/font_blue.svg"></div>
+        <hr></div>
+      <div class="row">
+          <div class="col-2"></div>
+          <div class="col-4 img"><img src="../../../../assets/image/bluetooth_blue.svg"></div>
+          <div class="col-4 img"><img src="../../../../assets/image/data-storage_blue.svg"></div>
+        <hr></div>
+      <div class="row">
+          <div class="col-2"></div>
+          <div class="col-4 img"><img src="../../../../assets/image/hierarchy_blue.svg"></div>
+          <div class="col-4 img"><img src="../../../../assets/image/font_blue.svg"></div></div>
+  </div>
+  <div class="small-container">
+      <pre>Quick Search</pre>
+      <div class="">
+          <input type="text" [(ngModel)]="searchText" placeholder="Search.." class="text-search" autocomplete="off">
+      </div>
+  </div>
+</div>
+</div>
+</div>

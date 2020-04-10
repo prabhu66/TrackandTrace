@@ -1,0 +1,20 @@
+body{
+    height:50vh;
+    background:whitesmoke
+}
+
+.tab-pane{
+    background:white;
+    height:50vh
+}
+a{
+    font-weight:bold
+}
+
+@media screen and (min-width:1440px) {
+
+    body{
+        margin-left: -125px;
+    }
+
+}

@@ -1,0 +1,84 @@
+<!-- <nav>
+    <div class="nav nav-tabs heading-set" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active first-nav " id="nav-people-tab" data-toggle="tab" href="#nav-people" role="tab" aria-controls="nav-people" aria-selected="false">Workers</a>
+        <a class="nav-item nav-link " id="nav-assets-tab" data-toggle="tab" href="#nav-assets" role="tab" aria-controls="nav-assets" aria-selected="true">Assets</a>
+        
+         
+    </div>
+  </nav> -->
+  <!-- <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+   
+    <div class="tab-pane fade show active" id="nav-people" role="tabpanel" aria-labelledby="nav-people-tab">
+        <div class="utilization-content">
+            <div *ngIf="showCard" class="main-container">
+                <div class="card-content row" *ngFor="let floor of floorList; let i = index" (click)="ExpandPlan(floor); selectedFacility=floor.FacilityName">
+                  <div class="card-title">{{floor.FacilityName | uppercase}}</div>
+                    <img src={{floor.ImageUrl}} class="thumbnail" alt="">
+              </div>
+              </div>
+              <div class="d-flex svg-header">
+              <div class="p-2 mr-auto heading" *ngIf="!showCard">{{selectedFacility}}</div>
+              <img src="../../../../../assets/image/cancel_red.svg" class="material-icons ml-auto p-2" *ngIf="!showCard" (click)="showCard = true; CloseFacility()">
+              <i class="material-icons p-2 refresh" *ngIf="!showCard" (click)="RefreshPlan()">refresh</i>
+              </div>
+              <div class="scaling-svg-container">
+              <svg id="mySvg" *ngIf="!showCard" class="image-container" viewBox="0 60 338 303" preserveAspectRatio="none" >
+                  <image [attr.xlink:href]=floorImage class="image" (click)="getLocationPoints($event)" alt="" data-toggle="modal" data-target="#FacilityEdit"></image>
+                  <a *ngFor = "let zone of facility.Zones; let i =index" class="tooltiptext">
+                 <svg:circle  [ngbPopover]="pop" container="body" r="6" [ngClass]="!zone.AlertCount ? 'green-circle' : 'red-circle'" [attr.cx]=zone.Left [attr.cy]=zone.Top (click)="AssignZone(zone)" onload="ShowByDefault()"></svg:circle>
+                  </a>
+                </svg>
+              </div>
+          </div>
+        
+     </div>
+   -->
+    <!-- <div class="tab-pane fade " id="nav-assets" role="tabpanel" aria-labelledby="nav-assets-tab"> -->
+        <div class="utilization-content">
+            <div *ngIf="showCard" class="main-container">
+                <div class="card-content row" *ngFor="let floor of floorList; let i = index" (click)="ExpandPlan(floor); selectedFacility=floor.FacilityName">
+                  <div class="card-title">{{floor.FacilityName | uppercase}}</div>
+                    <img src={{floor.ImageUrl}} class="thumbnail" alt="">
+              </div>
+              </div>
+              <div class="d-flex svg-header">
+              <div class="p-2 mr-auto heading" *ngIf="!showCard">{{selectedFacility}}</div>
+              <img src="../../../../../assets/image/cancel_red.svg" class="material-icons ml-auto p-2" *ngIf="!showCard" (click)="showCard = true; CloseFacility()">
+              <i class="material-icons p-2 refresh" *ngIf="!showCard" (click)="RefreshPlan()">refresh</i>
+              </div>
+              <div class="scaling-svg-container">
+              <svg id="mySvg" *ngIf="!showCard" class="image-container" viewBox="0 60 338 303" preserveAspectRatio="none" >
+                  <image [attr.xlink:href]=floorImage class="image" (click)="getLocationPoints($event)" alt="" data-toggle="modal" data-target="#FacilityEdit"></image>
+                  <a *ngFor = "let zone of facility.Zones; let i =index" class="tooltiptext">
+                 <svg:circle  [ngbPopover]="pop" container="body" r="6" [ngClass]="!(zone.AlertCount || facilityPeople.Zones[i].AlertCount)  ? 'green-circle' : 'red-circle'" [attr.cx]=zone.Left [attr.cy]=zone.Top (click)="AssignZone(zone,i)" onload="ShowByDefault()"></svg:circle>
+                  </a>
+                </svg>
+              </div>
+          </div>
+    <!-- </div> -->
+    <!-- </div> -->
+
+
+
+  <ng-template #pop>
+      <div class="tooltiptext">
+            <div class="zone-name">{{selectedZone.ZoneName}} - {{selectedZone.GatewaySlNo}}</div>
+              <img src="../../../../../assets/image/data-storage_black.svg" class="tool-data">
+              {{AssetCount}}
+              <img src="../../../../../assets/image/worker_black.svg" id="worker" class="tool-data">
+              {{peopleAssetCount}}
+              <img src="../../../../assets/image/warning.svg" class="tool-data">
+              {{AlertCount}}
+              <!-- <div class="floorlist">
+                <div *ngIf="selectedZone.AssetCount == 0" class="NoAsset"> No Assets In this Zone</div>
+                <div [class.OUT]="asset.AssetStatus === 'IN RESTRICTED ZONE'" [class.IN]="asset.AssetStatus === 'IN AUTHORIZED ZONE'" class="assetList" *ngFor="let asset of selectedZone.AssetInZoneList; let i = index">{{asset.AssetName}}&nbsp; - &nbsp;{{asset.AssetStatus}}</div>
+              </div> -->
+          </div>
+  </ng-template>
+  <div>
+  <!-- <div  *ngFor = "let m of x">
+  <ng-template #pop>{{m}}
+  </ng-template>
+  <button type="button" class="btn btn-secondary" [ngbPopover]="pop" popoverTitle="Fancy content" [autoClose]="false" (click)="ShowAllByDefault();"></button>
+  </div>
+  <div> -->

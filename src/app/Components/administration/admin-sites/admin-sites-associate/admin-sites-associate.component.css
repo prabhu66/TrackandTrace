@@ -1,0 +1,21 @@
+.user , .asset{
+    color:blue;
+    padding: 5px;
+    background-color: #dadada;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #a7a996;
+}
+.highlight{
+    background-color: blue;
+    color:white;
+}
+.user-list, .asset-list{
+height: 80vh;
+overflow-y: scroll;
+}
+pre{
+    font-size: 18px;
+    color: #24aba6;
+    font-weight: bolder;
+}

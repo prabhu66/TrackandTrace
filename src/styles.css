@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+#tileCanvasId {
+    position: relative !important;
+}
+mat-step-header{
+    width:1em !important;
+}
+
+/* .Geofence .MicrosoftMap .Infobox .infobox-title {
+    padding: 10px 10px 5px 10px;
+    color: red !important;
+} */
