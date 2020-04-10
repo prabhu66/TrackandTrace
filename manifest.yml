@@ -1,6 +1,6 @@
 applications :
-- name: "TrackandTrace"
-  path : "dist/TrackandTrace"
+- name: "ProjectTrackTrace"
+  path : "dist/ProjectTrackTrace"
   memory : 256M
   buildpack :
   - "https://github.com/cloudfoundry/staticfile-buildpack.git"
